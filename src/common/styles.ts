@@ -1,67 +1,36 @@
 const LINE_SPACE = '-2.5%'
 const LINE_HEIGHT = '140%'
 
-const font = {
-  B: {
-    24: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    },
-    20: {
-      fontSize: '20px',
-      fontWeight: 'bold',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    },
-    16: {
-      fontSize: '16px',
-      fontWeight: 'bold',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    }
-  },
-  M: {
-    24: {
-      fontSize: '24px',
-      fontWeight: 'medium',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    },
-    20: {
-      fontSize: '20px',
-      fontWeight: 'medium',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    },
-    16: {
-      fontSize: '16px',
-      fontWeight: 'medium',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    }
-  },
-  R: {
-    24: {
-      fontSize: '24px',
-      fontWeight: 'regular',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    },
-    20: {
-      fontSize: '20px',
-      fontWeight: 'regular',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    },
-    16: {
-      fontSize: '16px',
-      fontWeight: 'regular',
-      lineHeight: LINE_HEIGHT,
-      letterSpacing: LINE_SPACE,
-    }
-  }
+export type FontType = {
+  fontSize: string,
+  fontWeight: number,
+  lineHeight: string,
+  letterSpacing: string,
+}
+
+const font: {
+  B: (size: number) => FontType;
+  M: (size: number) => FontType;
+  R: (size: number) => FontType;
+  } = {
+  B: (size) => ({
+    fontSize: `${size}px`,
+    fontWeight: 700,
+    lineHeight: LINE_HEIGHT,
+    letterSpacing: LINE_SPACE,
+  }),
+  M: (size: number) => ({
+    fontSize: `${size}px`,
+    fontWeight: 500,
+    lineHeight: LINE_HEIGHT,
+    letterSpacing: LINE_SPACE,
+  }),
+  R: (size: number) => ({
+    fontSize: `${size}px`,
+    fontWeight: 400,
+    lineHeight: LINE_HEIGHT,
+    letterSpacing: LINE_SPACE,
+  }),
 }
 
 const color = {
