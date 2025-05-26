@@ -35,7 +35,7 @@ export const HeaderMenu = () => {
 const S = {
   Wrapper: styled.div`
     display: flex;
-    gap: 45px;
+    gap: 40px;
   `,
 
   Menu: styled.div`
@@ -43,8 +43,8 @@ const S = {
     color: ${({theme}) => theme.color.mono["700"]};
     ${({theme}) => fontStyle(theme.font.B["24"])};
     user-select: none;
-    height: 45px;
-    line-height: 45px;
+    height: 50px;
+    line-height: 50px;
     padding: 5px;
     white-space: nowrap;
       
