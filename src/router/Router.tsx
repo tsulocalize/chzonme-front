@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, Outlet} from "react-router-dom";
 import {LandingPage} from "@/page/LandingPage.tsx";
 import {Header} from "@/component/_common/Header.tsx";
 import {ErrorBoundary} from "react-error-boundary";
@@ -11,6 +11,7 @@ export const router = createBrowserRouter(
       element: (
         <ErrorBoundary fallback={<FallbackPage />}>
           <Header />
+          <Outlet />
         </ErrorBoundary>
       ),
       children: [
