@@ -41,7 +41,7 @@ const S = {
   Menu: styled.div`
     background: none;
     color: ${({theme}) => theme.color.mono["700"]};
-    ${({theme}) => fontStyle(theme.font.B["24"])};
+    ${({theme}) => fontStyle(theme.font.B(24))};
     user-select: none;
     height: 50px;
     line-height: 50px;

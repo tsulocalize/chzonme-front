@@ -47,7 +47,7 @@ const S = {
   `,
 
   Username: styled.span`
-    ${({theme}) => fontStyle(theme.font.B["24"])};
+    ${({theme}) => fontStyle(theme.font.B(24))};
     white-space: nowrap;
   `
 }
