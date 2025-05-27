@@ -18,8 +18,8 @@ export const Header = () => {
 
 const S = {
     Wrapper: styled.div`
-        background: ${({theme}) => theme.color.mono["50"]};
-        height: 100px;
+        background: ${({theme}) => theme.color.white};
+        height: 90px;
         display: flex;
         padding: 0 48px 0 48px;
         align-items: center;
