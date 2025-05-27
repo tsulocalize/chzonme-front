@@ -23,7 +23,7 @@ export const _Item = ({mainText, subText, contents, gap}: Props) => {
 }
 
 const S = {
-  Wrapper: styled.div<{gap? : number}>`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["gap"].includes(prop)})<{gap? : number}>`
     width: 100%;
     display: flex;
     flex-direction: column;

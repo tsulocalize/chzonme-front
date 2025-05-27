@@ -20,7 +20,7 @@ export const Title = ({mainText, mainFont, subText, subFont, gap}: Props) => {
 }
 
 const S = {
-  Wrapper: styled.div<{gap?: number}>`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["gap"].includes(prop)})<{gap?: number}>`
     display: flex;
     flex-direction: column;
     gap: ${({gap}) => gap && gap + "px"};
