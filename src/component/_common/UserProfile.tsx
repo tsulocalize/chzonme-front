@@ -28,12 +28,13 @@ const S = {
     justify-items: center;
     align-items: center;
     height: 100%;
-    gap: 15px;
+    gap: 10px;
   `,
 
   Image: styled.img`
     width: 50px;
     height: 50px;
+    padding: 5px 5px 5px 5px;
     border-radius: 15px;
     overflow: hidden;
     object-fit: cover;
@@ -49,5 +50,6 @@ const S = {
   Username: styled.span`
     ${({theme}) => fontStyle(theme.font.B(24))};
     white-space: nowrap;
+    user-select: none;
   `
 }
