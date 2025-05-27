@@ -1,33 +1,16 @@
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
-import {useNavigate} from "react-router-dom";
+import {useMenuStore} from "@/store/useMenuStore.ts";
+import {goTo} from "@/router/Navigator.tsx";
 
 export const HeaderMenu = () => {
-  const navigate = useNavigate();
-  const handleClick = (dest: string) => {
-    navigate(dest)
-  }
+  const { menus } = useMenuStore();
 
   return (
     <S.Wrapper>
-      <S.Menu onClick={() => handleClick("/")}>
-        치즈온미 소개
-      </S.Menu>
-      <S.Menu onClick={() => handleClick("/video")}>
-        영상 도네이션
-      </S.Menu>
-      <S.Menu>
-        도네이션 룰렛
-      </S.Menu>
-      <S.Menu>
-        채팅 그래프
-      </S.Menu>
-      <S.Menu>
-        멤버십
-      </S.Menu>
-      <S.Menu>
-        고객문의
-      </S.Menu>
+      {menus.map((menu) => (
+        <S.Menu onClick={() => goTo(menu.path)} isCurrentMenu={menu.isCurrentMenu}>{menu.title}</S.Menu>
+      ))}
     </S.Wrapper>
   )
 }
@@ -38,18 +21,21 @@ const S = {
     gap: 40px;
   `,
 
-  Menu: styled.div`
+  Menu: styled.div.withConfig({shouldForwardProp: (prop) => !["isCurrentMenu"].includes(prop)})<{isCurrentMenu: boolean}>`
     background: none;
-    color: ${({theme}) => theme.color.mono["700"]};
+    color: ${({theme, isCurrentMenu}) => 
+            isCurrentMenu ? theme.color.mono["700"] : theme.color.mono["300"]};
     ${({theme}) => fontStyle(theme.font.B(24))};
     user-select: none;
     height: 50px;
     line-height: 50px;
     padding: 5px;
     white-space: nowrap;
-      
+    transition: color 0.3s ease;
+
       &:hover {
         cursor: pointer;
-    }
+        color: ${({theme}) => theme.color.mono["900"]};
+      }
   `
 }
