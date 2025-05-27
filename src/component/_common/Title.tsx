@@ -26,11 +26,11 @@ const S = {
     gap: ${({gap}) => gap && gap + "px"};
   `,
 
-  MainTitle: styled.div<{mainFont: FontType}>`
+  MainTitle: styled.div.withConfig({shouldForwardProp: (prop) => !["mainFont"].includes(prop)})<{mainFont: FontType}>`
     ${({mainFont}) => fontStyle(mainFont)};
   `,
 
-  SubTitle: styled.div<{subFont?: FontType}>`
+  SubTitle: styled.div.withConfig({shouldForwardProp: (prop) => !["subFont"].includes(prop)})<{subFont?: FontType}>`
     ${({subFont}) => subFont && fontStyle(subFont)};
     color: ${({theme}) => theme.color.mono["400"]};
     white-space: pre-line;
