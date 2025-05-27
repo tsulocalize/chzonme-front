@@ -5,7 +5,6 @@ import {RouterProvider} from "react-router-dom";
 import {router} from "@/router/Router.tsx"
 
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
