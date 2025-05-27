@@ -3,19 +3,14 @@ import {LandingItems} from "@/component/landing/LandingItems.tsx";
 
 export const LandingPage = () => {
   return (
-    <S.OutsideWrapper>
+    <S.Wrapper>
       <LandingItems />
-    </S.OutsideWrapper>
+    </S.Wrapper>
   );
 }
 
 const S = {
-  OutsideWrapper: styled.div`
+  Wrapper: styled.div`
     padding: 90px 120px 0 120px;
   `,
-  Wrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 200px;
-  `
 }
