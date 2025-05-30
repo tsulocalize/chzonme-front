@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {HeaderMenu} from "./HeaderMenu.tsx";
-import logo from "@/assets/image/Logo-black.svg";
+import logo from "@/assets/image/logo-black.svg";
 import {UserProfile} from "@/component/_common/UserProfile.tsx";
 
 export const Header = () => {

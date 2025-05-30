@@ -1,0 +1,67 @@
+import React from "react";
+import styled, {css} from "styled-components";
+import {type FontType} from "@/common/styles.ts";
+import {fontStyle} from "@/util/fontStyle.ts";
+
+export interface InputBoxStyle {
+  background: string;
+  color: string;
+  font: FontType;
+  padding: string;
+  border: string;
+  borderRadius: string,
+}
+
+const inputStyleCss = ({background, color, font, padding, border, borderRadius}: InputBoxStyle) => css`
+    background: ${background};
+    color: ${color};
+    ${() => fontStyle(font)};
+    padding: ${padding};
+    box-sizing: border-box;
+    border: ${border};
+    border-radius: ${borderRadius};
+`;
+
+interface Props {
+  ref: React.RefObject<HTMLInputElement | null>,
+  value: string
+  setValue: (value: (((prevState: string) => string) | string)) => void
+  inputBoxStyle: InputBoxStyle,
+  placeholder: string | null,
+  onEnter: () => void,
+  setSelected: (value: (((prevState: boolean) => boolean) | boolean)) => void,
+}
+
+export const InputBox = ({ref, value, setValue, inputBoxStyle, placeholder, onEnter, setSelected}: Props) => {
+  const handleEnter = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && ref.current) {
+      onEnter()
+    }
+  }
+
+  return (
+    <S.StyledInputBox
+      ref={ref}
+      value={value}
+      inputBoxStyle={inputBoxStyle}
+      placeholder={placeholder ?? ""}
+      type="search"
+      onKeyUp={(e) => handleEnter(e)}
+      onChange={(e) => setValue(e.target.value)}
+      onBlur={() => setSelected(false)}
+    />
+  )
+};
+
+const S = {
+  StyledInputBox: styled.input.withConfig({shouldForwardProp: (prop) => !["inputBoxStyle"].includes(prop)})<{ inputBoxStyle: InputBoxStyle }>`
+    width: 100%;
+    ${({inputBoxStyle}) => inputStyleCss(inputBoxStyle)};
+
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  `
+}
+

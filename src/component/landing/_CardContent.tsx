@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "@/assets/image/Logo-black.svg"
+import img from "@/assets/image/logo-black.svg"
 import {Title} from "@/component/_common/Title.tsx";
 import {theme} from "@/common/styles.ts";
 

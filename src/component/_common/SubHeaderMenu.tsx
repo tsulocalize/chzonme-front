@@ -23,7 +23,7 @@ const S = {
   Menu: styled.div`
     background: none;
     color: ${({theme}) => theme.color.mono["400"]};
-    ${({theme}) => fontStyle(theme.font.B(20))};
+    ${({theme}) => fontStyle(theme.font.B(18))};
     user-select: none;
     height: 50px;
     line-height: 50px;
@@ -33,7 +33,7 @@ const S = {
 
       &:hover {
       cursor: pointer;
-      color: ${({theme}) => theme.color.mono["700"]};
+      color: ${({theme}) => theme.color.mono["800"]};
     }
   `
 }

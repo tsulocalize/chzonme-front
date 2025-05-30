@@ -1,7 +1,7 @@
 import {useUserStore} from "@/store/useUserStore.ts";
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
-import fallback from "@/assets/image/fallback-userImage.png";
+import fallback from "@/assets/image/fallback-image.png";
 
 export const UserProfile = () => {
   const {username, img, isLoggedIn} = useUserStore();
