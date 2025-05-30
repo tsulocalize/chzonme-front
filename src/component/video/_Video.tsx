@@ -16,8 +16,8 @@ export const _Video = () => {
   };
 
   useEffect(() => {
-    if (playerRef.current && videoId) {
-      playerRef.current.cueVideoById(videoId);
+    if (playerRef.current) {
+      playerRef.current.cueVideoById(videoId ? videoId : "invalid_video_id");
     }
   }, [videoId]);
 
