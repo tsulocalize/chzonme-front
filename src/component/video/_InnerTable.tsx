@@ -3,7 +3,7 @@
 import type {VideoInfo} from "@/component/video/_Table.tsx";
 import {useEffect, useMemo, useState} from "react";
 import {useVideoStore} from "@/store/useVideoStore.ts";
-import {formatDate} from "@/util/date.ts";
+import {formatDate, formatShortTime} from "@/util/date.ts";
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
 
@@ -51,7 +51,7 @@ export const _InnerTable = ({infos, unitPrice}: Props) => {
               let tableData = info[header as keyof VideoInfo];
               if (header === 'id') tableData = infos.length - index;
               if (header === 'createdAt') tableData = formatDate(String(tableData));
-              if (header === 'timeTo') tableData = formatTimeTo((accumulate[index] - accumulate[selectedIndex]) / unitPrice);
+              if (header === 'timeTo') tableData = formatShortTime((accumulate[index] - accumulate[selectedIndex]) / unitPrice);
               if (header === 'cheese') tableData = tableData.toLocaleString()
               return (
                 <S.Td key={header} colorIndex={index} selected={index == selectedIndex}> {tableData} </S.Td>
@@ -77,27 +77,6 @@ function calculateAccumulate(infos: VideoInfo[]) {
   result.push(0); // append 0
 
   return result;
-}
-
-function formatTimeTo(second: number) {
-  if (second === 0) {
-    return 'NOW';
-  }
-
-  const absSecond = Math.abs(second);
-
-  if (absSecond < 60) {
-    return Math.floor(second) + '초';
-  }
-  if (absSecond < 3600) {
-    return Math.floor(second / 60) + '분';
-  }
-
-  if (isNaN(second)) {
-    return '-';
-  }
-
-  return Math.floor(second / 3600) + '시간';
 }
 
 const S = {
