@@ -8,6 +8,7 @@ import {SubHeader} from "@/component/_common/SubHeader.tsx";
 import {VideoPage} from "@/page/VideoPage.tsx";
 import {StoreSubscribeManager} from "@/store/StoreSubscribeManager.tsx";
 import {Navigator} from "@/router/Navigator.tsx";
+import {VideoGuidePage} from "@/page/VideoGuidePage.tsx";
 
 export const router = createBrowserRouter(
   [
@@ -18,7 +19,6 @@ export const router = createBrowserRouter(
         <RouteFollower>
         <Navigator>
         <StoreSubscribeManager>
-          <Header />
           <Outlet />
         </StoreSubscribeManager>
         </Navigator>
@@ -28,17 +28,31 @@ export const router = createBrowserRouter(
       children: [
         {
           path: "",
-          element: <LandingPage />
+          element: (
+            <>
+              <Header />
+              <LandingPage />
+            </>
+          )
         },
         {
           path: "video",
           element: (
             <>
+              <Header />
               <SubHeader />
               <VideoPage />
             </>
           )
-        }
+        },
+        {
+          path: "video-guide",
+          element: (
+            <>
+              <VideoGuidePage />
+            </>
+          )
+        },
       ]
     },
     {

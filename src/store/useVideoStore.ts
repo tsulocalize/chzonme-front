@@ -2,7 +2,7 @@ import {create} from "zustand/react";
 
 export interface VideoState {
   videoId: string | null;
-  setVideoId: (id: string) => void;
+  setVideoId: (id: string | null) => void;
   reset: (path: string) => void;
   isHighlighter: boolean;
   switchHighlighter: () => void;
