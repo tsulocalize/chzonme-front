@@ -5,6 +5,7 @@ import {theme} from "@/common/styles.ts";
 import SearchSVG from "@/assets/image/search.svg?react"
 import {useRef, useState} from "react";
 import {onToastError, onToastSuccess} from "@/util/alert.ts";
+import {ChannelFuseSearch} from "@/component/_common/ChannelFuseSearch.tsx";
 
 
 export const ChannelSearch = () => {
@@ -13,13 +14,13 @@ export const ChannelSearch = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
 
-  const handleSetChannelName = () => {
+  const handleSetChannelName = (input: string) => {
     if (!inputRef.current) return;
-    if (inputValue === "") {
+    if (input === "") {
       onToastError("채널명을 입력하세요");
     } else {
-      setChannelName(inputValue);
-      onToastSuccess(inputValue)
+      setChannelName(input);
+      onToastSuccess(input)
       setInputValue("");
     }
 
@@ -28,61 +29,69 @@ export const ChannelSearch = () => {
   }
 
   return (
-    <S.Wrapper selected={selected}>
-      <S.InputArea selected={selected} onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
-        <InputBox
-          ref={inputRef}
-          value={inputValue}
-          setValue = {setInputValue}
-          inputBoxStyle={S.InputCss}
-          placeholder={"채널명을 입력하세요"}
-          onEnter={handleSetChannelName}
-          setSelected = {setSelected}
-        />
-      </S.InputArea>
-      <S.SearchArea onClick={handleSetChannelName}>
-        <SearchSVG />
-      </S.SearchArea>
-    </S.Wrapper>
-
+    <S.OutsideWrapper>
+      <S.Wrapper selected={selected}>
+        <S.InputArea selected={selected} onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
+          <InputBox
+            ref={inputRef}
+            value={inputValue}
+            setValue = {setInputValue}
+            inputBoxStyle={S.InputCss}
+            placeholder={"채널명을 입력하세요"}
+            onEnter={() => handleSetChannelName(inputValue)}
+            setSelected = {setSelected}
+          />
+        </S.InputArea>
+        <S.SearchArea onClick={() => handleSetChannelName(inputValue)}>
+          <SearchSVG />
+        </S.SearchArea>
+      </S.Wrapper>
+      <S.FuseArea>
+        <ChannelFuseSearch input={inputValue} onClickEvent={(clickedChannelName) => {
+          handleSetChannelName(clickedChannelName);
+        }}/>
+      </S.FuseArea>
+    </S.OutsideWrapper>
   )
 }
 
 const S = {
-  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["selected"].includes(prop)})<{selected: boolean}>`
-    display: flex;
-    width: 300px;
-    height: 46px;
-    padding: 0 10px 0 20px;
-    margin-left: auto;
-    border-radius: 15px;
-    background: ${({theme}) => theme.color.white};
-    border: 2px ${({selected}) => selected ? `solid black` : "solid transparent"};
+  OutsideWrapper: styled.div`
+      position: relative;
+      margin-left: auto;
   `,
-  InputArea: styled.div.withConfig({shouldForwardProp: (prop) => !["selected"].includes(prop)})<{selected: boolean}>`
-    display: flex;
-    align-items: center;
-    width: 80%;
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["selected"].includes(prop)})<{ selected: boolean }>`
+      display: flex;
+      width: 300px;
+      height: 44px;
+      padding: 0 10px 0 20px;
+      border-radius: 15px;
+      background: ${({theme}) => theme.color.white};
+      border: 2px ${({selected}) => selected ? `solid black` : "solid transparent"};
+  `,
+  InputArea: styled.div.withConfig({shouldForwardProp: (prop) => !["selected"].includes(prop)})<{ selected: boolean }>`
+      display: flex;
+      align-items: center;
+      width: 80%;
   `,
   InputCss: {
     background: theme.color.white,
     color: theme.color.black,
-    font: theme.font.M(20),
+    font: theme.font.M(18),
     border: "0",
   } as InputBoxStyle
   ,
   SearchArea: styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20%;
-    cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20%;
+      cursor: pointer;
   `,
+  FuseArea: styled.div`
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+  `
 }
-
-
-
-
-
-
-

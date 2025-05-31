@@ -39,6 +39,12 @@ export const InputBox = ({ref, value, setValue, inputBoxStyle, placeholder, onEn
     }
   }
 
+  const preventUpDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault();
+    }
+  }
+
   return (
     <S.StyledInputBox
       ref={ref}
@@ -46,7 +52,8 @@ export const InputBox = ({ref, value, setValue, inputBoxStyle, placeholder, onEn
       inputBoxStyle={inputBoxStyle}
       placeholder={placeholder ?? ""}
       type="search"
-      onKeyUp={(e) => handleEnter(e)}
+      onKeyUp={handleEnter}
+      onKeyDown={preventUpDown}
       onChange={(e) => setValue(e.target.value)}
       onBlur={() => setSelected(false)}
     />

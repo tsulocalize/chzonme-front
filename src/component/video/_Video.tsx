@@ -9,6 +9,8 @@ import {_Controller} from "@/component/video/_Controller.tsx";
 
 export const _Video = () => {
   const { videoId } = useVideoStore();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const playerRef = useRef<YT.Player | null>(null);
 
   const handleReady = (event: YouTubeEvent) => {

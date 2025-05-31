@@ -21,11 +21,10 @@ export const Icon = ({svg, onClick}: Props) => {
 }
 
 const S = {
-  StyledIcon: styled.svg<{ active: boolean }>`
+  StyledIcon: styled.svg.withConfig({shouldForwardProp: (prop) => !["active"].includes(prop)})<{ active: boolean }>`
       cursor: pointer;
       width: 50px;
       height: 50px;
       color: ${({theme, active}) => (active ? theme.color.point["400"] : theme.color.black)};
-      //transition: color 0.1s ease;
   `,
 }

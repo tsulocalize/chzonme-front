@@ -102,6 +102,7 @@ const S = {
     }
   `,
   Summary: styled.div`
+    padding-top: 4px;
     padding-right: 14px;
     text-align: right;
     white-space: pre-line;
