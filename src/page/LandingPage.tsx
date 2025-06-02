@@ -11,6 +11,6 @@ export const LandingPage = () => {
 
 const S = {
   Wrapper: styled.div`
-    padding: 90px 120px 0 120px;
+    padding: 90px 120px 90px 120px;
   `,
 }

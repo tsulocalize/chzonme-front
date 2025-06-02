@@ -1,0 +1,74 @@
+import styled from "styled-components";
+
+interface Props {
+  floor?: boolean;
+}
+
+export const Footer = ({floor}: Props) => {
+  const menuData = [
+    {
+      content: "이용약관",
+      url: "https://drive.google.com/file/d/1dAMzO-wwlZDxJrJGvgo5-BHEse_XBWSM/view?usp=sharing"
+    },
+    {
+      content: "개인정보처리방침",
+      url: "https://drive.google.com/file/d/1NZjZb7ogkRFoZSlI7BWdy3B_tH2Q0o_b/view?usp=sharing"
+    },
+    {
+      content: "1:1 문의",
+      url: "https://open.kakao.com/o/sd6r2uzh"
+    },
+    {
+      content: "디스코드",
+      url: "https://discord.gg/48J5u2NVwK"
+    },
+  ];
+
+  return (
+    <S.Wrapper floor={floor}>
+      <S.Spacer />
+      <S.Menus>
+        {menuData.map((data) => (
+          <S.Menu onClick={() => window.open(data.url, "_blank")}>{data.content}</S.Menu>
+        ))}
+      </S.Menus>
+      <S.Spacer>
+        <S.Copyright>ⓒ 2024-2025. 치즈온미(ChzOnMe)</S.Copyright>
+        <S.Copyright>All rights reserved.</S.Copyright>
+      </S.Spacer>
+    </S.Wrapper>
+  )
+}
+
+const S = {
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["floor"].includes(prop)})<{floor?: boolean}>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    background: ${({theme, floor}) => floor ? theme.color.white : theme.color.mono["100"]};
+  `,
+  Copyright: styled.div`
+    margin-left: auto;
+    margin-right: 16px;
+    white-space: nowrap;
+    color: ${({theme}) => theme.color.mono["400"]};
+  `,
+  Menus: styled.div`
+    display: flex;
+    justify-content: space-between;
+    max-width: 700px;
+    flex: 1;
+  `,
+  Menu: styled.div`
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  `,
+  Spacer: styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  `
+}
+

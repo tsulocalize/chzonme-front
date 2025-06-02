@@ -14,5 +14,6 @@ const S = {
   Wrapper: styled.div`
     padding: 120px 120px 0 120px;
     background: ${({theme}) => theme.color.white};
+    flex: 1;
   `,
 }

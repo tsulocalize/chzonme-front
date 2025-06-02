@@ -9,6 +9,16 @@ import {VideoPage} from "@/page/VideoPage.tsx";
 import {StoreSubscribeManager} from "@/store/StoreSubscribeManager.tsx";
 import {Navigator} from "@/router/Navigator.tsx";
 import {VideoGuidePage} from "@/page/VideoGuidePage.tsx";
+import styled from "styled-components";
+import {Footer} from "@/component/_common/Footer.tsx";
+
+const S = {
+  OutletWrapper: styled.div`
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+  `
+}
 
 export const router = createBrowserRouter(
   [
@@ -30,8 +40,11 @@ export const router = createBrowserRouter(
           path: "",
           element: (
             <>
-              <Header />
-              <LandingPage />
+              <S.OutletWrapper>
+                <Header />
+                <LandingPage />
+                <Footer floor={true}/>
+              </S.OutletWrapper>
             </>
           )
         },
@@ -39,9 +52,12 @@ export const router = createBrowserRouter(
           path: "video",
           element: (
             <>
-              <Header />
-              <SubHeader />
-              <VideoPage />
+              <S.OutletWrapper>
+                <Header />
+                <SubHeader />
+                <VideoPage />
+                <Footer />
+              </S.OutletWrapper>
             </>
           )
         },
