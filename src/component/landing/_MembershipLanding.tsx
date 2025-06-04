@@ -9,7 +9,7 @@ interface Props {
   content: string;
 }
 
-export const _Membership = ({title, content}: Props) => {
+export const _MembershipLanding = ({title, content}: Props) => {
   const navigate = useNavigate();
   const handleClick = (dest: string) => {
     navigate(dest)

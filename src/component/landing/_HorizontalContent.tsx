@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {_Membership} from "@/component/landing/_Membership.tsx";
+import {_MembershipLanding} from "@/component/landing/_MembershipLanding.tsx";
 
 interface Props {
   title: string;
@@ -14,8 +14,8 @@ export const _HorizontalContent = ({propsList}: PropsList) => {
   return (
     <S.Wrapper>
       {propsList.map((props) => (
-        <_Membership title={props.title}
-                     content={props.content}
+        <_MembershipLanding title={props.title}
+                            content={props.content}
         />
       ))}
     </S.Wrapper>
@@ -29,7 +29,7 @@ const S = {
     flex-direction: column;
     background: ${({theme}) => theme.color.white};
     border-radius: 12px;
-    padding: 32px 24px 32px 24px;
+    padding: 32px 32px 32px 24px;
     gap: 30px;
     box-sizing: border-box;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);

@@ -2,10 +2,10 @@ import {useUserStore} from "@/store/useUserStore.ts";
 import styled from "styled-components";
 import fallback from "@/assets/image/fallback-image.png";
 import {fontStyle} from "@/util/fontStyle.ts";
+import {SUBSCRIBE_URL} from "@/common/constant.ts";
 
 export const _Profile = () => {
   const { username, img, isSubscribed, subscribeDuration } = useUserStore();
-  const subscribeUrl = "https://chzzk.naver.com/2fab1ff9fb326824d71de66e26fede7f";
 
   return (
     <S.Wrapper>
@@ -24,7 +24,7 @@ export const _Profile = () => {
             ) : (
             <>
               치즈온미 채널을 구독하고 있지 않습니다.
-              <S.SubscribeButton onClick={() => window.open(subscribeUrl, "_blank")}>{"구독하러 가기"}</S.SubscribeButton>
+              <S.SubscribeButton onClick={() => window.open(SUBSCRIBE_URL, "_blank")}>{"구독하러 가기"}</S.SubscribeButton>
             </>
           )}
         </S.Subscribe>
@@ -42,7 +42,6 @@ const S = {
     max-width: 500px;
     background: ${({theme}) => theme.color.white};
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.06);
-    border-left: 1px solid ${({theme}) => theme.color.mono["300"]};
   `,
   Title: styled.div`
     align-self: flex-start;

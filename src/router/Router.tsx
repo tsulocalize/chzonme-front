@@ -13,6 +13,7 @@ import styled from "styled-components";
 import {Footer} from "@/component/_common/Footer.tsx";
 import {MyPage} from "@/page/MyPage.tsx";
 import {LoginChecker} from "@/router/LoginChecker.tsx";
+import {MembershipPage} from "@/page/MembershipPage.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -45,7 +46,7 @@ export const router = createBrowserRouter(
               <S.OutletWrapper>
                 <Header />
                 <LandingPage />
-                <Footer floor={true}/>
+                <Footer floor/>
               </S.OutletWrapper>
             </>
           )
@@ -79,6 +80,18 @@ export const router = createBrowserRouter(
                 <Header />
                 <MyPage />
                 <Footer />
+              </S.OutletWrapper>
+            </>
+          )
+        },
+        {
+          path: "membership",
+          element: (
+            <>
+              <S.OutletWrapper>
+                <Header />
+                <MembershipPage />
+                <Footer floor/>
               </S.OutletWrapper>
             </>
           )
