@@ -8,12 +8,16 @@ export const serverApi = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 5000,
-  timeoutErrorMessage: "서버가 응답하지 않습니다."
+  timeoutErrorMessage: "서버가 응답하지 않습니다.",
 })
 
 serverApi.interceptors.response.use(
   response => response,
   error => {
+    if (error.response.status === 401) {
+      return Promise.reject(error); // auth는 alert하지 않고 oauth로 보내기
+    }
+
     if (!error.response || !error.response.data) {
       onError("네트워크 오류가 발생했습니다");
       return Promise.reject(error);

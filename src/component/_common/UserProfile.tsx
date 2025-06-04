@@ -2,21 +2,20 @@ import {useUserStore} from "@/store/useUserStore.ts";
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
 import fallback from "@/assets/image/fallback-image.png";
+import {LoginModal} from "@/component/modal/LoginModal.tsx";
 
 export const UserProfile = () => {
-  const {username, img, isLoggedIn} = useUserStore();
+  const {username, img} = useUserStore();
 
   return (
     <S.Wrapper>
-      {!isLoggedIn ? (
+      {username !== null ? (
         <>
           <S.Image src={img ?? fallback} alt="이미지" />
           <S.Username> {(username ?? "알 수 없는 사용자") + " 님"} </S.Username>
         </>
       ) : (
-        <div>
-          로그인 버튼
-        </div>
+        <S.Login onClick={LoginModal}>로그인</S.Login>
       )}
     </S.Wrapper>
   )
@@ -30,7 +29,6 @@ const S = {
     height: 100%;
     gap: 10px;
   `,
-
   Image: styled.img`
     width: 50px;
     height: 50px;
@@ -39,17 +37,25 @@ const S = {
     overflow: hidden;
     object-fit: cover;
   `,
-
   FallbackImage: styled.div`
     width: 50px;
     height: 50px;
     border-radius: 15px;
     background: ${({theme}) => theme.color.mono["200"]};
   `,
-
   Username: styled.span`
     ${({theme}) => fontStyle(theme.font.B(24))};
     white-space: nowrap;
     user-select: none;
-  `
+  `,
+  Login: styled.div`
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: ${({theme}) => theme.color.point["500"]};
+    color: ${({theme}) => theme.color.black};
+    ${({theme}) => fontStyle(theme.font.B(24))};
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  `,
 }

@@ -11,6 +11,8 @@ import {Navigator} from "@/router/Navigator.tsx";
 import {VideoGuidePage} from "@/page/VideoGuidePage.tsx";
 import styled from "styled-components";
 import {Footer} from "@/component/_common/Footer.tsx";
+import {MyPage} from "@/page/MyPage.tsx";
+import {LoginChecker} from "@/router/LoginChecker.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -67,6 +69,24 @@ export const router = createBrowserRouter(
             <>
               <VideoGuidePage />
             </>
+          )
+        },
+        {
+          path: "my",
+          element: (
+            <>
+              <S.OutletWrapper>
+                <Header />
+                <MyPage />
+                <Footer />
+              </S.OutletWrapper>
+            </>
+          )
+        },
+        {
+          path: "login",
+          element: (
+            <LoginChecker />
           )
         },
       ]
