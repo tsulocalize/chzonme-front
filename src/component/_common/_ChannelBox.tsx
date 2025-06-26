@@ -15,11 +15,16 @@ interface Props {
 
 export const _ChannelBox = ({fuseChannels, onClickEvent}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [keyLock, setKeyLock] = useState(false);
 
   useEffect(() => {
     const keyUpHandler = (e:KeyboardEvent) => {
+      if (keyLock) return;
+      console.log()
       if (e.key === "ArrowDown") {
+        setKeyLock(true);
         setSelectedIndex((prev) => Math.min(prev + 1, fuseChannels.length - 1));
+        setTimeout(() => setKeyLock(false), 100);
         return;
       }
       if (e.key === "ArrowUp") {
@@ -38,7 +43,7 @@ export const _ChannelBox = ({fuseChannels, onClickEvent}: Props) => {
     return () => {
       document.removeEventListener('keyup', keyUpHandler);
     }
-  }, [selectedIndex, fuseChannels]);
+  }, [keyLock, selectedIndex, fuseChannels]);
 
   return (
     <>
