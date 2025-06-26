@@ -6,13 +6,18 @@ export const getVideoChannels = async () => {
   return response.data;
 }
 
-export const getVideoTable = async (channelName: string) => {
-  const response = await serverApi.get(`/video-donations/v1?channelName=${channelName}`);
+export const getVideoTable = async (channelId: string) => {
+  const response = await serverApi.get(`/video-donations?channelId=${channelId}`);
   return response.data;
 }
 
-export const getVideoSetting = async (channelName: string) => {
-  const response = await serverApi.get(`/video-setting/v1?channelName=${channelName}`);
+export const getVideoSetting = async (channelId: string) => {
+  const response = await serverApi.get(`/video-setting?channelId=${channelId}`);
+  return response.data;
+}
+
+export const getRanking = async (criteria: string) => {
+  const response = await serverApi.get(`/ranking?criteria=${criteria}`);
   return response.data;
 }
 

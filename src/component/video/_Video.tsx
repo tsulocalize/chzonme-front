@@ -6,8 +6,10 @@ import {useVideoStore} from "@/store/useVideoStore.ts";
 import {useEffect, useRef} from "react";
 import {_Channel} from "@/component/video/_Channel.tsx";
 import {_Controller} from "@/component/video/_Controller.tsx";
+import {useSizeStore} from "@/store/useSizeStore.ts";
 
 export const _Video = () => {
+  const { ratio } = useSizeStore();
   const { videoId } = useVideoStore();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
@@ -29,8 +31,8 @@ export const _Video = () => {
         onReady={handleReady}
         videoId=''
         opts={{
-          width: "800",
-          height: "550",
+          width: 600 * ratio,
+          height: 450 * ratio,
           playerVars: {
             autoplay: 0, //자동재생 X
             rel: 0, //관련 동영상 표시하지 않음

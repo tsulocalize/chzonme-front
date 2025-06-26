@@ -6,6 +6,7 @@ import {useVideoStore} from "@/store/useVideoStore.ts";
 import {formatDate, formatShortTime} from "@/util/date.ts";
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
+import {useSizeStore} from "@/store/useSizeStore.ts";
 
 const headers = ['No.', '영상 제목', '치즈', '생성 시간', '남은 시간'];
 const headersInData = ['id', 'videoName', 'cheese', 'createdAt', 'timeTo'];
@@ -17,6 +18,7 @@ interface Props {
 
 export const _InnerTable = ({infos, unitPrice}: Props) => {
   const { setVideoId } = useVideoStore();
+  const { ratio } = useSizeStore();
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [infosLength, setInfosLength] = useState(0);
   const accumulate = useMemo(() => {
@@ -54,7 +56,7 @@ export const _InnerTable = ({infos, unitPrice}: Props) => {
               if (header === 'timeTo') tableData = formatShortTime((accumulate[index] - accumulate[selectedIndex]) / unitPrice);
               if (header === 'cheese') tableData = tableData.toLocaleString()
               return (
-                <S.Td key={header} colorIndex={index} selected={index == selectedIndex}> {tableData} </S.Td>
+                <S.Td key={header} colorIndex={index} selected={index == selectedIndex} ratio={ratio}> {tableData} </S.Td>
             )})}
           </S.Tr>
           ))
@@ -111,8 +113,8 @@ const S = {
       width: 100px;
     }
   `,
-  Td: styled.td.withConfig({shouldForwardProp: (prop) => !["colorIndex", "selected"].includes(prop)})<{colorIndex: number, selected: boolean}>`
-    ${({theme}) => fontStyle(theme.font.R(20))};
+  Td: styled.td.withConfig({shouldForwardProp: (prop) => !["colorIndex", "selected", "ratio"].includes(prop)})<{colorIndex: number, selected: boolean, ratio: number}>`
+    ${({theme, ratio}) => fontStyle(theme.font.R(16 + ratio))};
     background: ${({theme, colorIndex, selected}) => 
             selected ? theme.color.point["300"] : colorIndex % 2 == 0 ? theme.color.mono["50"] : ""};
     padding: 12px 5px 12px 5px;
@@ -123,17 +125,18 @@ const S = {
     }
     &:nth-child(2) {
       max-width: 500px;
+      min-width: ${({ratio}) => 170 * ratio + 'px'};
     }
     &:nth-child(3) {
-      width: 120px;
+      width: ${({ratio}) => 80 + 20 * ratio + 'px'};
       text-align: center;
     }
     &:nth-child(4) {
-      width: 130px;
+      width: ${({ratio}) => 100 + 20 * ratio + 'px'};
       text-align: center;
     }
     &:nth-child(5) {
-      width: 100px;
+      width: ${({ratio}) => 80 + 10 * ratio + 'px'};
       text-align: center;
     }
   `,

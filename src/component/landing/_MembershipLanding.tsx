@@ -34,7 +34,7 @@ const S = {
   Wrapper: styled.div`
     display: flex;
     width: 100%;
-    gap: 25px;
+    gap: 40px;
   `,
   Title: styled.div`
     ${({theme}) => fontStyle(theme.font.B(40))};

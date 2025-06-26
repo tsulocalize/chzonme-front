@@ -5,3 +5,8 @@ export const getAllChannels = async () => {
   const response = await serverApi.get("/channels");
   return response.data;
 }
+
+export const getChannelInfo = async (channelName: string) => {
+  const response = await serverApi.get(`/channel-info?channelName=${channelName}`);
+  return response.data;
+}

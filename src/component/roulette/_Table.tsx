@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import styled from "styled-components";
-import {useChannelStore} from "@/store/useChannelStore.ts";
 import {getVideoSetting, getVideoTable} from "@/api/server/video.ts";
 import {useEffect, useMemo, useState} from "react";
 import {_InnerTable} from "@/component/video/_InnerTable.tsx";
 import {useVideoStore} from "@/store/useVideoStore.ts";
 import {formatTime} from "@/util/date.ts";
-import {useSizeStore} from "@/store/useSizeStore.ts";
+import {useUserStore} from "@/store/useUserStore.ts";
 
 export interface VideoInfo {
   videoName: string;
@@ -22,9 +21,8 @@ export interface VideoData {
 }
 
 export const _Table = () => {
-  const { channelId } = useChannelStore();
+  const { channelId } = useUserStore();
   const { isHighlighter } = useVideoStore();
-  const { ratio } = useSizeStore();
   const [ data, setData ] = useState<VideoData>({ general: [], highlighter: []});
   const [ unitPrice, setUnitPrice ] = useState(100);
   const summary = useMemo(() => {
@@ -36,35 +34,34 @@ export const _Table = () => {
   }, [data, unitPrice]);
 
   useEffect(() => {
-    if (!channelId) return
-
     const fetchVideoTable = async () => {
+      if (channelId !== null) {
         const videoTable = await getVideoTable(channelId);
         setData(videoTable);
+      }
     }
 
     const fetchVideoSetting = async () => {
+      if (channelId !== null) {
         const videoSetting = await getVideoSetting(channelId);
         setUnitPrice(videoSetting.payAmountPerSecond);
+      }
     }
-
-    const intervalId = setInterval(fetchVideoTable, 5000);
 
     fetchVideoTable();
     fetchVideoSetting();
-
-    return () => clearInterval(intervalId);
   }, [channelId]);
+
 
   return(
     <>
       {channelId && (
         <S.OutsideWrapper>
-          <S.Wrapper ratio={ratio}>
-           <_InnerTable infos={isHighlighter ? data.highlighter : data.general} unitPrice={unitPrice} />
+          <S.Wrapper>
+            <_InnerTable infos={isHighlighter ? data.highlighter : data.general} unitPrice={unitPrice} />
           </S.Wrapper>
           <S.Summary>
-          {`총 개수: ${summary.count}개\n총 재생 시간: ${summary.time}`}
+            {`총 개수: ${summary.count}개\n총 재생 시간: ${summary.time}`}
           </S.Summary>
         </S.OutsideWrapper>
       )}
@@ -82,8 +79,8 @@ const S = {
     flex-direction: column;
     gap: 3px;
   `,
-  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["ratio"].includes(prop)})<{ratio: number}>`
-    max-height: ${({ratio}) => 450 * ratio + 'px'};
+  Wrapper: styled.div`
+    max-height: 550px;
     overflow-y: scroll;
       
     &::-webkit-scrollbar {

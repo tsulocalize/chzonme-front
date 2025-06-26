@@ -2,44 +2,53 @@ import {create} from "zustand/react";
 
 export interface UserState {
   username: string | null;
+  channelId: string | null;
   img: string | null;
-  isSubscribed: boolean;
-  subscribeDuration: string | null;
+  tier: string | null;
+  startDate: string | null;
+  endDate: string | null;
   isLoggedIn: boolean;
-  login: (userData: UserData) => void;
+  setData: (userData: UserData) => void;
 }
 
 export interface UserData {
-  channelName:string;
-  img:string;
-  isSubscribed: boolean;
-  subscribeDuration: string;
+  channelName: string;
+  channelId: string;
+  img: string;
+  tier: string;
+  startDate: string | null;
+  endDate: string | null;
 }
 
 export const useUserStore = create<UserState>((set) => ({
   username: null,
+  channelId: null,
   img: null,
-  isSubscribed: false,
-  subscribeDuration: null,
+  tier: null,
+  startDate: null,
+  endDate: null,
   isLoggedIn: false,
 
-  login: (userData: UserData) => {
-    console.log(userData.channelName);
+  setData: (userData: UserData) => {
     set({
       username: userData.channelName,
+      channelId: userData.channelId,
       img: userData.img,
-      isSubscribed: userData.isSubscribed,
-      subscribeDuration: userData.subscribeDuration,
+      tier: userData.tier,
+      startDate: userData.startDate,
+      endDate: userData.endDate,
       isLoggedIn: true,
     });
   },
 
-  logout: () => {
+  resetData: () => {
     set({
       username: null,
+      channelId: null,
       img: null,
-      isSubscribed: false,
-      subscribeDuration: null,
+      tier: null,
+      startDate: null,
+      endDate: null,
       isLoggedIn: false,
     });
   },

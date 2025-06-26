@@ -2,13 +2,16 @@ import axios from "axios"
 import {onError} from "@/util/alert.ts";
 
 export const serverApi = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER_API_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
   timeout: 5000,
   timeoutErrorMessage: "서버가 응답하지 않습니다.",
+  validateStatus: function (status) {
+    return status < 400 && status >= 200;
+  }
 })
 
 serverApi.interceptors.response.use(

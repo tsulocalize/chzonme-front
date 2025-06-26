@@ -1,10 +1,13 @@
 import {_Table} from "@/component/video/_Table.tsx";
 import {_Video} from "@/component/video/_Video.tsx";
 import styled from "styled-components";
+import {useSizeStore} from "@/store/useSizeStore.ts";
 
 export const VideoItems = () => {
+  const { ratio } = useSizeStore();
+
   return (
-    <S.Wrapper>
+    <S.Wrapper ratio={ratio}>
       <_Video />
       <_Table />
     </S.Wrapper>
@@ -12,9 +15,9 @@ export const VideoItems = () => {
 }
 
 const S = {
-  Wrapper: styled.div`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["ratio"].includes(prop)})<{ ratio: number }>`
     display: flex;
-    gap: 20px;
+    gap: ${({ratio}) => 30 * ratio + 'px'};
     justify-content: space-between;
   `
 }

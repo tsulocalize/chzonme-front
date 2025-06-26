@@ -1,7 +1,7 @@
 import AxiosMockAdapter from "axios-mock-adapter";
 
 export const registerVideoData = (mock: AxiosMockAdapter) => {
-  mock.onGet(/\/video-donations\/v1.*/).reply(() => {
+  mock.onGet(/\/video-donations.*/).reply(() => {
     return [200,
       {
         "general": [
@@ -164,7 +164,7 @@ export const registerVideoData = (mock: AxiosMockAdapter) => {
 }
 
 export const registerVideoSetting = (mock: AxiosMockAdapter) => {
-  mock.onGet(/\/video-setting\/v1.*/).reply(() => {
+  mock.onGet(/\/video-setting.*/).reply(() => {
     return [200,
       {
         donationActive: true,
@@ -175,5 +175,107 @@ export const registerVideoSetting = (mock: AxiosMockAdapter) => {
         isChzzkClipAllow: false,
         isAllowForSubscriber: false,
       }]
+  })
+}
+
+export const registerRanking = (mock: AxiosMockAdapter) => {
+  mock.onGet(/\/ranking/).reply(() => {
+    return [200,
+      {
+        "ranking": [
+          {
+            "rank": 1,
+            "element": {
+              "videoName": "\"죽은 왕의 송곳니, 빅딕\"",
+              "videoId": "cocSbxVFdGo",
+              "cheese": 266610,
+              "count": 27
+            }
+          },
+          {
+            "rank": 2,
+            "element": {
+              "videoName": "MAV 송",
+              "videoId": "Y8xLipMKbO8",
+              "cheese": 132174,
+              "count": 29
+            }
+          },
+          {
+            "rank": 2,
+            "element": {
+              "videoName": "장난전화에서 시작된 ㅈ대로의 아버지 [콩밥특별시 6편]",
+              "videoId": "pn6598Dlm2s",
+              "cheese": 214000,
+              "count": 25
+            }
+          },
+          {
+            "rank": 4,
+            "element": {
+              "videoName": "지금 이 순간 정답은 없다, 짐빔은 있다",
+              "videoId": "F9F3xs_Nf3s",
+              "cheese": 180055,
+              "count": 22
+            }
+          },
+          {
+            "rank": 5,
+            "element": {
+              "videoName": "워해머 40k  블러드 엔젤 설명회 #생귀니우스 #워해머40000 #warhammer40k",
+              "videoId": "Z4kLfygHrQw",
+              "cheese": 203910,
+              "count": 19
+            }
+          },
+          {
+            "rank": 6,
+            "element": {
+              "videoName": "[BONUS TRACK] 일일 사도 체험 - 죠안 BBANGMIX ver.",
+              "videoId": "eyUTbB6ScQc",
+              "cheese": 109200,
+              "count": 28
+            }
+          },
+          {
+            "rank": 7,
+            "element": {
+              "videoName": "콩밥특별시 시청자 만 명을 웃긴 레전드 뺑소니 사건",
+              "videoId": "L40N9WSTPXA",
+              "cheese": 214640,
+              "count": 14
+            }
+          },
+          {
+            "rank": 7,
+            "element": {
+              "videoName": "21세기 조현병 환자 (Kanye West - Power) [실프.콩밥특별시] 자막",
+              "videoId": "FEq2M-klpJo",
+              "cheese": 170620,
+              "count": 16
+            }
+          },
+          {
+            "rank": 9,
+            "element": {
+              "videoName": "xx하지 않으면 나갈 수 없는 방",
+              "videoId": null,
+              "cheese": 87140,
+              "count": 48
+            }
+          },
+          {
+            "rank": 10,
+            "element": {
+              "videoName": "레전드 경찰 뺑소니 사건 발생 [콩밥특별시 2화]",
+              "videoId": "VBL7STiBmf4",
+              "cheese": 129100,
+              "count": 13
+            }
+          }
+        ],
+        "now": "2025-06-13T05:00:00"
+      }
+    ]
   })
 }

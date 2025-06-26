@@ -24,15 +24,23 @@ const inputStyleCss = ({background, color, font, padding, border, borderRadius}:
 
 interface Props {
   ref: React.RefObject<HTMLInputElement | null>,
-  value: string
-  setValue: (value: (((prevState: string) => string) | string)) => void
+  value: string,
+  setValue: (value: (((prevState: string) => string) | string)) => void,
   inputBoxStyle: InputBoxStyle,
   placeholder: string | null,
   onEnter: () => void,
   setSelected: (value: (((prevState: boolean) => boolean) | boolean)) => void,
 }
 
-export const InputBox = ({ref, value, setValue, inputBoxStyle, placeholder, onEnter, setSelected}: Props) => {
+export const InputBox = ({
+                           ref,
+                           value,
+                           setValue,
+                           inputBoxStyle,
+                           placeholder,
+                           onEnter,
+                           setSelected,
+                         }: Props) => {
   const handleEnter = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && ref.current) {
       onEnter()
@@ -61,14 +69,16 @@ export const InputBox = ({ref, value, setValue, inputBoxStyle, placeholder, onEn
 };
 
 const S = {
-  StyledInputBox: styled.input.withConfig({shouldForwardProp: (prop) => !["inputBoxStyle"].includes(prop)})<{ inputBoxStyle: InputBoxStyle }>`
-    width: 100%;
-    ${({inputBoxStyle}) => inputStyleCss(inputBoxStyle)};
+  StyledInputBox: styled.input.withConfig({shouldForwardProp: (prop) => !["inputBoxStyle"].includes(prop)})<{
+    inputBoxStyle: InputBoxStyle
+  }>`
+      width: 100%;
+      ${({inputBoxStyle}) => inputStyleCss(inputBoxStyle)};
 
-    &:focus {
-      outline: none;
-      border: none;
-    }
+      &:focus {
+          outline: none;
+          border: none;
+      }
   `
 }
 

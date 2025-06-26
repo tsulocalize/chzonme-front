@@ -4,6 +4,7 @@ import {useSubMenuStore} from "@/store/useSubMenuStore.ts";
 import {useMenuStore} from "@/store/useMenuStore.ts";
 import {useVideoStore} from "@/store/useVideoStore.ts";
 import {useChannelStore} from "@/store/useChannelStore.ts";
+import {useVoteStore} from "@/store/useVoteStore.ts";
 
 interface Props {
   children: React.ReactNode
@@ -39,11 +40,19 @@ export const StoreSubscribeManager = ({children}: Props) => {
       },
     )
 
+    const unsubscribeVoteFromRoute = useRouteStore.subscribe(
+      (state) => state.currentPath,
+      (currentPath) => {
+        useVoteStore.getState().reset(currentPath);
+      },
+    )
+
     return () => {
       unsubscribeSubMenuFromRoute();
       unsubscribeMenuFromRoute();
       unsubscribeVideoFromRoute();
-      unsubscribeChannelFromRoute()
+      unsubscribeChannelFromRoute();
+      unsubscribeVoteFromRoute();
     }
   }, []);
 

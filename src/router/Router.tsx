@@ -1,7 +1,6 @@
 import {createBrowserRouter, Outlet} from "react-router-dom";
 import {LandingPage} from "@/page/LandingPage.tsx";
 import {Header} from "@/component/_common/Header.tsx";
-import {ErrorBoundary} from "react-error-boundary";
 import {FallbackPage} from "@/page/FallbackPage.tsx";
 import {RouteFollower} from "@/router/RouteFollower.tsx";
 import {SubHeader} from "@/component/_common/SubHeader.tsx";
@@ -14,6 +13,9 @@ import {Footer} from "@/component/_common/Footer.tsx";
 import {MyPage} from "@/page/MyPage.tsx";
 import {LoginChecker} from "@/router/LoginChecker.tsx";
 import {MembershipPage} from "@/page/MembershipPage.tsx";
+import {RoulettePage} from "@/page/RoulettePage.tsx";
+import {CustomErrorBoundary} from "@/router/CustomErrorBoundary.tsx";
+import {VideoRankingPage} from "@/page/VideoRankingPage.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -28,15 +30,15 @@ export const router = createBrowserRouter(
     {
       path: "/",
       element: (
-        <ErrorBoundary fallback={<FallbackPage />}>
         <RouteFollower>
+        <CustomErrorBoundary>
         <Navigator>
         <StoreSubscribeManager>
           <Outlet />
         </StoreSubscribeManager>
         </Navigator>
+        </CustomErrorBoundary>
         </RouteFollower>
-        </ErrorBoundary>
       ),
       children: [
         {
@@ -73,6 +75,14 @@ export const router = createBrowserRouter(
           )
         },
         {
+          path: "ranking",
+          element: (
+            <>
+              <VideoRankingPage />
+            </>
+          )
+        },
+        {
           path: "my",
           element: (
             <>
@@ -92,6 +102,18 @@ export const router = createBrowserRouter(
                 <Header />
                 <MembershipPage />
                 <Footer floor/>
+              </S.OutletWrapper>
+            </>
+          )
+        },
+        {
+          path: "roulette",
+          element: (
+            <>
+              <S.OutletWrapper>
+                <Header />
+                <RoulettePage />
+                <Footer/>
               </S.OutletWrapper>
             </>
           )

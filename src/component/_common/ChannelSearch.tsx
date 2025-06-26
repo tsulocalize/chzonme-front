@@ -4,7 +4,7 @@ import {InputBox, type InputBoxStyle} from "@/component/_common/InputBox.tsx";
 import {theme} from "@/common/styles.ts";
 import SearchSVG from "@/assets/image/search.svg?react"
 import {useRef, useState} from "react";
-import {onToastError, onToastSuccess} from "@/util/alert.ts";
+import {onToastError} from "@/util/alert.ts";
 import {ChannelFuseSearch} from "@/component/_common/ChannelFuseSearch.tsx";
 
 
@@ -20,7 +20,6 @@ export const ChannelSearch = () => {
       onToastError("채널명을 입력하세요");
     } else {
       setChannelName(input);
-      onToastSuccess(input)
       setInputValue("");
     }
 

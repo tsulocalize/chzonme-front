@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import styled from "styled-components";
 import img from "@/assets/image/logo-black.svg"
 import {Title} from "@/component/_common/Title.tsx";
 import {theme} from "@/common/styles.ts";
+import {useSizeStore} from "@/store/useSizeStore.ts";
 
 interface Props {
   mainText: string;
@@ -9,8 +12,10 @@ interface Props {
 }
 
 export const _CardContent = ({mainText, subText}: Props) => {
+  const { ratio } = useSizeStore();
+
   return (
-    <S.Wrapper>
+    <S.Wrapper ratio={ratio}>
       <Title mainText={mainText} mainFont={theme.font.M(32)}
              subText={subText} subFont={theme.font.M(16)} gap={18} />
       <S.Image src={img}/>
@@ -19,11 +24,11 @@ export const _CardContent = ({mainText, subText}: Props) => {
 }
 
 const S = {
-  Wrapper: styled.div`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["ratio"].includes(prop)})<{ ratio: number }>`
     display: flex;
     flex-direction: column;
-    width: 500px;
-    height: 500px;
+    width: ${({ratio}) => 400 * ratio + 'px'};
+    height: ${({ratio}) => 400 * ratio + 'px'};
     background: ${({theme}) => theme.color.white};
     border-radius: 12px;
     padding: 32px 24px 32px 24px;
@@ -33,7 +38,7 @@ const S = {
   `,
 
   Image: styled.img`
-    width: 400px;
+    width: 80%;
     margin-top: auto;
     align-self: center;
   `

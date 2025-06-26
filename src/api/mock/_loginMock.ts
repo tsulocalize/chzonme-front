@@ -6,8 +6,9 @@ export const registerLogin = (mock: AxiosMockAdapter) => {
       {
         "channelName" : "가짜 이름",
         "img" : "https://hips.hearstapps.com/hmg-prod/images/chow-chow-portrait-royalty-free-image-1652926953.jpg?crop=0.44455xw:1xh;center,top&resize=980:*",
-        "isSubscribed" : false,
-        "subscribeDuration" : null
+        "tier" : "1",
+        "startDate" : "2025-06-10T11:42:20",
+        "endDate" : "2025-06-10T11:42:20"
       }]
   })
 }

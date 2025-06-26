@@ -12,7 +12,7 @@ export const LandingItems = () => {
              contents={[
                <_CardContent
                  mainText={"영상 도네이션 목록"}
-                 subText={"어떤 영상 도네이션이 왔는지 한눈에 확인하세요\nYoutube 영상은 재생 가능합니다! (일부 한정)"}/>,
+                 subText={"어떤 영상 도네이션이 왔는지 한눈에 확인하세요\nYoutube 영상은 재생 가능합니다! (일부 영상에 한정)"}/>,
                <_CardContent
                  mainText={"도네이션 룰렛"}
                  subText={"이제 손으로 일일히 타이핑하지 마세요\n자동으로 작성된 룰렛판을 돌려돌려~"}/>,
@@ -23,8 +23,8 @@ export const LandingItems = () => {
       <_Item mainText={"멤버십만의 추가 혜택"} subText={"일반 기능보다 좋은 것은 멤버십 기능"}
              contents={[
                <_HorizontalContent propsList={[
-                 {title: "Basic", content: "과거 영상 도네이션 목록 확인, 분당 채팅수 기록, 채팅 그래프 확인, 채팅 그래프 필터 1개,  항상 연결하기 채널 1개 등"},
-                 {title: "Pro", content: "Basic 기능 전체 + 채팅 그래프 필터 3회, 항상 연결하기 채널 2개, 채팅 그래프 피크 5곳 AI 분석 등"}
+                 {title: "Basic", content: "과거 영상 도네이션 목록 확인, 항상 연결하기 채널 1개"},
+                 {title: "Pro", content: "Basic 기능 전체 + 채팅 그래프 기록, 항상 연결하기 채널 추가 1개"}
                ]} />
              ]} />
       <_Item mainText={"안내사항"} subText={"치즈온미는 아래와 같은 정책으로 운영됩니다."} gap={0}

@@ -26,16 +26,13 @@ export const Footer = ({floor}: Props) => {
 
   return (
     <S.Wrapper floor={floor}>
-      <S.Spacer />
-      <S.Menus>
-        {menuData.map((data) => (
-          <S.Menu onClick={() => window.open(data.url, "_blank")}>{data.content}</S.Menu>
-        ))}
-      </S.Menus>
-      <S.Spacer>
-        <S.Copyright>ⓒ 2024-2025. 치즈온미(ChzOnMe)</S.Copyright>
-        <S.Copyright>All rights reserved.</S.Copyright>
-      </S.Spacer>
+        <S.Spacer/>
+        <S.Menus>
+          {menuData.map((data) => (
+            <S.Menu onClick={() => window.open(data.url, "_blank")}>{data.content}</S.Menu>
+          ))}
+        </S.Menus>
+        <S.Copyright>{`ⓒ 2024-2025. 치즈온미(ChzOnMe)\nAll rights reserved.`}</S.Copyright>
     </S.Wrapper>
   )
 }
@@ -43,32 +40,38 @@ export const Footer = ({floor}: Props) => {
 const S = {
   Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["floor"].includes(prop)})<{floor?: boolean}>`
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 60px;
     background: ${({theme, floor}) => floor ? theme.color.white : theme.color.mono["100"]};
   `,
+  Line: styled.div`
+    display: flex;
+  `,
+  Spacer: styled.div`
+    flex: 1;
+  `,
   Copyright: styled.div`
+    flex: 1;
+    text-align: right;
     margin-left: auto;
     margin-right: 16px;
-    white-space: nowrap;
+    white-space: pre-line;
     color: ${({theme}) => theme.color.mono["400"]};
   `,
   Menus: styled.div`
+    flex: none;
     display: flex;
     justify-content: space-between;
+    min-width: 500px;
     max-width: 700px;
-    flex: 1;
+    //flex: 1;
   `,
   Menu: styled.div`
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
   `,
-  Spacer: styled.div`
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  `
 }
 

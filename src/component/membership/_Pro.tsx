@@ -15,7 +15,7 @@ export const _Pro = () => {
           14,900원 / 월
         </S.Price>
         <LiContents checkIcon font={theme.font.M(20)} gap={8}
-                    texts={["과거 영상 도네이션 목록", "항상 연결하기 2채널", "채팅 그래프 기록", "채팅 그래프 필터 3개"]}
+                    texts={["과거 영상 도네이션 목록", "항상 연결하기 2채널", "채팅 그래프 기록"]}
         />
       </S.Content>
       <S.ButtonWrapper>

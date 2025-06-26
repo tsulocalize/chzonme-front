@@ -4,15 +4,17 @@ import styled from "styled-components";
 import {MembershipItems} from "@/component/membership/MembershipItems.tsx";
 import {Title} from "@/component/_common/Title.tsx";
 import {theme} from "@/common/styles.ts";
+import {useSizeStore} from "@/store/useSizeStore.ts";
 
 export const MembershipPage = () => {
+  const { ratio } = useSizeStore();
 
   return (
     <S.Wrapper>
       <S.CheddarCheese src={CheddarCheesePNG} />
       <S.Title>
-        <Title mainText={"치즈온미를 구독하고 다양한 기능을 마음껏 누려보세요!"} mainFont={theme.font.B(38)}
-              subText={"회원가입 하시고 ‘치지직 치즈온미' 채널을 구독하면 자동으로 멤버십이 적용됩니다!"} subFont={theme.font.M(20)}
+        <Title mainText={"치즈온미를 구독하고 다양한 기능을 마음껏 누려보세요!"} mainFont={theme.font.B(30 + 4 * ratio)}
+              subText={"회원가입 하시고 ‘치지직 치즈온미' 채널을 구독하면 자동으로 멤버십이 적용됩니다!"} subFont={theme.font.M(16 + 4 * ratio)}
                gap={3}
         />
       </S.Title>
@@ -29,7 +31,7 @@ const S = {
   `,
   Title: styled.div`
     position: absolute;
-    top: 60px;
+    top: 40px;
     left: 120px;
   `,
   CheddarCheese: styled.img`

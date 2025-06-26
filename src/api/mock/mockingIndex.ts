@@ -1,8 +1,9 @@
 import {serverApi} from "@/api/server/_index.ts";
 import AxiosMockAdapter from 'axios-mock-adapter';
-import {registerVideoData, registerVideoSetting} from "@/api/mock/_videoMock.ts";
-import {registerChannelData} from "@/api/mock/_channelMock.ts";
+import {registerRanking, registerVideoData, registerVideoSetting} from "@/api/mock/_videoMock.ts";
+import {registerChannelData, registerChannelInfo} from "@/api/mock/_channelMock.ts";
 import {registerLogin, registerTokenLogin} from "@/api/mock/_loginMock.ts";
+import {registerConnectVideo} from "@/api/mock/_connectMock.ts";
 
 type MockRegister = (mock: AxiosMockAdapter) => void;
 
@@ -10,7 +11,10 @@ const registers: MockRegister[] = [
   registerVideoData,
   registerVideoSetting,
   registerChannelData,
-  registerLogin,
+  registerChannelInfo,
+  registerConnectVideo,
+  registerRanking,
+  // registerLogin,
   registerTokenLogin,
 ]
 
@@ -18,5 +22,7 @@ export const setMockIfEnable = () => {
   if (!import.meta.env.VITE_ENABLE_MOCK) return;
   const mock = new AxiosMockAdapter(serverApi, {delayResponse: 50});
   registers.forEach((register) => register(mock));
+
+  mock.onAny().passThrough();
 }
 

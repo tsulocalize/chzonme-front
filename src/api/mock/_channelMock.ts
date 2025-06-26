@@ -108,3 +108,17 @@ export const registerChannelData = (mock: AxiosMockAdapter) => {
     ];
   })
 }
+
+export const registerChannelInfo = (mock: AxiosMockAdapter) => {
+  mock.onGet(/\/channel-info.*/).reply(() => {
+    return [200,
+      {
+        channelId: "0dad8baf12a436f722faa8e5001c5011",
+        channelName: "따효니",
+        channelImageUrl: "https://nng-phinf.pstatic.net/MjAyNDEyMDVfMTk3/MDAxNzMzMzY2MzQ4ODM2.Q-4EFecyIqJAt_FlCo3glfO5T_q09gzeRBdY1uTKXSkg.cun03AtDL3JPYzKaU6dS4NvC_JHMfceeYMNBA4dVSn4g.PNG/%EB%94%B0%ED%94%84%EC%82%AC_%EC%88%98%EC%A0%951.png",
+        verifiedMark: true,
+        openLive: true
+      },
+    ];
+  })
+}
