@@ -7,8 +7,8 @@ export const SubHeaderMenu = () => {
 
   return (
     <S.Wrapper>
-      {subMenus.map((prop) => (
-        <S.Menu onClick={prop.onClick}>{prop.title}</S.Menu>
+      {subMenus.map((prop, index) => (
+        <S.Menu key={index} onClick={prop.onClick}>{prop.title}</S.Menu>
       ))}
     </S.Wrapper>
   )

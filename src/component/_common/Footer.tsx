@@ -28,8 +28,8 @@ export const Footer = ({floor}: Props) => {
     <S.Wrapper floor={floor}>
         <S.Spacer/>
         <S.Menus>
-          {menuData.map((data) => (
-            <S.Menu onClick={() => window.open(data.url, "_blank")}>{data.content}</S.Menu>
+          {menuData.map((data, index) => (
+            <S.Menu key={index} onClick={() => window.open(data.url, "_blank")}>{data.content}</S.Menu>
           ))}
         </S.Menus>
         <S.Copyright>{`ⓒ 2024-2025. 치즈온미(ChzOnMe)\nAll rights reserved.`}</S.Copyright>

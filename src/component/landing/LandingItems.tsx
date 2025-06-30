@@ -11,12 +11,15 @@ export const LandingItems = () => {
              subText={"방송에 도움을 주는 여러 기능을 만나보세요!"}
              contents={[
                <_CardContent
+                 key={1}
                  mainText={"영상 도네이션 목록"}
                  subText={"어떤 영상 도네이션이 왔는지 한눈에 확인하세요\nYoutube 영상은 재생 가능합니다! (일부 영상에 한정)"}/>,
                <_CardContent
+                 key={2}
                  mainText={"도네이션 룰렛"}
                  subText={"이제 손으로 일일히 타이핑하지 마세요\n자동으로 작성된 룰렛판을 돌려돌려~"}/>,
                <_CardContent
+                 key={3}
                  mainText={"채팅 그래프"}
                  subText={"재미있는 순간 포착!\n오늘 방송 중 ‘ㅋㅋㅋ'는 언제 많이 올라왔을까요?"}/>,
              ]} />
