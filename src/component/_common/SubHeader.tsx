@@ -2,11 +2,15 @@ import styled from "styled-components";
 import {SubHeaderMenu} from "@/component/_common/SubHeaderMenu.tsx";
 import {ChannelSearch} from "@/component/_common/ChannelSearch.tsx";
 
-export const SubHeader = () => {
+interface Props {
+  withSearch?: boolean;
+}
+
+export const SubHeader = ({withSearch = true}: Props) => {
   return (
     <S.Wrapper>
       <SubHeaderMenu />
-      <ChannelSearch />
+      {withSearch && <ChannelSearch />}
     </S.Wrapper>
   )
 }

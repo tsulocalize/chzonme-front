@@ -1,67 +1,60 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import styled from "styled-components";
-import {getVideoSetting, getVideoTable} from "@/api/server/video.ts";
-import {useEffect, useMemo, useState} from "react";
-import {_InnerTable} from "@/component/video/_InnerTable.tsx";
-import {useVideoStore} from "@/store/useVideoStore.ts";
-import {formatTime} from "@/util/date.ts";
+import {useEffect, useMemo} from "react";
 import {useUserStore} from "@/store/useUserStore.ts";
-
-export interface VideoInfo {
-  videoName: string;
-  videoId: string;
-  cheese: number;
-  createdAt: string;
-}
-
-export interface VideoData {
-  general: VideoInfo[],
-  highlighter: VideoInfo[]
-}
+import {getRouletteTable} from "@/api/server/roulette.ts";
+import {_InnerTable} from "@/component/roulette/_InnerTable.tsx";
+import {useVoteStore, type Vote} from "@/store/useVoteStore.ts";
 
 export const _Table = () => {
-  const { channelId } = useUserStore();
-  const { isHighlighter } = useVideoStore();
-  const [ data, setData ] = useState<VideoData>({ general: [], highlighter: []});
-  const [ unitPrice, setUnitPrice ] = useState(100);
+  const { userChannelId } = useUserStore();
+  const { votes, setVotes, unitPrice } = useVoteStore();
   const summary = useMemo(() => {
     return {
-      count: data.general.length + data.highlighter.length,
-      time: formatTime((sumCheese(data.general) + sumCheese(data.highlighter)) / unitPrice)
+      count: getVoteCount(votes, unitPrice)
     };
+  }, [votes, unitPrice]);
 
-  }, [data, unitPrice]);
+  const handleGetRoulette = async () => {
+    try {
+      const result = await getRouletteTable();
+      setVotes(result.elements);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
 
   useEffect(() => {
-    const fetchVideoTable = async () => {
-      if (channelId !== null) {
-        const videoTable = await getVideoTable(channelId);
-        setData(videoTable);
+    if (!userChannelId) return;
+
+    const fetchRouletteTable = async () => {
+      if (userChannelId !== null) {
+        const available = await handleGetRoulette();
+        if (!available) {
+          clearInterval(intervalId);
+        }
       }
     }
 
-    const fetchVideoSetting = async () => {
-      if (channelId !== null) {
-        const videoSetting = await getVideoSetting(channelId);
-        setUnitPrice(videoSetting.payAmountPerSecond);
-      }
-    }
+    const intervalId = setInterval(fetchRouletteTable, 5000);
+    fetchRouletteTable();
 
-    fetchVideoTable();
-    fetchVideoSetting();
-  }, [channelId]);
+    return () => clearInterval(intervalId);
+  }, [userChannelId]);
 
 
   return(
     <>
-      {channelId && (
+      {votes.length != 0 && (
         <S.OutsideWrapper>
           <S.Wrapper>
-            <_InnerTable infos={isHighlighter ? data.highlighter : data.general} unitPrice={unitPrice} />
+            <_InnerTable summary={summary} />
           </S.Wrapper>
           <S.Summary>
-            {`총 개수: ${summary.count}개\n총 재생 시간: ${summary.time}`}
+            {`총 투표수: ${summary.count}개`}
           </S.Summary>
         </S.OutsideWrapper>
       )}
@@ -69,8 +62,9 @@ export const _Table = () => {
   );
 }
 
-function sumCheese(infos: VideoInfo[]) {
-  return infos.length > 0 ? infos.map((info) => info.cheese).reduce((a, b) => a + b, 0) : 0;
+function getVoteCount(votes: Vote[], unitPrice: number) {
+  return votes.length > 0 ? votes.map((vote) => Math.floor(vote.cheese / unitPrice))
+    .reduce((a, b) => a + b, 0) : 0;
 }
 
 const S = {

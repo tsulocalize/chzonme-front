@@ -5,14 +5,14 @@ import fallback from "@/assets/image/fallback-image.png";
 import {LoginModal} from "@/component/modal/LoginModal.tsx";
 
 export const UserProfile = () => {
-  const {username, img} = useUserStore();
+  const {userChannelName, img} = useUserStore();
 
   return (
     <S.Wrapper>
-      {username !== null ? (
+      {userChannelName !== null ? (
         <>
           <S.Image src={img ?? fallback} alt="이미지" />
-          <S.Username> {(username ?? "알 수 없는 사용자") + " 님"} </S.Username>
+          <S.Username> {(userChannelName ?? "알 수 없는 사용자") + " 님"} </S.Username>
         </>
       ) : (
         <S.Login onClick={LoginModal}>로그인</S.Login>

@@ -17,7 +17,7 @@ export const getVideoSetting = async (channelId: string) => {
 }
 
 export const getRanking = async (criteria: string) => {
-  const response = await serverApi.get(`/ranking?criteria=${criteria}`);
+  const response = await serverApi.get(`/video-donations/ranking?criteria=${criteria}`);
   return response.data;
 }
 

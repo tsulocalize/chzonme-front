@@ -22,10 +22,4 @@ const S = {
       background: ${({theme}) => theme.color.white};
       flex: 1;
   `,
-  //
-  // Wrapper: styled.div`
-  //   padding: 120px 120px 70px 120px;
-  //   background: ${({theme}) => theme.color.white};
-  //   flex: 1;
-  // `,
 }

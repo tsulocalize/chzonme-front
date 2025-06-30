@@ -4,7 +4,8 @@ export const onError = (message: string) => {
   Swal.fire({
     icon: 'error',
     title: '에러가 발생했습니다',
-    text: message,
+    html: `${message}`,
+    // text: message, // TODO
   });
 }
 

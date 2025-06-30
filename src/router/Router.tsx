@@ -112,6 +112,7 @@ export const router = createBrowserRouter(
             <>
               <S.OutletWrapper>
                 <Header />
+                <SubHeader withSearch={false} />
                 <RoulettePage />
                 <Footer/>
               </S.OutletWrapper>

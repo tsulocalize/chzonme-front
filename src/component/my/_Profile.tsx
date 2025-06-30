@@ -7,7 +7,7 @@ import {fontStyle} from "@/util/fontStyle.ts";
 import {SUBSCRIBE_URL} from "@/common/constant.ts";
 
 export const _Profile = () => {
-  const { username, img, tier, startDate, endDate } = useUserStore();
+  const { userChannelName, img, tier } = useUserStore();
 
   return (
     <S.Wrapper>
@@ -15,13 +15,14 @@ export const _Profile = () => {
       <S.Content>
         <S.User>
           <S.UserImage src={img ?? fallback}/>
-          {/*<S.UserName>{username}</S.UserName>*/}
-          <S.UserName>알 수 없는 사용자</S.UserName>
+          {/*TODO 수정 필요*/}
+          <S.UserName>{userChannelName}</S.UserName>
+          {/*<S.UserName>알 수 없는 사용자</S.UserName>*/}
         </S.User>
         <S.Subscribe>
           {tier ? (
             <>
-              현재 치즈온미 채널을 구독 중입니다.\n구독 기간: ${startDate}~${endDate}\n자동 연장: O
+              현재 치즈온미 채널을 구독 중입니다.
             </>
             ) : (
             <>

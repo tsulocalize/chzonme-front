@@ -8,6 +8,7 @@ import {_InnerTable} from "@/component/video/_InnerTable.tsx";
 import {useVideoStore} from "@/store/useVideoStore.ts";
 import {formatTime} from "@/util/date.ts";
 import {useSizeStore} from "@/store/useSizeStore.ts";
+import {connectVideo} from "@/api/server/connect.ts";
 
 export interface VideoInfo {
   videoName: string;
@@ -22,6 +23,7 @@ export interface VideoData {
 }
 
 export const _Table = () => {
+  const [ connected, setConnected ] = useState(false);
   const { channelId } = useChannelStore();
   const { isHighlighter } = useVideoStore();
   const { ratio } = useSizeStore();
@@ -32,33 +34,55 @@ export const _Table = () => {
       count: data.general.length + data.highlighter.length,
       time: formatTime((sumCheese(data.general) + sumCheese(data.highlighter)) / unitPrice)
     };
-
   }, [data, unitPrice]);
 
-  useEffect(() => {
-    if (!channelId) return
-
-    const fetchVideoTable = async () => {
-        const videoTable = await getVideoTable(channelId);
-        setData(videoTable);
+  const handleGetVideo = async (channelId: string) => {
+    try {
+      const result = await getVideoTable(channelId);
+      setData(result);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
     }
+  }
+
+  useEffect(() => {
+    if (!channelId) return;
+    const setVideo = async () => {
+      const connected = await connectVideo(channelId);
+      setConnected(connected == 200);
+    }
+
+    setVideo();
+  }, [channelId]);
+
+  useEffect(() => {
+    if (!connected || !channelId) return;
 
     const fetchVideoSetting = async () => {
-        const videoSetting = await getVideoSetting(channelId);
-        setUnitPrice(videoSetting.payAmountPerSecond);
+      const videoSetting = await getVideoSetting(channelId);
+      setUnitPrice(videoSetting.payAmountPerSecond);
     }
+
+    const fetchVideoTable = async () => {
+      const available = await handleGetVideo(channelId);
+      if (!available) {
+        clearInterval(intervalId);
+      }
+    };
 
     const intervalId = setInterval(fetchVideoTable, 5000);
 
-    fetchVideoTable();
     fetchVideoSetting();
+    fetchVideoTable();
 
     return () => clearInterval(intervalId);
-  }, [channelId]);
+  }, [connected]);
 
   return(
     <>
-      {channelId && (
+      {connected && (
         <S.OutsideWrapper>
           <S.Wrapper ratio={ratio}>
            <_InnerTable infos={isHighlighter ? data.highlighter : data.general} unitPrice={unitPrice} />

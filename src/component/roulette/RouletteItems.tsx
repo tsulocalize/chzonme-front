@@ -1,35 +1,28 @@
 import {_Table} from "@/component/roulette/_Table.tsx";
 import styled from "styled-components";
-import {useEffect} from "react";
-import {useVoteStore} from "@/store/useVoteStore.ts";
-import {useChannelStore} from "@/store/useChannelStore.ts";
-import {getRouletteTable} from "@/api/server/roulette.ts";
 import {_Roulette} from "@/component/roulette/_Roulette.tsx";
+import {_Flag} from "@/component/roulette/_Flag.tsx";
+import {useUserStore} from "@/store/useUserStore.ts";
+import {useEffect} from "react";
+import {onToastError} from "@/util/alert.ts";
 
 export const RouletteItems = () => {
-  const { setVotes } = useVoteStore();
-  const { channelName } = useChannelStore();
+  const { userChannelId } = useUserStore();
 
   useEffect(() => {
-    const fetchRouletteTable = async () => {
-      const rouletteTable = await getRouletteTable();
-      setVotes(rouletteTable);
+    if (userChannelId === null) {
+      onToastError("로그인된 회원만 사용할 수 있습니다.")
     }
-    const intervalId = setInterval(fetchRouletteTable, 5000);
-    fetchRouletteTable();
-
-    return () => clearInterval(intervalId);
-  }, [channelName]);
+  }, []);
 
   return (
     <S.Wrapper>
-      <_Roulette />
+      <_Roulette/>
+      <_Flag/>
       <_Table />
     </S.Wrapper>
   )
 }
-
-
 
 const S = {
   Wrapper: styled.div`

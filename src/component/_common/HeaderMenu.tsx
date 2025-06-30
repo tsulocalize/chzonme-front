@@ -10,8 +10,8 @@ export const HeaderMenu = () => {
 
   return (
     <S.Wrapper ratio={ratio}>
-      {menus.map((menu) => (
-        <S.Menu onClick={() => goTo(menu.path)} isCurrentMenu={menu.isCurrentMenu} ratio={ratio}>{menu.title}</S.Menu>
+      {menus.map((menu, index) => (
+        <S.Menu key={index} onClick={() => goTo(menu.path)} isCurrentMenu={menu.isCurrentMenu} ratio={ratio}>{menu.title}</S.Menu>
       ))}
     </S.Wrapper>
   )

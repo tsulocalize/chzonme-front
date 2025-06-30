@@ -10,9 +10,10 @@ export interface InputBoxStyle {
   padding: string;
   border: string;
   borderRadius: string,
+  textAlign?: string
 }
 
-const inputStyleCss = ({background, color, font, padding, border, borderRadius}: InputBoxStyle) => css`
+const inputStyleCss = ({background, color, font, padding, border, borderRadius, textAlign}: InputBoxStyle) => css`
     background: ${background};
     color: ${color};
     ${() => fontStyle(font)};
@@ -20,6 +21,7 @@ const inputStyleCss = ({background, color, font, padding, border, borderRadius}:
     box-sizing: border-box;
     border: ${border};
     border-radius: ${borderRadius};
+    text-align: ${textAlign};
 `;
 
 interface Props {
@@ -27,8 +29,8 @@ interface Props {
   value: string,
   setValue: (value: (((prevState: string) => string) | string)) => void,
   inputBoxStyle: InputBoxStyle,
-  placeholder: string | null,
-  onEnter: () => void,
+  placeholder?: string | null,
+  onEnter?: () => void,
   setSelected: (value: (((prevState: boolean) => boolean) | boolean)) => void,
 }
 
@@ -42,8 +44,8 @@ export const InputBox = ({
                            setSelected,
                          }: Props) => {
   const handleEnter = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && ref.current) {
-      onEnter()
+    if (e.key === "Enter" && ref.current && onEnter) {
+      onEnter();
     }
   }
 
@@ -59,7 +61,7 @@ export const InputBox = ({
       value={value}
       inputBoxStyle={inputBoxStyle}
       placeholder={placeholder ?? ""}
-      type="search"
+      type="text"
       onKeyUp={handleEnter}
       onKeyDown={preventUpDown}
       onChange={(e) => setValue(e.target.value)}

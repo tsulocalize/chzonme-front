@@ -30,7 +30,7 @@ export const ChannelSearch = () => {
   return (
     <S.OutsideWrapper>
       <S.Wrapper selected={selected}>
-        <S.InputArea selected={selected} onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
+        <S.InputArea onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
           <InputBox
             ref={inputRef}
             value={inputValue}
@@ -68,7 +68,7 @@ const S = {
       background: ${({theme}) => theme.color.white};
       border: 2px ${({selected}) => selected ? `solid black` : "solid transparent"};
   `,
-  InputArea: styled.div.withConfig({shouldForwardProp: (prop) => !["selected"].includes(prop)})<{ selected: boolean }>`
+  InputArea: styled.div`
       display: flex;
       align-items: center;
       width: 80%;
