@@ -20,11 +20,10 @@ export const _ChannelBox = ({fuseChannels, onClickEvent}: Props) => {
   useEffect(() => {
     const keyUpHandler = (e:KeyboardEvent) => {
       if (keyLock) return;
-      console.log()
       if (e.key === "ArrowDown") {
         setKeyLock(true);
         setSelectedIndex((prev) => Math.min(prev + 1, fuseChannels.length - 1));
-        setTimeout(() => setKeyLock(false), 100);
+        setTimeout(() => setKeyLock(false), 90);
         return;
       }
       if (e.key === "ArrowUp") {
