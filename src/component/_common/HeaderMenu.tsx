@@ -29,7 +29,7 @@ const S = {
     background: none;
     color: ${({theme, isCurrentMenu}) => 
             isCurrentMenu ? theme.color.mono["700"] : theme.color.mono["300"]};
-    ${({theme, ratio}) => fontStyle(theme.font.B(22 + 2 * ratio))};
+    ${({theme, ratio}) => fontStyle(theme.font.B(20 + 4 * ratio))};
     user-select: none;
     height: 50px;
     line-height: 50px;

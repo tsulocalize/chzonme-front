@@ -5,6 +5,7 @@ import {registerChannelData, registerChannelInfo} from "@/api/mock/_channelMock.
 import {registerLogin, registerTokenLogin} from "@/api/mock/_loginMock.ts";
 import {registerConnectVideo} from "@/api/mock/_connectMock.ts";
 import {registerRoulette} from "@/api/mock/_rouletteMock.ts";
+import {registerChattingData} from "@/api/mock/_chattingMock.ts";
 
 type MockRegister = (mock: AxiosMockAdapter) => void;
 
@@ -18,6 +19,7 @@ const registers: MockRegister[] = [
   registerLogin,
   registerTokenLogin,
   registerRoulette,
+  registerChattingData
 ]
 
 export const setMockIfEnable = () => {

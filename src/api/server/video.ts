@@ -1,4 +1,5 @@
 import {serverApi} from "@/api/server/_index.ts";
+import moment from "moment";
 
 export const getVideoChannels = async () => {
   // TODO: endPoint 변경 필요 (like video-donations/channels)
@@ -8,6 +9,11 @@ export const getVideoChannels = async () => {
 
 export const getVideoTable = async (channelId: string) => {
   const response = await serverApi.get(`/video-donations?channelId=${channelId}`);
+  return response.data;
+}
+
+export const getPreviousVideoTable = async (channelId: string, date: Date) => {
+  const response = await serverApi.get(`/video-donations/previous?channelId=${channelId}&from=${moment(date).format('YYYY-MM-DDTHH:mm:ss')}&to=${moment(date).add(1, 'day').format('YYYY-MM-DDTHH:mm:ss')}`);
   return response.data;
 }
 

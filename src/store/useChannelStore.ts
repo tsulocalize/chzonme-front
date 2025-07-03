@@ -2,10 +2,10 @@ import {create} from "zustand/react";
 import {getChannelInfo} from "@/api/server/channel.ts";
 
 export interface ChannelState {
-  channelName: string | null;
-  setChannelName: (name: string) => void;
   channelId: string | null;
   setChannelId: (id: string) => void;
+  channelName: string | null;
+  setChannelName: (name: string) => void;
   channelImage: string | null;
   setChannelImage: (img: string) => void;
   currentPath: string;

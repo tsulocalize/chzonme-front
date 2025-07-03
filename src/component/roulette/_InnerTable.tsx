@@ -17,7 +17,6 @@ export const _InnerTable = ({summary}: Props) => {
   const { votes, unitPrice } = useVoteStore();
   const filteredElements = votes.filter((vote) => Math.floor(vote.cheese / unitPrice) > 0);
   filteredElements.sort((a, b) => b.cheese - a.cheese);
-  console.log(filteredElements)
 
   return (
     <S.Table>

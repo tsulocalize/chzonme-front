@@ -18,7 +18,7 @@ export const useMenuStore = create<MenuState>()(
         {title: "치즈온미 소개", path: "/", isCurrentMenu: true},
         {title: "영상 도네이션", path: "/video", isCurrentMenu: false},
         {title: "도네이션 룰렛", path: "/roulette", isCurrentMenu: false},
-        {title: "채팅 그래프", path: "/chat", isCurrentMenu: false},
+        {title: "채팅 그래프", path: "/chatting", isCurrentMenu: false},
         {title: "멤버십", path: "/membership", isCurrentMenu: false},
       ],
       setCurrentMenu: (path) => set((state) => {

@@ -16,6 +16,7 @@ import {MembershipPage} from "@/page/MembershipPage.tsx";
 import {RoulettePage} from "@/page/RoulettePage.tsx";
 import {CustomErrorBoundary} from "@/router/CustomErrorBoundary.tsx";
 import {VideoRankingPage} from "@/page/VideoRankingPage.tsx";
+import {ChattingPage} from "@/page/ChattingPage.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -114,6 +115,19 @@ export const router = createBrowserRouter(
                 <Header />
                 <SubHeader withSearch={false} />
                 <RoulettePage />
+                <Footer/>
+              </S.OutletWrapper>
+            </>
+          )
+        },
+        {
+          path: "chatting",
+          element: (
+            <>
+              <S.OutletWrapper>
+                <Header />
+                <SubHeader withSearch={false} />
+                <ChattingPage />
                 <Footer/>
               </S.OutletWrapper>
             </>

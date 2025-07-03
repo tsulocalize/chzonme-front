@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import {useChannelStore} from "@/store/useChannelStore.ts";
-import {getVideoSetting, getVideoTable} from "@/api/server/video.ts";
+import {getPreviousVideoTable, getVideoSetting, getVideoTable} from "@/api/server/video.ts";
 import {useEffect, useMemo, useState} from "react";
 import {_InnerTable} from "@/component/video/_InnerTable.tsx";
 import {useVideoStore} from "@/store/useVideoStore.ts";
@@ -25,7 +25,7 @@ export interface VideoData {
 export const _Table = () => {
   const [ connected, setConnected ] = useState(false);
   const { channelId } = useChannelStore();
-  const { isHighlighter } = useVideoStore();
+  const { isHighlighter, date } = useVideoStore();
   const { ratio } = useSizeStore();
   const [ data, setData ] = useState<VideoData>({ general: [], highlighter: []});
   const [ unitPrice, setUnitPrice ] = useState(100);
@@ -49,12 +49,12 @@ export const _Table = () => {
 
   useEffect(() => {
     if (!channelId) return;
-    const setVideo = async () => {
+    const setVideoConnection = async () => {
       const connected = await connectVideo(channelId);
       setConnected(connected == 200);
     }
 
-    setVideo();
+    setVideoConnection();
   }, [channelId]);
 
   useEffect(() => {
@@ -72,13 +72,23 @@ export const _Table = () => {
       }
     };
 
-    const intervalId = setInterval(fetchVideoTable, 5000);
+    const fetchPreviousVideoTable = async () => {
+      if (date) {
+        const result = await getPreviousVideoTable(channelId, date);
+        setData(result);
+      }
+    }
 
     fetchVideoSetting();
+    if (date) {
+      fetchPreviousVideoTable();
+      return;
+    }
+    const intervalId = setInterval(fetchVideoTable, 5000);
     fetchVideoTable();
 
     return () => clearInterval(intervalId);
-  }, [connected]);
+  }, [connected, date]);
 
   return(
     <>

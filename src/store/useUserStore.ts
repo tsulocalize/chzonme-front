@@ -4,7 +4,7 @@ export interface UserState {
   userChannelId: string | null;
   userChannelName: string | null;
   img: string | null;
-  tier: string | null;
+  tier: number | null;
   isLoggedIn: boolean;
   setData: (userData: UserData) => void;
 }
@@ -13,7 +13,7 @@ export interface UserData {
   channelId: string;
   channelName: string;
   img: string;
-  tier: string;
+  tier: number;
 }
 
 export const useUserStore = create<UserState>((set) => ({

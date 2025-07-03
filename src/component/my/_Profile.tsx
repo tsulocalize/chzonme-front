@@ -22,7 +22,7 @@ export const _Profile = () => {
         <S.Subscribe>
           {tier ? (
             <>
-              현재 치즈온미 채널을 구독 중입니다.
+              {`현재 치즈온미 채널을 ${tier}티어 구독 중입니다.`}
             </>
             ) : (
             <>

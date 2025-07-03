@@ -3,12 +3,19 @@ import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
 import fallback from "@/assets/image/fallback-image.png";
 import {LoginModal} from "@/component/modal/LoginModal.tsx";
+import {goTo} from "@/router/Navigator.tsx";
 
 export const UserProfile = () => {
   const {userChannelName, img} = useUserStore();
 
+  const handleOnClick = () => {
+    if (userChannelName) {
+      goTo("/my");
+    }
+  }
+
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={handleOnClick}>
       {userChannelName !== null ? (
         <>
           <S.Image src={img ?? fallback} alt="이미지" />
@@ -28,6 +35,7 @@ const S = {
     align-items: center;
     height: 100%;
     gap: 10px;
+    cursor: pointer;
   `,
   Image: styled.img`
     width: 50px;

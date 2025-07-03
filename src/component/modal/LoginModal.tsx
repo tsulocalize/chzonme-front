@@ -11,8 +11,10 @@ export const LoginModal = () => {
       confirmButtonText: '<span style="color:#00FEA2;">치지직 아이디로 로그인</span>',
       showCloseButton: true,
     }
-  ).then(() => {
-    goTo("/login")
+  ).then((result) => {
+    if (result.isConfirmed) {
+      goTo("/login")
+    }
   })
 
   return (<></>);
