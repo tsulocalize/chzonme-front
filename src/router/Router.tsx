@@ -9,13 +9,13 @@ import styled from "styled-components";
 import {Footer} from "@/component/_common/Footer.tsx";
 import {MyPage} from "@/page/my/MyPage.tsx";
 import {LoginChecker} from "@/router/LoginChecker.tsx";
-import {MembershipPage} from "@/page/membership/MembershipPage.tsx";
 import {CustomErrorBoundary} from "@/router/CustomErrorBoundary.tsx";
 import {VideoRankingPage} from "@/page/videoranking/VideoRankingPage.tsx";
 import {ChattingIndex} from "@/page/chatting/ChattingIndex.tsx";
 import {LandingIndex} from "@/page/landing/LandingIndex.tsx";
 import {VideoIndex} from "@/page/video/VideoIndex.tsx";
 import {RouletteIndex} from "@/page/roulette/RouletteIndex.tsx";
+import {MembershipIndex} from "@/page/membership/MembershipIndex.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -99,9 +99,7 @@ export const router = createBrowserRouter(
           element: (
             <>
               <S.OutletWrapper>
-                <Header />
-                <MembershipPage />
-                <Footer floor/>
+                <MembershipIndex />
               </S.OutletWrapper>
             </>
           )

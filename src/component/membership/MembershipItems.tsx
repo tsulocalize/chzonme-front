@@ -1,15 +1,26 @@
 import styled from "styled-components";
 import {_Membership} from "@/component/membership/_Membership.tsx";
 import {useSizeStore} from "@/store/useSizeStore.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const MembershipItems = () => {
+  const isMobile = useIsMobile();
   const { ratio } = useSizeStore();
 
   return (
-    <S.Wrapper ratio={ratio}>
-      <_Membership tier={1} />
-      <_Membership tier={2} />
-    </S.Wrapper>
+    <>
+    {isMobile ? (
+      <S.MobileWrapper>
+        <_Membership tier={1} />
+        <_Membership tier={2} />
+      </S.MobileWrapper>
+    ) : (
+      <S.Wrapper ratio={ratio}>
+        <_Membership tier={1} />
+        <_Membership tier={2} />
+      </S.Wrapper>
+    )}
+    </>
   )
 }
 
@@ -23,5 +34,11 @@ const S = {
     display: flex;
     gap: ${({ratio}) => - 100 + 300 * ratio + 'px'};
     z-index: 10;
+  `,
+  MobileWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 30px;
   `,
 }

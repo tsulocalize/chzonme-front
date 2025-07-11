@@ -28,6 +28,7 @@ const S = {
 
   MainTitle: styled.div.withConfig({shouldForwardProp: (prop) => !["mainFont"].includes(prop)})<{mainFont: FontType}>`
     ${({mainFont}) => fontStyle(mainFont)};
+    white-space: pre-line;
   `,
 
   SubTitle: styled.div.withConfig({shouldForwardProp: (prop) => !["subFont"].includes(prop)})<{subFont?: FontType}>`

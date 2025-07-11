@@ -1,27 +1,32 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import styled from "styled-components";
 import {theme} from "@/common/styles.ts";
 import {_Basic} from "@/component/membership/_Basic.tsx";
 import {_Pro} from "@/component/membership/_Pro.tsx";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 interface Props {
   tier: number
 }
 
 export const _Membership = ({tier}: Props) => {
+  const isMobile = useIsMobile();
+
   return (
-    <S.Wrapper tier={tier}>
+    <S.Wrapper tier={tier} isMobile={isMobile}>
       {tier === 1 ? <_Basic /> : <_Pro />}
     </S.Wrapper>
   )
 }
 
 const S = {
-  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["tier"].includes(prop)})<{tier: number}>`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["tier", "isMobile"].includes(prop)})<{ tier: number, isMobile: boolean }>`
     display: flex;
     min-width: clamp(180px, 20vw, 240px);
     border: 2px solid ${({tier}) => TierColor[tier]};
     border-radius: 20px;
-    padding: 32px 26px;
+    padding: ${({isMobile}) => isMobile ? `16px 16px` : `32px 26px`};
     background: ${({theme}) => theme.color.white};
   `,
 }
