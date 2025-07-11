@@ -7,6 +7,7 @@ export const LoginModal = () => {
       title: '로그인',
       text: '치지직 ID로 로그인할 수 있습니다!',
       icon: 'info',
+      width: window.innerWidth < 768 ? '85%' : 600,
       confirmButtonColor: '#000000',
       confirmButtonText: '<span style="color:#00FEA2;">치지직 아이디로 로그인</span>',
       showCloseButton: true,

@@ -7,8 +7,11 @@ import {useRef, useState} from "react";
 import {onToastError} from "@/util/alert.ts";
 import {ChannelFuseSearch} from "@/component/_common/ChannelFuseSearch.tsx";
 
+interface Props {
+  border?: boolean;
+}
 
-export const ChannelSearch = () => {
+export const ChannelSearch = ({border}: Props) => {
   const { setChannelName } = useChannelStore()
   const [selected, setSelected] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -28,8 +31,8 @@ export const ChannelSearch = () => {
   }
 
   return (
-    <S.OutsideWrapper>
-      <S.Wrapper selected={selected}>
+    <>
+      <S.Wrapper selected={border ? border : selected}>
         <S.InputArea onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
           <InputBox
             ref={inputRef}
@@ -50,28 +53,25 @@ export const ChannelSearch = () => {
           handleSetChannelName(clickedChannelName);
         }}/>
       </S.FuseArea>
-    </S.OutsideWrapper>
+    </>
   )
 }
 
 const S = {
-  OutsideWrapper: styled.div`
-      position: relative;
-      margin-left: auto;
-  `,
   Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["selected"].includes(prop)})<{ selected: boolean }>`
-      display: flex;
-      width: 300px;
-      height: 44px;
-      padding: 0 10px 0 20px;
-      border-radius: 15px;
-      background: ${({theme}) => theme.color.white};
-      border: 2px ${({selected}) => selected ? `solid black` : "solid transparent"};
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px 0 20px;
+    border-radius: 14px;
+    background: ${({theme}) => theme.color.white};
+    border: 2px ${({selected}) => selected ? `solid black` : "solid transparent"};
+    box-sizing: border-box;
   `,
   InputArea: styled.div`
-      display: flex;
-      align-items: center;
-      width: 80%;
+    display: flex;
+    align-items: center;
+    width: 80%;
   `,
   InputCss: {
     background: theme.color.white,
@@ -81,16 +81,17 @@ const S = {
   } as InputBoxStyle
   ,
   SearchArea: styled.div`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20%;
-      cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    cursor: pointer;
   `,
   FuseArea: styled.div`
     position: absolute;
     top: 100%;
     left: 0;
+    width: 100%;
     z-index: 20;
   `
 }

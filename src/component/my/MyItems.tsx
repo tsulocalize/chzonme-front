@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import {_Profile} from "@/component/my/_Profile.tsx";
-import {_Setting} from "@/component/my/_Setting.tsx";
+import {_Settings} from "@/component/my/_Settings.tsx";
 
 export const MyItems = () => {
   return (
     <S.Wrapper>
       <S.Spacer />
       <_Profile />
-      <_Setting />
+      <_Settings />
     </S.Wrapper>
   )
 }

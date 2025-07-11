@@ -1,28 +1,33 @@
 import {createBrowserRouter, Outlet} from "react-router-dom";
-import {LandingPage} from "@/page/LandingPage.tsx";
 import {Header} from "@/component/_common/Header.tsx";
-import {FallbackPage} from "@/page/FallbackPage.tsx";
+import {FallbackPage} from "@/page/fallback/FallbackPage.tsx";
 import {RouteFollower} from "@/router/RouteFollower.tsx";
 import {SubHeader} from "@/component/_common/SubHeader.tsx";
-import {VideoPage} from "@/page/VideoPage.tsx";
+import {VideoPage} from "@/page/video/VideoPage.tsx";
 import {StoreSubscribeManager} from "@/store/StoreSubscribeManager.tsx";
 import {Navigator} from "@/router/Navigator.tsx";
-import {VideoGuidePage} from "@/page/VideoGuidePage.tsx";
+import {VideoGuidePage} from "@/page/videoguide/VideoGuidePage.tsx";
 import styled from "styled-components";
 import {Footer} from "@/component/_common/Footer.tsx";
-import {MyPage} from "@/page/MyPage.tsx";
+import {MyPage} from "@/page/my/MyPage.tsx";
 import {LoginChecker} from "@/router/LoginChecker.tsx";
-import {MembershipPage} from "@/page/MembershipPage.tsx";
-import {RoulettePage} from "@/page/RoulettePage.tsx";
+import {MembershipPage} from "@/page/membership/MembershipPage.tsx";
+import {RoulettePage} from "@/page/roulette/RoulettePage.tsx";
 import {CustomErrorBoundary} from "@/router/CustomErrorBoundary.tsx";
-import {VideoRankingPage} from "@/page/VideoRankingPage.tsx";
-import {ChattingPage} from "@/page/ChattingPage.tsx";
+import {VideoRankingPage} from "@/page/videoranking/VideoRankingPage.tsx";
+import {ChattingIndex} from "@/page/chatting/ChattingIndex.tsx";
+import {LandingIndex} from "@/page/landing/LandingIndex.tsx";
 
 const S = {
   OutletWrapper: styled.div`
-      display: flex;
-      flex-direction: column;
-      min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+
+    padding-bottom: 0;
+    @media (max-width: 1024px) {
+      padding-bottom: var(--bottom-nav-height);
+    }
   `
 }
 
@@ -47,9 +52,7 @@ export const router = createBrowserRouter(
           element: (
             <>
               <S.OutletWrapper>
-                <Header />
-                <LandingPage />
-                <Footer floor/>
+                <LandingIndex />
               </S.OutletWrapper>
             </>
           )
@@ -125,10 +128,7 @@ export const router = createBrowserRouter(
           element: (
             <>
               <S.OutletWrapper>
-                <Header />
-                <SubHeader withSearch={false} />
-                <ChattingPage />
-                <Footer/>
+                <ChattingIndex />
               </S.OutletWrapper>
             </>
           )

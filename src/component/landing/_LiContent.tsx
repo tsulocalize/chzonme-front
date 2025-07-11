@@ -1,24 +1,33 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import styled from "styled-components";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
+import {fontStyle} from "@/util/fontStyle.ts";
 
 interface Props {
   texts: string[]
 }
 
 export const _LiContent = ({texts}: Props) => {
+  const isMobile = useIsMobile();
+
   return (
-    <S.Wrapper>
-      {texts.map((text) => (
-        <li>{text}</li>
-      ))}
+    <S.Wrapper isMobile={isMobile}>
+      <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+        {texts.map((text) => (
+          <li>{text}</li>
+        ))}
+      </ul>
     </S.Wrapper>
   )
 }
 
 const S = {
-  Wrapper: styled.div`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px 20px 20px 10px;
+    padding: ${({isMobile}) => isMobile ? `0 10px 10px 5px` : `20px 20px 20px 10px`};
+    ${({theme, isMobile}) => isMobile ? fontStyle(theme.font.R(12)) : ''};
   `
 }

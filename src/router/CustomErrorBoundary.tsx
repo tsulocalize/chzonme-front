@@ -1,5 +1,5 @@
 import {useRouteStore} from "@/store/useRouteStore.ts";
-import {FallbackPage} from "@/page/FallbackPage.tsx";
+import {FallbackPage} from "@/page/fallback/FallbackPage.tsx";
 import {ErrorBoundary} from "react-error-boundary";
 import React from "react";
 

@@ -27,6 +27,7 @@ export const onToastError = (message: string) => {
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-right',
+  width: window.innerWidth < 768 ? '85%' : 600,
   showConfirmButton: false,
   timer: 2000,
   timerProgressBar: false,

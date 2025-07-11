@@ -10,18 +10,29 @@ export const SubHeader = ({withSearch = true}: Props) => {
   return (
     <S.Wrapper>
       <SubHeaderMenu />
-      {withSearch && <ChannelSearch />}
+      {withSearch &&
+        <S.ChannelSearchArea>
+          <ChannelSearch />
+        </S.ChannelSearchArea>}
     </S.Wrapper>
   )
 }
 
 const S = {
   Wrapper: styled.div`
-    background: ${({theme}) => theme.color.mono["100"]};
-    height: 60px;
     display: flex;
-    padding: 0 48px 0 120px;
     align-items: center;
+    height: 60px;
+    padding: 0 40px 0 120px;
+    background: ${({theme}) => theme.color.mono["100"]};
     gap: 40px;
+  `,
+  ChannelSearchArea: styled.div`
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+    width: 300px;
+    height: 44px;
   `,
 }

@@ -18,7 +18,12 @@ serverApi.interceptors.response.use(
   response => response,
   error => {
     if (error.response.status === 401) {
-      return Promise.reject(error); // auth는 alert하지 않고 oauth로 보내기
+      onError("권한이 없습니다.");
+      return Promise.reject(error);
+    }
+
+    if (error.response.status == 404) {
+      return Promise.reject(error);
     }
 
     if (!error.response || !error.response.data) {

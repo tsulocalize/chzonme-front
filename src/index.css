@@ -7,7 +7,6 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  /*font-size: clamp(14px, 10px + 0.5vw, 20px);*/
 
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
@@ -17,6 +16,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bottom-nav-height: 60px;
 }
 
 a {

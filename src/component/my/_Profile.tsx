@@ -15,9 +15,7 @@ export const _Profile = () => {
       <S.Content>
         <S.User>
           <S.UserImage src={img ?? fallback}/>
-          {/*TODO 수정 필요*/}
           <S.UserName>{userChannelName}</S.UserName>
-          {/*<S.UserName>알 수 없는 사용자</S.UserName>*/}
         </S.User>
         <S.Subscribe>
           {tier ? (
@@ -70,7 +68,10 @@ const S = {
   UserImage: styled.img`
     width: 140px;
     height: 140px;
-    border-radius: 14px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 18px;
+    overflow: hidden;
+    object-fit: cover;
   `,
   UserName: styled.div`
     ${({theme}) => fontStyle(theme.font.B(32))};

@@ -49,7 +49,7 @@ const S = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    width: 240px;
+    width: 100%;
     background: ${({theme}) => theme.color.white};
     border: 2px solid ${({theme}) => theme.color.mono["100"]};
     border-radius: 10px;
