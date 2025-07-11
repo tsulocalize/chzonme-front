@@ -6,12 +6,14 @@ import SearchSVG from "@/assets/image/search.svg?react"
 import {useRef, useState} from "react";
 import {onToastError} from "@/util/alert.ts";
 import {ChannelFuseSearch} from "@/component/_common/ChannelFuseSearch.tsx";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 interface Props {
   border?: boolean;
 }
 
 export const ChannelSearch = ({border}: Props) => {
+  const isMobile = useIsMobile();
   const { setChannelName } = useChannelStore()
   const [selected, setSelected] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,14 +34,14 @@ export const ChannelSearch = ({border}: Props) => {
 
   return (
     <>
-      <S.Wrapper selected={border ? border : selected}>
+      <S.Wrapper selected={border ? border : selected} isMobile={isMobile}>
         <S.InputArea onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
           <InputBox
             ref={inputRef}
             value={inputValue}
             setValue = {setInputValue}
-            inputBoxStyle={S.InputCss}
-            placeholder={"채널명을 입력하세요"}
+            inputBoxStyle={isMobile ? S.MobileInputCss : S.InputCss}
+            placeholder={isMobile ? "채널 검색" : "채널명을 입력하세요"}
             onEnter={() => handleSetChannelName(inputValue)}
             setSelected = {setSelected}
           />
@@ -48,21 +50,23 @@ export const ChannelSearch = ({border}: Props) => {
           <SearchSVG />
         </S.SearchArea>
       </S.Wrapper>
-      <S.FuseArea>
-        <ChannelFuseSearch input={inputValue} onClickEvent={(clickedChannelName) => {
-          handleSetChannelName(clickedChannelName);
-        }}/>
-      </S.FuseArea>
+      {!isMobile && (
+        <S.FuseArea>
+          <ChannelFuseSearch input={inputValue} onClickEvent={(clickedChannelName) => {
+            handleSetChannelName(clickedChannelName);
+          }}/>
+        </S.FuseArea>
+      )}
     </>
   )
 }
 
 const S = {
-  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["selected"].includes(prop)})<{ selected: boolean }>`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["selected", "isMobile"].includes(prop)})<{ selected: boolean, isMobile: boolean }>`
     display: flex;
     width: 100%;
     height: 100%;
-    padding: 0 10px 0 20px;
+    padding: ${({isMobile}) => isMobile ? `0 10px 0 10px` : `0 10px 0 20px`};
     border-radius: 14px;
     background: ${({theme}) => theme.color.white};
     border: 2px ${({selected}) => selected ? `solid black` : "solid transparent"};
@@ -77,6 +81,13 @@ const S = {
     background: theme.color.white,
     color: theme.color.black,
     font: theme.font.M(18),
+    border: "0",
+  } as InputBoxStyle
+  ,
+  MobileInputCss: {
+    background: theme.color.white,
+    color: theme.color.black,
+    font: theme.font.M(14),
     border: "0",
   } as InputBoxStyle
   ,
