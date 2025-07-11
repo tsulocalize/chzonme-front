@@ -74,13 +74,13 @@ const S = {
   StyledInputBox: styled.input.withConfig({shouldForwardProp: (prop) => !["inputBoxStyle"].includes(prop)})<{
     inputBoxStyle: InputBoxStyle
   }>`
-      width: 100%;
-      ${({inputBoxStyle}) => inputStyleCss(inputBoxStyle)};
+    width: 100%;
+    ${({inputBoxStyle}) => inputStyleCss(inputBoxStyle)};
 
-      &:focus {
-          outline: none;
-          border: none;
-      }
+    &:focus {
+        outline: none;
+        border: none;
+    }
   `
 }
 

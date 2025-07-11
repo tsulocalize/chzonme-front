@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function _TopThree({ data }: Props) {
-  const topThree = data.slice(0, 3)
+  const topThree = data.slice(0, 3);
 
   return (
     <S.Wrapper>
