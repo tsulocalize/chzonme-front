@@ -7,8 +7,10 @@ import {useEffect, useRef} from "react";
 import {_Channel} from "@/component/video/_Channel.tsx";
 import {_Controller} from "@/component/video/_Controller.tsx";
 import {useSizeStore} from "@/store/useSizeStore.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const _Video = () => {
+  const isMobile = useIsMobile();
   const { ratio } = useSizeStore();
   const { videoId } = useVideoStore();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -31,8 +33,8 @@ export const _Video = () => {
         onReady={handleReady}
         videoId=''
         opts={{
-          width: 600 * ratio,
-          height: 450 * ratio,
+          width: isMobile ? `100%` : 600 * ratio,
+          height: isMobile ? 180 : 450 * ratio,
           playerVars: {
             autoplay: 0, //자동재생 X
             rel: 0, //관련 동영상 표시하지 않음

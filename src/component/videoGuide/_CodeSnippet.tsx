@@ -49,9 +49,11 @@ const S = {
     ${({theme}) => fontStyle(theme.font.R(18))};
     padding: 4px 8px 4px 8px;
     border-radius: 4px;
-    
-    &:hover {
-      background: ${({theme}) => theme.color.mono["300"]};
+
+    @media (hover: hover) {
+      &:hover {
+        background: ${({theme}) => theme.color.mono["300"]};
+      }
     }
   `,
 }

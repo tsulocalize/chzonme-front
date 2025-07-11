@@ -56,9 +56,11 @@ const S = {
     ${({theme, isMobile}) => fontStyle(theme.font.M(isMobile ? 14 : 20))};
     white-space: nowrap;
     user-select: none;
-      
-    &:hover {
-      cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
     }
   `
 }

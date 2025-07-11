@@ -9,6 +9,9 @@ import {useVideoStore} from "@/store/useVideoStore.ts";
 import {formatTime} from "@/util/date.ts";
 import {useSizeStore} from "@/store/useSizeStore.ts";
 import {connectVideo} from "@/api/server/connect.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
+import {fontStyle} from "@/util/fontStyle.ts";
+import {theme} from "@/common/styles.ts";
 
 export interface VideoInfo {
   videoName: string;
@@ -23,6 +26,7 @@ export interface VideoData {
 }
 
 export const _Table = () => {
+  const isMobile = useIsMobile();
   const [ connected, setConnected ] = useState(false);
   const { channelId } = useChannelStore();
   const { isHighlighter, date } = useVideoStore();
@@ -94,10 +98,10 @@ export const _Table = () => {
     <>
       {connected && (
         <S.OutsideWrapper>
-          <S.Wrapper ratio={ratio}>
+          <S.Wrapper ratio={ratio} isMobile={isMobile}>
            <_InnerTable infos={isHighlighter ? data.highlighter : data.general} unitPrice={unitPrice} />
           </S.Wrapper>
-          <S.Summary>
+          <S.Summary isMobile={isMobile}>
           {`총 개수: ${summary.count}개\n총 재생 시간: ${summary.time}`}
           </S.Summary>
         </S.OutsideWrapper>
@@ -116,12 +120,12 @@ const S = {
     flex-direction: column;
     gap: 3px;
   `,
-  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["ratio"].includes(prop)})<{ratio: number}>`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["ratio", "isMobile"].includes(prop)})<{ratio: number, isMobile: boolean}>`
     max-height: ${({ratio}) => 450 * ratio + 'px'};
     overflow-y: scroll;
       
     &::-webkit-scrollbar {
-      width: 14px;
+      width: ${({isMobile}) => isMobile ? `12px` : `14px`};
     }
 
       /* 스크롤바 막대 (thumb) */
@@ -138,10 +142,11 @@ const S = {
       margin: 2px 0 2px 0;
     }
   `,
-  Summary: styled.div`
+  Summary: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     padding-top: 4px;
     padding-right: 14px;
     text-align: right;
     white-space: pre-line;
+    ${({isMobile}) => isMobile ? fontStyle(theme.font.M(12)) : ''};
   `
 }

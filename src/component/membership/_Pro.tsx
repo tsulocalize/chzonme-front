@@ -53,9 +53,11 @@ const S = {
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
-      
-    &:hover {
-      background: ${({theme}) => theme.color.point["500"]};
+
+    @media (hover: hover) {
+      &:hover {
+        background: ${({theme}) => theme.color.point["500"]};
+      }
     }
   `,
 }

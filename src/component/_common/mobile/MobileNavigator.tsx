@@ -59,5 +59,11 @@ const S = {
     cursor: pointer;
     user-select: none;
     min-width: 40px;
+      
+    @media (hover: hover) {
+      &:hover {
+          color: ${({theme}) => theme.color.mono["800"]};
+      }
+    }
   `
 }

@@ -35,9 +35,11 @@ const S = {
     white-space: nowrap;
     transition: color 0.3s ease;
 
-    &:hover {
-      cursor: pointer;
-      color: ${({theme}) => theme.color.mono["800"]};
+    @media (hover: hover) {
+      &:hover {
+          cursor: pointer;
+          color: ${({theme}) => theme.color.mono["800"]};
+      }
     }
   `
 }

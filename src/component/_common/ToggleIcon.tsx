@@ -4,10 +4,11 @@ import {useSizeStore} from "@/store/useSizeStore.ts";
 
 interface Props {
   svg: React.FC<React.SVGProps<SVGSVGElement>>,
-  onClick?: () => void
+  onClick?: () => void,
+  isMobile?: boolean
 }
 
-export const ToggleIcon = ({svg, onClick}: Props) => {
+export const ToggleIcon = ({svg, onClick, isMobile}: Props) => {
   const [active, setActive] = useState(false);
   const { ratio } = useSizeStore();
 
@@ -19,19 +20,22 @@ export const ToggleIcon = ({svg, onClick}: Props) => {
   }
 
   return (
-    <S.StyledIcon as={svg} active={active} onClick={handleClick} ratio={ratio} />
+    <S.StyledIcon as={svg} active={active} onClick={handleClick} ratio={ratio} isMobile={isMobile ? isMobile : false} />
   )
 }
 
 const S = {
-  StyledIcon: styled.svg.withConfig({shouldForwardProp: (prop) => !["active", "ratio"].includes(prop)})<{ active: boolean, ratio: number }>`
-    width: ${({ratio}) => 35 + 10 * ratio + 'px'};
-    height: ${({ratio}) => 35 + 10 * ratio + 'px'};
+  StyledIcon: styled.svg.withConfig({shouldForwardProp: (prop) => !["active", "ratio", "isMobile"]
+      .includes(prop)})<{ active: boolean, ratio: number, isMobile: boolean }>`
+    width: ${({ratio, isMobile}) => isMobile ? `24px` : 35 + 10 * ratio + 'px'};
+    height: ${({ratio, isMobile}) => isMobile ? `24px` : 35 + 10 * ratio + 'px'};
     color: ${({theme, active}) => (active ? theme.color.point["400"] : theme.color.black)};
     cursor: pointer;
 
-    &:hover {
+    @media (hover: hover) {
+      &:hover {
         color: ${({theme}) => theme.color.point["600"]}
+      }
     }
   `,
 }

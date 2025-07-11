@@ -7,8 +7,9 @@ import {formatDate, formatShortTime} from "@/util/date.ts";
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
 import {useSizeStore} from "@/store/useSizeStore.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
-const headers = ['No.', '영상 제목', '치즈', '생성 시간', '남은 시간'];
+const headers = ['No.', '영상 제목', '치즈', '생성 시간', '앞으로'];
 const headersInData = ['id', 'videoName', 'cheese', 'createdAt', 'timeTo'];
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export const _InnerTable = ({infos, unitPrice}: Props) => {
+  const isMobile = useIsMobile();
   const { setVideoId } = useVideoStore();
   const { ratio } = useSizeStore();
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -42,7 +44,7 @@ export const _InnerTable = ({infos, unitPrice}: Props) => {
         <S.Tr>
           {headers
              .map((header) => (
-               <S.Th key={header}> {header} </S.Th>
+               <S.Th key={header} isMobile={isMobile}> {header} </S.Th>
              ))}
         </S.Tr>
       </S.Thead>
@@ -56,7 +58,9 @@ export const _InnerTable = ({infos, unitPrice}: Props) => {
               if (header === 'timeTo') tableData = formatShortTime((accumulate[index] - accumulate[selectedIndex]) / unitPrice);
               if (header === 'cheese') tableData = tableData.toLocaleString()
               return (
-                <S.Td key={header} colorIndex={index} selected={index == selectedIndex} ratio={ratio}> {tableData} </S.Td>
+                <S.Td key={header} colorIndex={index} selected={index == selectedIndex} ratio={ratio} isMobile={isMobile}>
+                  {tableData}
+                </S.Td>
             )})}
           </S.Tr>
           ))
@@ -93,8 +97,8 @@ const S = {
   `,
   Tbody: styled.tbody``,
   Tr: styled.tr``,
-  Th: styled.th`
-    ${({theme}) => fontStyle(theme.font.B(18))};
+  Th: styled.th.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
+    ${({theme, isMobile}) => fontStyle(theme.font.B(isMobile ? 14 : 18))};
     white-space: nowrap;
     
     &:nth-child(1) {
@@ -113,11 +117,12 @@ const S = {
       width: 100px;
     }
   `,
-  Td: styled.td.withConfig({shouldForwardProp: (prop) => !["colorIndex", "selected", "ratio"].includes(prop)})<{colorIndex: number, selected: boolean, ratio: number}>`
-    ${({theme, ratio}) => fontStyle(theme.font.R(16 + ratio))};
+  Td: styled.td.withConfig({shouldForwardProp: (prop) => !["colorIndex", "selected", "ratio", "isMobile"]
+      .includes(prop)})<{colorIndex: number, selected: boolean, ratio: number, isMobile: boolean}>`
+    ${({theme, ratio, isMobile}) => fontStyle(theme.font.R(isMobile ? 13 : 16 + ratio))};
     background: ${({theme, colorIndex, selected}) => 
             selected ? theme.color.point["300"] : colorIndex % 2 == 0 ? theme.color.mono["50"] : ""};
-    padding: 12px 5px 12px 5px;
+    padding: ${({isMobile}) => isMobile ? `6px 2px 6px 2px` : `12px 5px 12px 5px`};
       
     &:nth-child(1) {
       width: 65px;

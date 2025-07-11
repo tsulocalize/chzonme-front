@@ -9,8 +9,10 @@ import {Calendar} from "@/component/_common/Calendar.tsx";
 import {useState} from "react";
 import {useUserStore} from "@/store/useUserStore.ts";
 import {onToastError} from "@/util/alert.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const _Controller = () => {
+  const isMobile = useIsMobile();
   const { userChannelId, tier } = useUserStore();
   const { switchHighlighter, date, setDate } = useVideoStore();
   const [ activeCalendar, setActiveCalendar ] = useState(false);
@@ -30,10 +32,10 @@ export const _Controller = () => {
   return (
     <S.Wrapper>
       <>
-        <ToggleIcon svg={CalendarSVG} onClick={handleCalendar}/>
+        <ToggleIcon svg={CalendarSVG} onClick={handleCalendar} isMobile={isMobile}/>
         { activeCalendar && (<Calendar date={date} setDate={setDate} />)}
       </>
-      <ToggleIcon svg={HighlighterSVG} onClick={switchHighlighter} />
+      <ToggleIcon svg={HighlighterSVG} onClick={switchHighlighter} isMobile={isMobile}/>
     </S.Wrapper>
   )
 }

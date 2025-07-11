@@ -3,7 +3,6 @@ import {Header} from "@/component/_common/Header.tsx";
 import {FallbackPage} from "@/page/fallback/FallbackPage.tsx";
 import {RouteFollower} from "@/router/RouteFollower.tsx";
 import {SubHeader} from "@/component/_common/SubHeader.tsx";
-import {VideoPage} from "@/page/video/VideoPage.tsx";
 import {StoreSubscribeManager} from "@/store/StoreSubscribeManager.tsx";
 import {Navigator} from "@/router/Navigator.tsx";
 import {VideoGuidePage} from "@/page/videoguide/VideoGuidePage.tsx";
@@ -17,6 +16,7 @@ import {CustomErrorBoundary} from "@/router/CustomErrorBoundary.tsx";
 import {VideoRankingPage} from "@/page/videoranking/VideoRankingPage.tsx";
 import {ChattingIndex} from "@/page/chatting/ChattingIndex.tsx";
 import {LandingIndex} from "@/page/landing/LandingIndex.tsx";
+import {VideoIndex} from "@/page/video/VideoIndex.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -62,10 +62,7 @@ export const router = createBrowserRouter(
           element: (
             <>
               <S.OutletWrapper>
-                <Header />
-                <SubHeader />
-                <VideoPage />
-                <Footer />
+                <VideoIndex />
               </S.OutletWrapper>
             </>
           )

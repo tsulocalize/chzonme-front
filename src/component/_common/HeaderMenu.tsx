@@ -37,9 +37,11 @@ const S = {
     white-space: nowrap;
     transition: color 0.3s ease;
 
+    @media (hover: hover) {
       &:hover {
         cursor: pointer;
         color: ${({theme}) => theme.color.mono["900"]};
       }
+    }
   `
 }

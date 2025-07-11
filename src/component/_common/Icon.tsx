@@ -27,9 +27,11 @@ const S = {
     height: ${({ratio}) => 35 + 10 * ratio + 'px'};
     color: ${({theme}) => theme.color.black};
     cursor: pointer;
-      
-    &:hover {
+
+    @media (hover: hover) {
+      &:hover {
         color: ${({theme}) => theme.color.point["600"]}
-    }
+      }
+    }  
   `,
 }
