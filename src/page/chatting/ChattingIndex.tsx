@@ -1,26 +1,25 @@
 import {useIsMobile} from "@/hook/useIsMobile.ts";
 import {ChattingPage} from "@/page/chatting/ChattingPage.tsx";
 import {Header} from "@/component/_common/Header.tsx";
-import {SubHeader} from "@/component/_common/SubHeader.tsx";
 import {Footer} from "@/component/_common/Footer.tsx";
+import {HeaderMobile} from "@/component/_common/mobile/HeaderMobile.tsx";
+import {FooterMobile} from "@/component/_common/mobile/FooterMobile.tsx";
+import {MobileWrapper} from "@/component/_common/mobile/MobileWrapper.tsx";
+import {ChattingMobilePage} from "@/page/chatting/ChattingMobilePage.tsx";
 
 export const ChattingIndex = () => {
   const isMobile = useIsMobile();
 
   return isMobile ? (
-    <>
-      <title>치즈온미 - 채팅 그래프</title>
-      <Header/>
-      <SubHeader withSearch={false}/>
-      <ChattingPage/>
-      <Footer/>
-    </>
+    <MobileWrapper>
+      <HeaderMobile />
+      <ChattingMobilePage />
+      <FooterMobile />
+    </MobileWrapper>
     ) :
     <>
-      <title>치즈온미 - 채팅 그래프</title>
       <Header/>
-      <SubHeader withSearch={false}/>
-      <ChattingPage/>
-      <Footer/>
+      <ChattingPage />
+      <Footer />
     </>
 }

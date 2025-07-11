@@ -39,11 +39,13 @@ const S = {
     top: 0;
     right: 0;
     z-index: 0;
+    opacity: 0.9;
   `,
   CartoonCheese: styled.img`
     position: absolute;
     bottom: 20px;
     left: 20px;
     z-index: 0;
+    opacity: 0.9;
   `
 }

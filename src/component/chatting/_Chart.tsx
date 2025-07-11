@@ -28,7 +28,7 @@ export const _Chart = ({maxWidth}: Props) => {
           width={chartWidth}
           height={300}
           data={chatting}
-          margin={{top: 20, right: 30, left: 20, bottom: 5}}
+          margin={{top: 20, right: 30, left: 0, bottom: 5}}
         >
           <XAxis
             dataKey="time"
@@ -36,7 +36,7 @@ export const _Chart = ({maxWidth}: Props) => {
             domain={['dataMin', 'dataMax']}
             tickFormatter={(t) => moment.unix(t).format("HH:mm")}
           />
-          <YAxis/>
+          <YAxis />
           <Tooltip labelFormatter={(label) => {
             return moment.unix(label).format('HH:mm');
           }} formatter={(value: number, name: string) => {

@@ -1,5 +1,4 @@
 import CheddarCheesePNG from "@/assets/image/cheddar-cheese.png";
-import CartoonCheesePNG from "@/assets/image/cartoon-cheese.png";
 import styled from "styled-components";
 import {MembershipItems} from "@/component/membership/MembershipItems.tsx";
 import {Title} from "@/component/_common/Title.tsx";
@@ -28,9 +27,6 @@ export const MembershipMobilePage = () => {
         )}
       </S.Title>
       <MembershipItems />
-      {!isMobile && (
-        <S.CartoonCheese src={CartoonCheesePNG} />
-      )}
     </S.Wrapper>
   )
 }
@@ -50,11 +46,6 @@ const S = {
     right: 0;
     ${({isMobile}) => isMobile ? `width: 100px` : ''};
     z-index: 0;
+    opacity: 0.9;
   `,
-  CartoonCheese: styled.img`
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: 0;
-  `
 }
