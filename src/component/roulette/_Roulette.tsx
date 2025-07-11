@@ -8,8 +8,10 @@ import {_Controller} from "@/component/roulette/_Controller.tsx";
 import {fontStyle} from "@/util/fontStyle.ts";
 import PinSVG from "@/assets/image/pin.svg?react";
 import {_UnitPriceInputBox} from "@/component/roulette/_UnitPriceInputBox.tsx";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const _Roulette = () => {
+  const isMobile = useIsMobile();
   const { votes, winningVote, setWinningVote, setTrigger, unitPrice } = useVoteStore();
   const filteredVotes = votes
     .filter((vote) => Math.floor(vote.cheese / unitPrice) > 0)
@@ -137,8 +139,8 @@ export const _Roulette = () => {
 
   return (
     <S.WheelContainer>
-      <S.SelectedOption>{winningVote}</S.SelectedOption>
-      <S.CanvasContainer>
+      <S.SelectedOption isMobile={isMobile}>{winningVote}</S.SelectedOption>
+      <S.CanvasContainer isMobile={isMobile}>
         <S.Wheel
           ref={canvasRef}
           width={500}
@@ -159,21 +161,22 @@ const S = {
     flex-direction: column;
     justify-content: flex-start;
   `,
-  SelectedOption: styled.div`
+  SelectedOption: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     display: flex;
     justify-content: center;
     color: ${({theme}) => theme.color.point["900"]};
-    ${({theme}) => fontStyle(theme.font.M(30))};
-    width: 500px;
-    height: 50px;
+    ${({theme, isMobile}) => fontStyle(theme.font.M(isMobile ? 24 : 30))};
+    width: ${({isMobile}) => isMobile ? `100%` : `500px`};
+    height: ${({isMobile}) => isMobile ? `36px` : `50px`};
     margin-bottom: 5px;
     overflow: hidden;
     white-space: nowrap;
   `,
-  CanvasContainer: styled.div`
+  CanvasContainer: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: ${({isMobile}) => isMobile ? `100%` : `500px`};
+    height: ${({isMobile}) => isMobile ? `100%` : `500px`};
+    overflow: hidden;
     display: flex;
     justify-items: center;
     align-items: center;

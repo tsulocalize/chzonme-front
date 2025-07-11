@@ -5,8 +5,10 @@ import {_Flag} from "@/component/roulette/_Flag.tsx";
 import {useUserStore} from "@/store/useUserStore.ts";
 import {useEffect} from "react";
 import {onToastError} from "@/util/alert.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const RouletteItems = () => {
+  const isMobile = useIsMobile();
   const { userChannelId } = useUserStore();
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export const RouletteItems = () => {
   }, []);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper isMobile={isMobile}>
       <_Roulette/>
       <_Flag/>
       <_Table />
@@ -25,8 +27,9 @@ export const RouletteItems = () => {
 }
 
 const S = {
-  Wrapper: styled.div`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     display: flex;
+    ${({isMobile}) => isMobile ? `flex-direction: column` : ''};
     gap: 20px;
     justify-content: space-between;
   `

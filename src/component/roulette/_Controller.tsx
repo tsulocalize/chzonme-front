@@ -12,6 +12,7 @@ import {useUserStore} from "@/store/useUserStore.ts";
 import {createRoulette, getRouletteTable} from "@/api/server/roulette.ts";
 import {ToggleIcon} from "@/component/_common/ToggleIcon.tsx";
 import {useVoteStore} from "@/store/useVoteStore.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 interface _ControllerProps {
   handleRotate: () => void,
@@ -19,6 +20,7 @@ interface _ControllerProps {
 }
 
 export const _Controller = ({handleRotate, handleStop}: _ControllerProps) => {
+  const isMobile = useIsMobile();
   const { votes, setVotes, setWinningVote, isVoting, setIsVoting } = useVoteStore();
   const { userChannelId } = useUserStore();
   const [ isRotating, setIsRotating] = useState(false);
@@ -56,17 +58,18 @@ export const _Controller = ({handleRotate, handleStop}: _ControllerProps) => {
 
   return (
     <S.Wrapper>
-      <Icon svg={RefreshSVG} onClick={refresh}/>
-      <ToggleIcon svg={VoteSVG} onClick={toggleVote}/>
-      <Icon svg={isRotating ? StopSVG : PlaySVG} onClick={turnWheel}/>
+      <Icon svg={RefreshSVG} onClick={refresh} isMobile={isMobile}/>
+      <ToggleIcon svg={VoteSVG} onClick={toggleVote} isMobile={isMobile}/>
+      <Icon svg={isRotating ? StopSVG : PlaySVG} onClick={turnWheel} isMobile={isMobile}/>
     </S.Wrapper>
   )
 }
 
 const S = {
   Wrapper: styled.div`
-      display: flex;
-      justify-content: flex-end;
-      gap: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
   `
 }

@@ -11,7 +11,6 @@ import {useSizeStore} from "@/store/useSizeStore.ts";
 import {connectVideo} from "@/api/server/connect.ts";
 import {useIsMobile} from "@/hook/useIsMobile.ts";
 import {fontStyle} from "@/util/fontStyle.ts";
-import {theme} from "@/common/styles.ts";
 
 export interface VideoInfo {
   videoName: string;
@@ -147,6 +146,6 @@ const S = {
     padding-right: 14px;
     text-align: right;
     white-space: pre-line;
-    ${({isMobile}) => isMobile ? fontStyle(theme.font.M(12)) : ''};
+    ${({theme, isMobile}) => isMobile ? fontStyle(theme.font.M(12)) : ''};
   `
 }

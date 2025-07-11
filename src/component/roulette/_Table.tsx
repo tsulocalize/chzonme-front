@@ -6,8 +6,11 @@ import {useUserStore} from "@/store/useUserStore.ts";
 import {getRouletteTable} from "@/api/server/roulette.ts";
 import {_InnerTable} from "@/component/roulette/_InnerTable.tsx";
 import {useVoteStore, type Vote} from "@/store/useVoteStore.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
+import {fontStyle} from "@/util/fontStyle.ts";
 
 export const _Table = () => {
+  const isMobile = useIsMobile();
   const { userChannelId } = useUserStore();
   const { votes, setVotes, unitPrice } = useVoteStore();
   const summary = useMemo(() => {
@@ -50,10 +53,10 @@ export const _Table = () => {
     <>
       {votes.length != 0 && (
         <S.OutsideWrapper>
-          <S.Wrapper>
+          <S.Wrapper isMobile={isMobile}>
             <_InnerTable summary={summary} />
           </S.Wrapper>
-          <S.Summary>
+          <S.Summary isMobile={isMobile}>
             {`총 투표수: ${summary.count}개`}
           </S.Summary>
         </S.OutsideWrapper>
@@ -73,12 +76,12 @@ const S = {
     flex-direction: column;
     gap: 3px;
   `,
-  Wrapper: styled.div`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     max-height: 550px;
     overflow-y: scroll;
       
     &::-webkit-scrollbar {
-      width: 14px;
+      width: ${({isMobile}) => isMobile ? `12px` : `14px`};
     }
 
       /* 스크롤바 막대 (thumb) */
@@ -95,10 +98,11 @@ const S = {
       margin: 2px 0 2px 0;
     }
   `,
-  Summary: styled.div`
+  Summary: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     padding-top: 4px;
     padding-right: 14px;
     text-align: right;
     white-space: pre-line;
+    ${({theme, isMobile}) => isMobile ? fontStyle(theme.font.M(12)) : ''};
   `
 }

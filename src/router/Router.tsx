@@ -2,7 +2,6 @@ import {createBrowserRouter, Outlet} from "react-router-dom";
 import {Header} from "@/component/_common/Header.tsx";
 import {FallbackPage} from "@/page/fallback/FallbackPage.tsx";
 import {RouteFollower} from "@/router/RouteFollower.tsx";
-import {SubHeader} from "@/component/_common/SubHeader.tsx";
 import {StoreSubscribeManager} from "@/store/StoreSubscribeManager.tsx";
 import {Navigator} from "@/router/Navigator.tsx";
 import {VideoGuidePage} from "@/page/videoguide/VideoGuidePage.tsx";
@@ -11,12 +10,12 @@ import {Footer} from "@/component/_common/Footer.tsx";
 import {MyPage} from "@/page/my/MyPage.tsx";
 import {LoginChecker} from "@/router/LoginChecker.tsx";
 import {MembershipPage} from "@/page/membership/MembershipPage.tsx";
-import {RoulettePage} from "@/page/roulette/RoulettePage.tsx";
 import {CustomErrorBoundary} from "@/router/CustomErrorBoundary.tsx";
 import {VideoRankingPage} from "@/page/videoranking/VideoRankingPage.tsx";
 import {ChattingIndex} from "@/page/chatting/ChattingIndex.tsx";
 import {LandingIndex} from "@/page/landing/LandingIndex.tsx";
 import {VideoIndex} from "@/page/video/VideoIndex.tsx";
+import {RouletteIndex} from "@/page/roulette/RouletteIndex.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -112,10 +111,7 @@ export const router = createBrowserRouter(
           element: (
             <>
               <S.OutletWrapper>
-                <Header />
-                <SubHeader withSearch={false} />
-                <RoulettePage />
-                <Footer/>
+                <RouletteIndex />
               </S.OutletWrapper>
             </>
           )
