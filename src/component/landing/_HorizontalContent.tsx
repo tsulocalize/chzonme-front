@@ -35,7 +35,7 @@ const S = {
     background: ${({theme}) => theme.color.white};
     border-radius: 12px;
     padding: ${({isMobile}) => isMobile ? `16px 16px 16px 12px` : `32px 32px 32px 24px`};
-    gap: ${({isMobile}) => isMobile ? `16px` : `30px`};
+    gap: ${({isMobile}) => isMobile ? `20px` : `30px`};
     box-sizing: border-box;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
     flex-shrink: 0

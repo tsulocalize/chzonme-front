@@ -22,7 +22,7 @@ export const _Pro = () => {
           </S.Price>
         </S.ContentHeader>
         <LiContents checkIcon font={theme.font.M(isMobile ? 16 : 20)} gap={isMobile ? 2 : 8}
-                    texts={["과거 영상 도네이션 목록", "항상 연결하기 2채널", "채팅 그래프 기록"]}
+                    texts={["과거 영상 도네이션 목록", "항상 연결하기 2채널", "채팅 기록하기 및 그래프 확인"]}
         />
       </S.Content>
       <S.ButtonWrapper isMobile={isMobile}>

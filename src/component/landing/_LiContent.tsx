@@ -27,7 +27,8 @@ const S = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: ${({isMobile}) => isMobile ? `0 10px 10px 5px` : `20px 20px 20px 10px`};
+    padding: ${({isMobile}) => isMobile ? `0` : `20px 20px 20px 10px`};
+    margin-top: -10px;
     ${({theme, isMobile}) => isMobile ? fontStyle(theme.font.R(12)) : ''};
   `
 }

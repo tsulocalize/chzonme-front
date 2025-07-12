@@ -38,7 +38,7 @@ const S = {
   MobileWrapper: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 20px 0;
-    gap: 30px;
+    padding: 30px 0;
+    gap: 40px;
   `,
 }

@@ -17,7 +17,7 @@ export const MembershipMobilePage = () => {
         {isMobile ? (
           <Title mainText={"치즈온미를 구독하고\n다양한 기능을 마음껏 누려보세요!"} mainFont={theme.font.B(22)}
                  subText={"회원가입 하고 ‘치즈온미' 채널을 구독하면\n자동으로 멤버십이 적용됩니다!"} subFont={theme.font.M(14)}
-                 gap={8}
+                 gap={4}
           />
         ) : (
           <Title mainText={"치즈온미를 구독하고 다양한 기능을 마음껏 누려보세요!"} mainFont={theme.font.B(30 + 4 * ratio)}

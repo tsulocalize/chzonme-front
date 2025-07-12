@@ -52,8 +52,9 @@ const S = {
   CheckButton: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
     display: flex;
     align-items: center;
+    ${({isMobile}) => isMobile ? `margin-top: 4px` : ''};
     margin-left: auto;
-    ${({theme, isMobile}) => fontStyle(theme.font.M(isMobile ? 14 : 20))};
+    ${({theme, isMobile}) => fontStyle(theme.font.M(isMobile ? 12 : 20))};
     white-space: nowrap;
     user-select: none;
 

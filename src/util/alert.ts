@@ -27,13 +27,13 @@ export const onToastError = (message: string) => {
 const Toast = Swal.mixin({
   toast: true,
   position: window.innerWidth < 768 ? `top-start` : 'top-end',
-  width: window.innerWidth < 768 ? '65%' : 600,
+  width: window.innerWidth < 768 ? '70%' : 600,
   showConfirmButton: false,
   timer: 2000,
   timerProgressBar: false,
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', Swal.stopTimer)
     toast.addEventListener('mouseleave', Swal.resumeTimer)
+    return window.innerWidth < 768 ? toast.style.padding = '4px 0px 4px 12px' : '';
   }
-})
-
+});
