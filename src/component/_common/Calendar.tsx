@@ -26,9 +26,9 @@ const S = {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: ${({theme}) => theme.color.mono["100"]};
+    background: ${({theme}) => theme.color.white};
     border-radius: 8px;
-    border: ${({theme}) => `2px ${theme.color.black}`};
+    border: ${({theme}) => `2px solid ${theme.color.black}`};
     padding: 8px 16px;
     z-index: 999;
 
