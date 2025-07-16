@@ -18,9 +18,10 @@ export const _HorizontalContent = ({propsList}: PropsList) => {
 
   return (
     <S.Wrapper isMobile={isMobile}>
-      {propsList.map((props) => (
+      {propsList.map((props, index) => (
         <_MembershipLanding title={props.title}
                             content={props.content}
+                            key={index}
         />
       ))}
     </S.Wrapper>

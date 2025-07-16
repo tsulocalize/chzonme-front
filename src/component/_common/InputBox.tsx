@@ -25,7 +25,7 @@ const inputStyleCss = ({background, color, font, padding, border, borderRadius, 
 `;
 
 interface Props {
-  ref: React.RefObject<HTMLInputElement | null>,
+  inputRef: React.RefObject<HTMLInputElement>,
   value: string,
   setValue: (value: (((prevState: string) => string) | string)) => void,
   inputBoxStyle: InputBoxStyle,
@@ -35,7 +35,7 @@ interface Props {
 }
 
 export const InputBox = ({
-                           ref,
+                           inputRef,
                            value,
                            setValue,
                            inputBoxStyle,
@@ -44,7 +44,7 @@ export const InputBox = ({
                            setSelected,
                          }: Props) => {
   const handleEnter = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && ref.current && onEnter) {
+    if (e.key === "Enter" && inputRef.current && onEnter) {
       onEnter();
     }
   }
@@ -57,7 +57,7 @@ export const InputBox = ({
 
   return (
     <S.StyledInputBox
-      ref={ref}
+      ref={inputRef}
       value={value}
       inputBoxStyle={inputBoxStyle}
       placeholder={placeholder ?? ""}

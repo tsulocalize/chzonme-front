@@ -14,8 +14,8 @@ export const _LiContent = ({texts}: Props) => {
   return (
     <S.Wrapper isMobile={isMobile}>
       <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-        {texts.map((text) => (
-          <li>{text}</li>
+        {texts.map((text, index) => (
+          <li key={index}>{text}</li>
         ))}
       </ul>
     </S.Wrapper>

@@ -12,6 +12,7 @@ export const LandingItems = () => {
     <S.Wrapper isMobile={isMobile}>
       <_Item mainText={"치즈온미의 다양한 기능"}
              subText={"방송에 도움을 주는 여러 기능을 만나보세요!"}
+             key={0}
              contents={[
                <_CardContent
                  key={0}
@@ -30,15 +31,17 @@ export const LandingItems = () => {
                  subText={"재미있는 순간 포착!\n오늘 방송 중 ‘ㅋㅋㅋ'는 언제 많이 올라왔을까요?"}/>,
              ]} />
       <_Item mainText={"멤버십만의 추가 혜택"} subText={"일반 기능보다 좋은 것은 멤버십 기능"}
+             key={1}
              contents={[
-               <_HorizontalContent propsList={[
+               <_HorizontalContent key={0} propsList={[
                  {title: "Basic", content: "과거 영상 도네이션 목록 확인, 항상 연결하기 채널 1개"},
                  {title: "Pro", content: "과거 영상 도네이션 목록 확인, 항상 연결하기 채널 2개, 채팅 기록하기 및 그래프 확인"}
                ]} />
              ]} />
       <_Item mainText={"안내사항"} subText={"치즈온미는 아래와 같은 정책으로 운영됩니다."} gap={0}
+             key={2}
              contents={[
-               <_LiContent texts={[
+               <_LiContent key={0} texts={[
                  "• ‘치지직’은 네이버(주)에서 운영하는 방송 플랫폼이며, 치즈온미는 ‘치지직’과 관련하여 어떠한 공식적인 제휴, 상표권, 또는 법적 이해관계를 가지고 있지 않습니다.",
                  "• 치즈온미는 ‘치지직’ 웹 애플리케이션에서 일반 사용자에게 공개된 범위 내의 데이터만을 수집 및 가공합니다.",
                  "• 데이터 수집 과정에서 일부 오류가 발생할 수 있습니다.",
