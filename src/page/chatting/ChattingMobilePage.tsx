@@ -5,7 +5,7 @@ export const ChattingMobilePage = () => {
   return (
     <S.Wrapper>
       <title>치즈온미 - 채팅 그래프</title>
-      <ChattingItems/>
+      <ChattingItems />
     </S.Wrapper>
   );
 }
