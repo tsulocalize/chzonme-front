@@ -176,6 +176,8 @@ const S = {
     position: relative;
     width: ${({isMobile}) => isMobile ? `100%` : `500px`};
     height: ${({isMobile}) => isMobile ? `100%` : `500px`};
+    max-width: 500px;
+    max-height: 500px;
     overflow: hidden;
     display: flex;
     justify-items: center;
