@@ -8,8 +8,11 @@ import {Title} from "@/component/_common/Title.tsx";
 import {theme} from "@/common/styles.ts";
 import {onToastError} from "@/util/alert.ts";
 import {_Controller} from "@/component/chatting/_Controller.tsx";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
+import moment from "moment";
 
 export const ChattingItems = () => {
+  const isMobile = useIsMobile();
   const { setChatting, date, interval } = useChattingStore();
   const { userChannelId } = useUserStore();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -21,8 +24,8 @@ export const ChattingItems = () => {
     }
     const fetchChatting = async() => {
       const result = await getChattingData(interval,
-        date.format(LOCAL_DATE_TIME_FORMAT),
-        date.clone().add(1, "days").format(LOCAL_DATE_TIME_FORMAT))
+        moment(date).format(LOCAL_DATE_TIME_FORMAT),
+        moment(date).clone().add(1, "days").format(LOCAL_DATE_TIME_FORMAT))
       setChatting(result.chatting);
     }
 
@@ -31,8 +34,8 @@ export const ChattingItems = () => {
 
   return(
     <S.Wrapper ref={ref}>
-      <Title mainFont={theme.font.B(24)}
-             mainText={date.format("yyyy년 MM월 DD일 채팅 그래프")}/>
+      <Title mainFont={theme.font.B(isMobile ? 20 : 24)}
+             mainText={moment(date).format("yyyy년 MM월 DD일 채팅 그래프")}/>
       <_Chart maxWidth={ref.current?.getBoundingClientRect().width}/>
       <_Controller />
     </S.Wrapper>
