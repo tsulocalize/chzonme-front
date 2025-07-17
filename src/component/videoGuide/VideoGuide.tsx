@@ -51,7 +51,7 @@ const S = {
     box-sizing: border-box;
     user-select: none;
   `,
-  Text: styled.p`
+  Text: styled.div`
     ${({theme}) => fontStyle(theme.font.R(18))};
     color: ${({theme}) => theme.color.mono["900"]};
   `,
@@ -63,7 +63,7 @@ const S = {
   Strong: styled.div`
     ${({theme}) => fontStyle(theme.font.M(24))};
   `,
-  Bold: styled.text`
+  Bold: styled.span`
     ${({theme}) => fontStyle(theme.font.B(18))};
   `,
 }

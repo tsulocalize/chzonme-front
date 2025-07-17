@@ -5,10 +5,11 @@ import {useSizeStore} from "@/store/useSizeStore.ts";
 interface Props {
   svg: React.FC<React.SVGProps<SVGSVGElement>>,
   onClick?: () => void,
-  isMobile?: boolean
+  isMobile?: boolean,
+  id?: string,
 }
 
-export const Icon = ({svg, onClick, isMobile}: Props) => {
+export const Icon = ({svg, onClick, isMobile, id}: Props) => {
   const { ratio } = useSizeStore();
 
   const handleClick = () => {
@@ -18,7 +19,12 @@ export const Icon = ({svg, onClick, isMobile}: Props) => {
   }
 
   return (
-    <S.StyledIcon as={svg} onClick={handleClick} ratio={ratio} isMobile={isMobile ? isMobile : false} />
+    <S.StyledIcon as={svg}
+                  onClick={handleClick}
+                  ratio={ratio}
+                  isMobile={isMobile ? isMobile : false}
+                  {...(id ? { id: id } : {})}
+    />
   )
 }
 

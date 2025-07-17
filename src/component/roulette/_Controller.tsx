@@ -58,9 +58,9 @@ export const _Controller = ({handleRotate, handleStop}: _ControllerProps) => {
 
   return (
     <S.Wrapper>
-      <Icon svg={RefreshSVG} onClick={refresh} isMobile={isMobile}/>
-      <ToggleIcon svg={VoteSVG} onClick={toggleVote} isMobile={isMobile}/>
-      <Icon svg={isRotating ? StopSVG : PlaySVG} onClick={turnWheel} isMobile={isMobile}/>
+      <Icon svg={RefreshSVG} onClick={refresh} isMobile={isMobile} id={'step-3'}/>
+      <ToggleIcon svg={VoteSVG} onClick={toggleVote} isMobile={isMobile} id={'step-4'}/>
+      <Icon svg={isRotating ? StopSVG : PlaySVG} onClick={turnWheel} isMobile={isMobile} id={'step-5'}/>
     </S.Wrapper>
   )
 }

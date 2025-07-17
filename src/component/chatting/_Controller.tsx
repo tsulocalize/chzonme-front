@@ -31,7 +31,7 @@ export const _Controller = () => {
   return (
     <S.Wrapper>
       <>
-        <ToggleIcon svg={CalendarSVG} onClick={handleCalendar} isMobile={isMobile}/>
+        <ToggleIcon svg={CalendarSVG} onClick={handleCalendar} isMobile={isMobile} id={'step-3'}/>
         { activeCalendar && (<Calendar date={date} setDate={setDate} />)}
       </>
 

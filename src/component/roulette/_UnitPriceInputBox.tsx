@@ -20,10 +20,10 @@ export const _UnitPriceInputBox = () => {
   }, [inputValue]);
 
   return (
-    <S.Wrapper selected={selected}>
+    <S.Wrapper selected={selected} id={'step-2'}>
       <S.InputArea onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
         <InputBox
-          ref={inputRef}
+          inputRef={inputRef}
           value={inputValue}
           setValue = {setInputValue}
           inputBoxStyle={S.InputCss}

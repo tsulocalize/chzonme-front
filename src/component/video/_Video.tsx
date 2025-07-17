@@ -28,7 +28,7 @@ export const _Video = () => {
   }, [videoId]);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper id={"step-1"}>
       <YouTube
         onReady={handleReady}
         videoId=''

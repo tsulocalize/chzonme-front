@@ -34,7 +34,7 @@ export const ChannelSearch = ({border}: Props) => {
 
   return (
     <>
-      <S.Wrapper selected={border ? border : selected} isMobile={isMobile}>
+      <S.Wrapper selected={border ? border : selected} isMobile={isMobile} id={"step-channelSearch"}>
         <S.InputArea onClick={() => setSelected(true)} tabIndex={0} onBlur={() => setSelected(false)}>
           <InputBox
             inputRef={inputRef}

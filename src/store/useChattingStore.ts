@@ -4,8 +4,8 @@ import moment from "moment";
 export interface ChattingState {
   chatting: Chatting[];
   setChatting: (responses: Response[]) => void;
-  date: moment.Moment;
-  setDate: (date:moment.Moment) => void;
+  date: Date | undefined;
+  setDate: (date: Date | undefined) => void;
   interval: number;
   setInterval: (interval: number) => void;
 }
@@ -27,8 +27,8 @@ export const useChattingStore = create<ChattingState>((set) => ({
   setChatting: (responses: Response[]) => set({
     chatting: responses.map((response: Response) => ({...response, time: moment(response.time).unix() }))
   }),
-  date: moment().startOf("day"),
-  setDate: (moment: moment.Moment) => set({date: moment}),
+  date: undefined,
+  setDate: (date: Date | undefined) => set({date: date}),
   interval: 1,
   setInterval: (interval: number) => set({interval: interval})
 }));

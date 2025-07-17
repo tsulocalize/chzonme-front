@@ -138,7 +138,7 @@ export const _Roulette = () => {
   };
 
   return (
-    <S.WheelContainer>
+    <S.WheelContainer id={'step-1'}>
       <S.SelectedOption isMobile={isMobile}>{winningVote}</S.SelectedOption>
       <S.CanvasContainer isMobile={isMobile}>
         <S.Wheel

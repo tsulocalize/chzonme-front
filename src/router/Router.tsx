@@ -14,6 +14,7 @@ import {VideoIndex} from "@/page/video/VideoIndex.tsx";
 import {RouletteIndex} from "@/page/roulette/RouletteIndex.tsx";
 import {MembershipIndex} from "@/page/membership/MembershipIndex.tsx";
 import {MyIndex} from "@/page/my/MyIndex.tsx";
+import {Guidance} from "@/guidance/Guidance.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -38,6 +39,7 @@ export const router = createBrowserRouter(
         <Navigator>
         <StoreSubscribeManager>
           <Outlet />
+          <Guidance />
         </StoreSubscribeManager>
         </Navigator>
         </CustomErrorBoundary>

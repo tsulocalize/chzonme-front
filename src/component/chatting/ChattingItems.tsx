@@ -33,7 +33,7 @@ export const ChattingItems = () => {
   }, [userChannelId, interval, date]);
 
   return(
-    <S.Wrapper ref={ref}>
+    <S.Wrapper ref={ref} id={'step-1'}>
       <Title mainFont={theme.font.B(isMobile ? 20 : 24)}
              mainText={moment(date).format("yyyy년 MM월 DD일 채팅 그래프")}/>
       <_Chart maxWidth={ref.current?.getBoundingClientRect().width}/>

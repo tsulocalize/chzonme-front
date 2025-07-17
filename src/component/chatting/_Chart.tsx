@@ -9,6 +9,7 @@ import {
 } from "recharts";
 import {useChattingStore} from "@/store/useChattingStore.ts";
 import moment from "moment";
+import styled from "styled-components";
 
 interface Props {
   maxWidth?: number;
@@ -22,7 +23,7 @@ export const _Chart = ({maxWidth}: Props) => {
     : (chatting.length - 1) * tickWidth;
 
   return (
-    <div style={{width: '100%', overflowX: 'auto',  overflowY: 'hidden' }}>
+    <S.Wrapper>
       <div style={{minWidth: chartWidth}}>
         <AreaChart
           width={chartWidth}
@@ -50,49 +51,14 @@ export const _Chart = ({maxWidth}: Props) => {
           <Area type="basis" dataKey="zzzCount" stroke="#82ca9d" fill="#82ca9d"/>
         </AreaChart>
       </div>
-    </div>
-    // <>
-    // <AreaChart
-    //   data={chatting}
-    //   width={(chatting.length - 1) * tickWidth}
-    //   margin={{
-    //     top: 20, right: 20, bottom: 20, left: 20
-    //   }}>
-    //   <CartesianGrid strokeDasharray="3 3" />
-    //   <XAxis
-    //     dataKey="time"
-    //     type="number"
-    //     // interval={0}
-    //     scale="time"
-    //     domain={['dataMin', 'dataMax']}
-    //     tickFormatter={(timeNum) =>
-    //       moment.unix(timeNum).format("HH:mm")
-    //     }/>
-    //   <YAxis />
-    //   {/*<Tooltip labelFormatter={(value) =>*/}
-    //   {/*  new Date(value).toLocaleString()*/}
-    //   {/*} />*/}
-    //   <Legend />
-    //
-    //   {/*<Area*/}
-    //   {/*  type="monotone"*/}
-    //   {/*  dataKey="total_count"*/}
-    //   {/*  stroke="#8884d8"*/}
-    //   {/*  fill="#8884d8"*/}
-    //   {/*  fillOpacity={0.5}*/}
-    //   {/*  name="전체 수"*/}
-    //   {/*/>*/}
-    //   {/*<Area*/}
-    //   {/*  type="monotone"*/}
-    //   {/*  dataKey="zzz_count"*/}
-    //   {/*  stroke="#82ca9d"*/}
-    //   {/*  fill="#82ca9d"*/}
-    //   {/*  fillOpacity={0.5}*/}
-    //   {/*  name="zzz 수"*/}
-    //   {/*/>*/}
-    // </AreaChart>
-    // </>
+    </S.Wrapper>
   )
 }
 
-
+const S = {
+  Wrapper: styled.div`
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  `,
+}
