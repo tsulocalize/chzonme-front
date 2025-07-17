@@ -4,8 +4,10 @@ import {useState} from "react";
 import {onError} from "@/util/alert.ts";
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const _CodeSnippet = () => {
+  const isMobile = useIsMobile();
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
@@ -20,9 +22,9 @@ export const _CodeSnippet = () => {
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper isMobile={isMobile}>
       <S.Pre>{code}</S.Pre>
-      <S.Button onClick={copyToClipboard}>
+      <S.Button onClick={copyToClipboard} isMobile={isMobile}>
         {copied ? "복사됨!" : "복사"}
       </S.Button>
     </S.Wrapper>
@@ -30,23 +32,23 @@ export const _CodeSnippet = () => {
 }
 
 const S = {
-  Wrapper: styled.div`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
     position: relative;
     background: ${({theme}) => theme.color.mono["700"]};
     color: ${({theme}) => theme.color.mono["50"]};
-    ${({theme}) => fontStyle(theme.font.M(16))};
+    ${({theme, isMobile}) => fontStyle(theme.font.M(isMobile ? 12 : 16))};
     padding: 16px;
     border-radius: 10px;
   `,
   Pre: styled.pre`
     overflow: auto;
   `,
-  Button: styled.button`
+  Button: styled.button.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
     position: absolute;
     top: 14px;
     right: 16px;
     background: ${({theme}) => theme.color.mono["400"]};
-    ${({theme}) => fontStyle(theme.font.R(18))};
+    ${({theme, isMobile}) => fontStyle(theme.font.R(isMobile ? 14 : 18))};
     padding: 4px 8px 4px 8px;
     border-radius: 4px;
 

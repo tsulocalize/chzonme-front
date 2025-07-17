@@ -69,17 +69,17 @@ export const router = createBrowserRouter(
         {
           path: "video-guide",
           element: (
-            <>
+            <S.OutletWrapper>
               <VideoGuidePage />
-            </>
+            </S.OutletWrapper>
           )
         },
         {
           path: "ranking",
           element: (
-            <>
+            <S.OutletWrapper>
               <VideoRankingPage />
-            </>
+            </S.OutletWrapper>
           )
         },
         {

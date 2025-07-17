@@ -1,17 +1,21 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import type {Ranking} from "@/component/videoRanking/VideoRankingItems.tsx";
 import YoutubeLogoSVG from "@/assets/image/youtube-logo.svg?react"
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 interface Props {
   data: Ranking[];
 }
 
 export function _TopThree({ data }: Props) {
+  const isMobile = useIsMobile();
   const topThree = data.slice(0, 3);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper isMobile={isMobile}>
       {topThree.map((item, index) => (
         <S.Card key={index}>
           <S.Trophy>{`🏆 #${item.rank}`}</S.Trophy>
@@ -37,9 +41,9 @@ export function _TopThree({ data }: Props) {
 }
 
 const S = {
-  Wrapper: styled.div`
+  Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* grid-cols-3 */
+    ${({isMobile}) => isMobile ? `grid-template-rows: repeat(3, 1fr)`: `grid-template-columns: repeat(3, 1fr)`};
     gap: 1rem; /* gap-4 */
     margin-bottom: 3rem; /* mb-12 */
   `,
