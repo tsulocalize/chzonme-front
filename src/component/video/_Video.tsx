@@ -41,7 +41,7 @@ export const _Video = () => {
             modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
           },
         }}
-        onEnd={(e)=>{e.target.stopVideo(0);}}
+        onEnd={(e: { target: { stopVideo: (arg0: number) => void; }; })=>{e.target.stopVideo(0);}}
       />
       <S.InnerWrapper>
         <_Channel />
