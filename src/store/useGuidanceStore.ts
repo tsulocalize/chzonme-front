@@ -38,9 +38,9 @@ const routeDataMap: Record<string, Step[]> = {
     {target: '#step-3', content: GuideContent({content: '이전 도네이션 기록도 찾아 볼 수 있어요\n(*1티어 구독 이상)'})},
   ],
   "/roulette": [
-    {target: '#step-1', content: GuideContent({content: '<> 안에 내용을 적어 도네이션을 해주세요!\n(예시: <짜장면> = 짜장면 1표 추가)'})},
+    {target: '#step-1', content: GuideContent({content: '<> 안에 내용을 적어 도네이션 해주세요!\n(예시: <짜장면> = 짜장면 1표 추가)'})},
     {target: '#step-2', content: GuideContent({content: '1표당 금액을 수정할 수 있습니다'})},
-    {target: '#step-3', content: GuideContent({content: '이건 새 룰렛을 만들기 버튼입니다'})},
+    {target: '#step-3', content: GuideContent({content: '이전 기록을 지우고 새 룰렛을 만들 수 있습니다'})},
     {target: '#step-4', content: GuideContent({content: '투표를 시작해야 집계가 시작됩니다.\n반대로 중단하면 더이상 집계되지 않습니다'})},
     {target: '#step-5', content: GuideContent({content: '이제 마구마구 돌려볼까요?'})},
   ],

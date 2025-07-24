@@ -35,7 +35,7 @@ const S = {
   Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     position: relative;
     flex: 1;
-    ${({isMobile}) => isMobile ? `padding: 10px 20px` : ``};
+    ${({isMobile}) => isMobile ? `padding: 20px` : ``};
   `,
   Title: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{isMobile: boolean}>`
     ${({isMobile}) => isMobile ? `position: relative` : `position: absolute; top: 40px; left: 120px;`};
