@@ -25,7 +25,7 @@ export const _Table = () => {
       setVotes(result.elements);
       return true;
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return false;
     }
   }

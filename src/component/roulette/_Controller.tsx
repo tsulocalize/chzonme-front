@@ -6,8 +6,8 @@ import StopSVG from "@/assets/image/stop.svg?react";
 import VoteSVG from "@/assets/image/vote.svg?react";
 import RefreshSVG from "@/assets/image/refresh.svg?react";
 import {Icon} from "@/component/_common/Icon.tsx";
-import {useState} from "react";
-import {connectRoulette, disconnectRoulette} from "@/api/server/connect.ts";
+import {useRef, useState} from "react";
+import {activateRoulette, connect, deactivateRoulette} from "@/api/server/connect.ts";
 import {useUserStore} from "@/store/useUserStore.ts";
 import {createRoulette, getRouletteTable} from "@/api/server/roulette.ts";
 import {ToggleIcon} from "@/component/_common/ToggleIcon.tsx";
@@ -24,6 +24,7 @@ export const _Controller = ({handleRotate, handleStop}: _ControllerProps) => {
   const { votes, setVotes, setWinningVote, isVoting, setIsVoting } = useVoteStore();
   const { userChannelId } = useUserStore();
   const [ isRotating, setIsRotating] = useState(false);
+  const server = useRef<string>("");
 
   const refresh = async () => {
     if (votes.length == 0) return;
@@ -37,12 +38,13 @@ export const _Controller = ({handleRotate, handleStop}: _ControllerProps) => {
     if (!userChannelId) return;
 
     if (isVoting) {
-      connectRoulette(userChannelId);
-      setIsVoting(true);
+      connect(userChannelId).then((serverName) => {
+        server.current = serverName;
+        activateRoulette(serverName).then(() => setIsVoting(true))
+      });
       return;
     }
-    disconnectRoulette(userChannelId);
-    setIsVoting(false);
+    deactivateRoulette(server.current).then(() => setIsVoting(false));
   }
 
   const turnWheel = () => {

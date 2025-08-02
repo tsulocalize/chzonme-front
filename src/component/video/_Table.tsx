@@ -3,12 +3,12 @@
 import styled from "styled-components";
 import {useChannelStore} from "@/store/useChannelStore.ts";
 import {getPreviousVideoTable, getVideoSetting, getVideoTable} from "@/api/server/video.ts";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {_InnerTable} from "@/component/video/_InnerTable.tsx";
 import {useVideoStore} from "@/store/useVideoStore.ts";
 import {formatTime} from "@/util/date.ts";
 import {useSizeStore} from "@/store/useSizeStore.ts";
-import {connectVideo} from "@/api/server/connect.ts";
+import {activateVideo, connect} from "@/api/server/connect.ts";
 import {useIsMobile} from "@/hook/useIsMobile.ts";
 import {fontStyle} from "@/util/fontStyle.ts";
 
@@ -32,6 +32,8 @@ export const _Table = () => {
   const { ratio } = useSizeStore();
   const [ data, setData ] = useState<VideoData>({ general: [], highlighter: []});
   const [ unitPrice, setUnitPrice ] = useState(100);
+  const etag = useRef(0); // etag by length
+
   const summary = useMemo(() => {
     return {
       count: data.general.length + data.highlighter.length,
@@ -41,8 +43,10 @@ export const _Table = () => {
 
   const handleGetVideo = async (channelId: string) => {
     try {
-      const result = await getVideoTable(channelId);
+      const result = await getVideoTable(channelId, etag.current);
+      if (result === null) return true;
       setData(result);
+      etag.current = result.general.length + result.highlighter.length;
       return true;
     } catch (err) {
       console.error(err);
@@ -53,8 +57,9 @@ export const _Table = () => {
   useEffect(() => {
     if (!channelId) return;
     const setVideoConnection = async () => {
-      const connected = await connectVideo(channelId);
+      const connected = await connect(channelId).then((serverName) => activateVideo(channelId, serverName));
       setConnected(connected == 200);
+      etag.current = 0;
     }
 
     setVideoConnection();

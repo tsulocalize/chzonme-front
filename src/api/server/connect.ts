@@ -1,21 +1,34 @@
 import {serverApi} from "@/api/server/_index.ts";
 
-export const connectVideo = async (channelId: string) => {
-  const response = await serverApi.post(`/connection/video`, { channelId });
+export const connect = async (channelId: string) => {
+  const response = await serverApi.post(`/connection`, { channelId });
+  return response.headers['x-server'];
+}
+
+export const activateVideo = async (channelId: string, serverName: string) => {
+  const response = await serverApi.post(`/activation/video`, { channelId }, {
+    headers: {'X-Server': serverName}
+  });
   return response.status;
 }
 
-export const connectRoulette = async (channelId: string) => {
-  const response = await serverApi.post(`/connection/roulette`, { channelId });
+export const activateRoulette = async (serverName: string) => {
+  const response = await serverApi.post(`/activation/roulette`, {}, {
+    headers: {'X-Server': serverName}
+  });
   return response.status;
 }
 
-export const disconnectRoulette = async (channelId: string) => {
-  const response = await serverApi.post(`/connection/roulette`, { channelId });
+export const deactivateRoulette = async (serverName: string) => {
+  const response = await serverApi.delete(`/activation/roulette`, {
+    headers: {'X-Server': serverName}
+  });
   return response.status;
 }
 
-export const connectChatting = async (channelId: string) => {
-  const response = await serverApi.post(`/connection/chatting`, { channelId });
+export const activateChatting = async (serverName: string) => {
+  const response = await serverApi.post(`/activation/chatting`, {}, {
+    headers: {'X-Server': serverName}
+  });
   return response.status;
 }

@@ -7,8 +7,13 @@ export const getVideoChannels = async () => {
   return response.data;
 }
 
-export const getVideoTable = async (channelId: string) => {
-  const response = await serverApi.get(`/video-donations?channelId=${channelId}`);
+export const getVideoTable = async (channelId: string, etag: number) => {
+  const response = await serverApi.get(`/video-donations?channelId=${channelId}`,{
+    headers: {'If-None-Match': etag}
+  });
+  if (response.status === 304) {
+    return null;
+  }
   return response.data;
 }
 
