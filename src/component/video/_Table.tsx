@@ -56,6 +56,7 @@ export const _Table = () => {
 
   useEffect(() => {
     if (!channelId) return;
+    setConnected(false);
     const setVideoConnection = async () => {
       const connected = await connect(channelId).then((serverName) => activateVideo(channelId, serverName));
       setConnected(connected == 200);
