@@ -1,11 +1,13 @@
 import Joyride, {type CallBackProps, STATUS} from "react-joyride";
 import {useGuidanceStore} from "@/store/useGuidanceStore.ts";
+import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const Guidance = () => {
-  const { steps, watched, setWatched } = useGuidanceStore();
+  const isMobile = useIsMobile();
+  const {steps, watched, setWatched} = useGuidanceStore();
 
   const handleCallback = (data: CallBackProps) => {
-    const { status } = data;
+    const {status} = data;
     if (status === STATUS.FINISHED) {
       setWatched(true);
     }
@@ -25,6 +27,11 @@ export const Guidance = () => {
         next: '다음',
         skip: '건너뛰기',
       }}
+      styles={{
+        options: {
+          width: `${isMobile ? '250px' : ''}`
+        }
+      }}
     />
-  )
+  );
 }
