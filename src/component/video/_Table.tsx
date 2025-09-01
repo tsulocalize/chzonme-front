@@ -127,6 +127,7 @@ const S = {
   Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["ratio", "isMobile"].includes(prop)})<{ratio: number, isMobile: boolean}>`
     max-height: ${({ratio}) => 450 * ratio + 'px'};
     overflow-y: scroll;
+    scrollbar-gutter: stable;
       
     &::-webkit-scrollbar {
       width: ${({isMobile}) => isMobile ? `12px` : `14px`};
