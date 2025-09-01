@@ -2,7 +2,6 @@ import {serverApi} from "@/api/server/_index.ts";
 import moment from "moment";
 
 export const getVideoChannels = async () => {
-  // TODO: endPoint 변경 필요 (like video-donations/channels)
   const response = await serverApi.get("/video-donations/video-donating");
   return response.data;
 }
