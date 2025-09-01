@@ -67,7 +67,7 @@ export const _Table = () => {
   }, [channelId]);
 
   useEffect(() => {
-    if (!connected || !channelId) return;
+    if (!connected || !channelId || date) return;
 
     const fetchVideoSetting = async () => {
       const videoSetting = await getVideoSetting(channelId);
@@ -81,23 +81,27 @@ export const _Table = () => {
       }
     };
 
-    const fetchPreviousVideoTable = async () => {
-      if (date) {
-        const result = await getPreviousVideoTable(channelId, date);
-        setData(result);
-      }
-    }
-
     fetchVideoSetting();
-    if (date) {
-      fetchPreviousVideoTable();
-      return;
-    }
     fetchVideoTable();
     const intervalId = setInterval(fetchVideoTable, 5000);
 
     return () => clearInterval(intervalId);
-  }, [connected, date]);
+  }, [channelId, connected, date]);
+
+  useEffect(() => {
+    if (!date || !channelId) return;
+    const fetchVideoSetting = async () => {
+      const videoSetting = await getVideoSetting(channelId);
+      setUnitPrice(videoSetting.payAmountPerSecond);
+    }
+    const fetchPreviousVideoTable = async () => {
+      const result = await getPreviousVideoTable(channelId, date);
+      setData(result);
+    }
+    fetchVideoSetting();
+    fetchPreviousVideoTable()
+  }, [channelId, date]);
+
 
   return(
     <>
