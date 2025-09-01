@@ -21,7 +21,7 @@ export const ChannelSearch = ({border}: Props) => {
   const fuzied = useRef(false);
 
   const handleSetChannelNameByInput = (input: string) => {
-    if (fuzied) return;
+    if (fuzied.current) return;
     handleSetChannelName(input);
   }
 
