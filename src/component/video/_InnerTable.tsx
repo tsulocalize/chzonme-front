@@ -132,6 +132,7 @@ const S = {
     &:nth-child(2) {
       max-width: 500px;
       min-width: ${({ratio}) => 120 * ratio + 'px'};
+      word-break: break-all;
     }
     &:nth-child(3) {
       width: ${({ratio}) => 80 + 20 * ratio + 'px'};
