@@ -38,11 +38,11 @@ const S = {
   Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["ratio", "isMobile"].includes(prop)})<{ ratio: number, isMobile: boolean }>`
     display: flex;
     flex-direction: column;
-    width: ${({ratio, isMobile}) => isMobile ? `100%` : 370 * ratio + 'px'};
-    height: ${({ratio, isMobile}) => isMobile ? `250px` : 400 * ratio + 50 + 'px'};
+    width: ${({ratio, isMobile}) => isMobile ? `100%` : 450 * ratio + 'px'};
+    height: ${({ratio, isMobile}) => isMobile ? `250px` : 500 * ratio + 50 + 'px'};
     background: ${({theme}) => theme.color.white};
     border-radius: 12px;
-    padding: ${({isMobile}) => isMobile ? `16px` : `32px 24px`};
+    padding: ${({isMobile}) => isMobile ? `16px` : `32px 32px`};
     box-sizing: border-box;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
     flex-shrink: 0

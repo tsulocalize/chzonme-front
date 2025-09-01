@@ -11,18 +11,18 @@ export const LandingItems = () => {
   return (
     <S.Wrapper isMobile={isMobile}>
       <_Item mainText={"치즈온미의 다양한 기능"}
-             subText={"방송에 도움을 주는 여러 기능을 만나보세요!"}
+             subText={"방송을 즐기는데 도움주는 여러 기능을 만나보세요!"}
              key={0}
              contents={[
                <_CardContent
                  key={0}
                  itemKey={0}
-                 mainText={"영상 도네이션 목록"}
+                 mainText={"영상 도네이션 목록(시청자용)"}
                  subText={"어떤 영상 도네이션이 왔는지 한눈에 확인하세요\nYoutube 영상은 재생 가능합니다! (일부 영상에 한정)"}/>,
                <_CardContent
                  key={1}
                  itemKey={1}
-                 mainText={"도네이션 룰렛"}
+                 mainText={"도네이션 룰렛(스트리머용)"}
                  subText={"이제 손으로 일일히 타이핑하지 마세요\n자동으로 작성된 룰렛판을 돌려돌려~"}/>,
                // <_CardContent
                //   key={2}
