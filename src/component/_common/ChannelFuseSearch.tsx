@@ -1,16 +1,17 @@
 import Fuse from "fuse.js";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {getAllChannels} from "@/api/server/channel.ts";
 import styled from "styled-components";
 import {_ChannelBox} from "@/component/_common/_ChannelBox.tsx";
 
 
 interface Props {
-  input: string;
-  onClickEvent: (input: string) => void;
+  input: string,
+  onClickEvent: (input: string) => void,
+  fuzied?: React.MutableRefObject<boolean>
 }
 
-export const ChannelFuseSearch = ({input, onClickEvent}: Props) => {
+export const ChannelFuseSearch = ({input, onClickEvent, fuzied}: Props) => {
   const fuseRef = useRef<Fuse<string> | null>(null);
   const [fuseChannels, setFuseChannels] = useState<string[]>([]);
 
@@ -34,7 +35,7 @@ export const ChannelFuseSearch = ({input, onClickEvent}: Props) => {
     <>
       {fuseChannels.length === 0 ? <></> :
         <S.Wrapper>
-          <_ChannelBox fuseChannels={fuseChannels} onClickEvent={onClickEvent} />
+          <_ChannelBox fuzied={fuzied} fuseChannels={fuseChannels} onClickEvent={onClickEvent}/>
         </S.Wrapper>
       }
     </>
@@ -43,13 +44,13 @@ export const ChannelFuseSearch = ({input, onClickEvent}: Props) => {
 
 const S = {
   Wrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background: ${({theme}) => theme.color.white};
-    border: 2px solid ${({theme}) => theme.color.mono["100"]};
-    border-radius: 10px;
-    margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background: ${({theme}) => theme.color.white};
+      border: 2px solid ${({theme}) => theme.color.mono["100"]};
+      border-radius: 10px;
+      margin-top: 6px;
   `,
 }
 

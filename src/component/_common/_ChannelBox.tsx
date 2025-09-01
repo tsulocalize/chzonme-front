@@ -1,20 +1,26 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {fontStyle} from "@/util/fontStyle.ts";
 import styled from "styled-components";
 
 interface Props {
-  fuseChannels: string[]
-  onClickEvent: (input: string) => void;
+  fuseChannels: string[],
+  onClickEvent: (input: string) => void,
+  fuzied?: React.MutableRefObject<boolean> | undefined
 }
 
-export const _ChannelBox = ({fuseChannels, onClickEvent}: Props) => {
+export const _ChannelBox = ({fuseChannels, onClickEvent, fuzied}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [keyLock, setKeyLock] = useState(false);
 
   useEffect(() => {
-    const keyUpHandler = (e:KeyboardEvent) => {
+    if (!fuzied) return;
+    fuzied.current = selectedIndex !== -1;
+  }, [fuzied, selectedIndex]);
+
+  useEffect(() => {
+    const keyUpHandler = (e: KeyboardEvent) => {
       if (keyLock) return;
       if (e.key === "ArrowDown") {
         setKeyLock(true);

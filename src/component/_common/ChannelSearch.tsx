@@ -18,6 +18,16 @@ export const ChannelSearch = ({border}: Props) => {
   const [selected, setSelected] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
+  const fuzied = useRef(false);
+
+  const handleSetChannelNameByInput = (input: string) => {
+    if (fuzied) return;
+    handleSetChannelName(input);
+  }
+
+  const handleSetChannelNameByFuzzy = (input: string) => {
+    handleSetChannelName(input);
+  }
 
   const handleSetChannelName = (input: string) => {
     if (!inputRef.current) return;
@@ -42,18 +52,18 @@ export const ChannelSearch = ({border}: Props) => {
             setValue = {setInputValue}
             inputBoxStyle={isMobile ? S.MobileInputCss : S.InputCss}
             placeholder={isMobile ? "채널 검색" : "채널명을 입력하세요"}
-            onEnter={() => handleSetChannelName(inputValue)}
+            onEnter={() => handleSetChannelNameByInput(inputValue)}
             setSelected = {setSelected}
           />
         </S.InputArea>
-        <S.SearchArea onClick={() => handleSetChannelName(inputValue)}>
+        <S.SearchArea onClick={() => handleSetChannelNameByInput(inputValue)}>
           <SearchSVG />
         </S.SearchArea>
       </S.Wrapper>
       {!isMobile && (
         <S.FuseArea>
-          <ChannelFuseSearch input={inputValue} onClickEvent={(clickedChannelName) => {
-            handleSetChannelName(clickedChannelName);
+          <ChannelFuseSearch fuzied={fuzied} input={inputValue} onClickEvent={(clickedChannelName) => {
+            handleSetChannelNameByFuzzy(clickedChannelName);
           }}/>
         </S.FuseArea>
       )}
