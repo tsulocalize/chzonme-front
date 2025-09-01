@@ -15,7 +15,6 @@ export const _VideoChannels = () => {
 
   const handleGetVideoDonating = async () => {
     const result: string[] = await getVideoChannels();
-    console.log(result);
     if (!result) return false;
     setMenuItems(result);
     return true;
@@ -65,7 +64,6 @@ const S = {
   DropdownList: styled.ul`
     position: absolute;
     width: 100%;
-    height: 400px;
     max-height: 400px;
     margin-top: 0;
     background-color: white;
