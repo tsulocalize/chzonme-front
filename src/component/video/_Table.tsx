@@ -105,7 +105,7 @@ export const _Table = () => {
 
   return(
     <>
-      {connected && (
+      {(
         <S.OutsideWrapper>
           <S.Wrapper ratio={ratio} isMobile={isMobile}>
            <_InnerTable infos={isHighlighter ? data.highlighter : data.general} unitPrice={unitPrice} />
