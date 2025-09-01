@@ -1,24 +1,31 @@
 import styled from "styled-components";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSizeStore} from "@/store/useSizeStore.ts";
 
 interface Props {
   svg: React.FC<React.SVGProps<SVGSVGElement>>,
   onClick?: () => void,
+  activation?: boolean,
   isMobile?: boolean,
   id?: string,
 }
 
-export const ToggleIcon = ({svg, onClick, isMobile, id}: Props) => {
+export const ToggleIcon = ({svg, onClick, activation, isMobile, id}: Props) => {
   const [active, setActive] = useState(false);
   const { ratio } = useSizeStore();
 
   const handleClick = () => {
-    setActive(!active);
     if (onClick) {
+      setActive(!active);
       onClick();
     }
   }
+
+  useEffect(() => {
+    if (activation !== undefined) {
+      setActive(activation);
+    }
+  }, [activation]);
 
   return (
     <S.StyledIcon as={svg}

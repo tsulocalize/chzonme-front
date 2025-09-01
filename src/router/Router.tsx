@@ -8,13 +8,15 @@ import styled from "styled-components";
 import {LoginChecker} from "@/router/LoginChecker.tsx";
 import {CustomErrorBoundary} from "@/router/CustomErrorBoundary.tsx";
 import {VideoRankingPage} from "@/page/videoranking/VideoRankingPage.tsx";
-import {ChattingIndex} from "@/page/chatting/ChattingIndex.tsx";
+// import {ChattingIndex} from "@/page/chatting/ChattingIndex.tsx";
 import {LandingIndex} from "@/page/landing/LandingIndex.tsx";
 import {VideoIndex} from "@/page/video/VideoIndex.tsx";
 import {RouletteIndex} from "@/page/roulette/RouletteIndex.tsx";
-import {MembershipIndex} from "@/page/membership/MembershipIndex.tsx";
-import {MyIndex} from "@/page/my/MyIndex.tsx";
+// import {MembershipIndex} from "@/page/membership/MembershipIndex.tsx";
+// import {MyIndex} from "@/page/my/MyIndex.tsx";
 import {Guidance} from "@/guidance/Guidance.tsx";
+// import {TossRedirectPage} from "@/page/payment/TossRedirectPage.tsx";
+// import {TossPaymentFailPage} from "@/page/payment/TossPaymentFailPage.tsx";
 
 const S = {
   OutletWrapper: styled.div`
@@ -82,26 +84,26 @@ export const router = createBrowserRouter(
             </S.OutletWrapper>
           )
         },
-        {
-          path: "my",
-          element: (
-            <>
-              <S.OutletWrapper>
-                <MyIndex />
-              </S.OutletWrapper>
-            </>
-          )
-        },
-        {
-          path: "membership",
-          element: (
-            <>
-              <S.OutletWrapper>
-                <MembershipIndex />
-              </S.OutletWrapper>
-            </>
-          )
-        },
+        // {
+        //   path: "my",
+        //   element: (
+        //     <>
+        //       <S.OutletWrapper>
+        //         <MyIndex />
+        //       </S.OutletWrapper>
+        //     </>
+        //   )
+        // },
+        // {
+        //   path: "membership",
+        //   element: (
+        //     <>
+        //       <S.OutletWrapper>
+        //         <MembershipIndex />
+        //       </S.OutletWrapper>
+        //     </>
+        //   )
+        // },
         {
           path: "roulette",
           element: (
@@ -112,22 +114,34 @@ export const router = createBrowserRouter(
             </>
           )
         },
-        {
-          path: "chatting",
-          element: (
-            <>
-              <S.OutletWrapper>
-                <ChattingIndex />
-              </S.OutletWrapper>
-            </>
-          )
-        },
+        // {
+        //   path: "chatting",
+        //   element: (
+        //     <>
+        //       <S.OutletWrapper>
+        //         <ChattingIndex />
+        //       </S.OutletWrapper>
+        //     </>
+        //   )
+        // },
         {
           path: "login",
           element: (
             <LoginChecker />
           )
         },
+        // {
+        //   path: "payment/success",
+        //   element: (
+        //     <TossRedirectPage />
+        //   )
+        // },
+        // {
+        //   path: "payment/fail",
+        //   element: (
+        //     <TossPaymentFailPage />
+        //   )
+        // }
       ]
     },
     {

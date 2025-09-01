@@ -14,8 +14,8 @@ interface Props {
 export const LiContents = ({checkIcon, texts, font, gap}: Props) => {
   return (
     <S.Wrapper font={font}>
-      {texts.map((text) => (
-        <S.Content gap={gap ?? 0}>
+      {texts.map((text, index) => (
+        <S.Content gap={gap ?? 0} key={index}>
           {checkIcon ? <CheckSVG /> : <DotSVG />}
           <S.Text pad={parseInt(font.fontSize) / 5}>{text}</S.Text>
         </S.Content>

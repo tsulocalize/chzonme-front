@@ -92,8 +92,8 @@ export const _Table = () => {
       fetchPreviousVideoTable();
       return;
     }
-    const intervalId = setInterval(fetchVideoTable, 5000);
     fetchVideoTable();
+    const intervalId = setInterval(fetchVideoTable, 5000);
 
     return () => clearInterval(intervalId);
   }, [connected, date]);

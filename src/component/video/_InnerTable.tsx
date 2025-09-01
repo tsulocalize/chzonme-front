@@ -88,6 +88,7 @@ function calculateAccumulate(infos: VideoInfo[]) {
 const S = {
   Table: styled.table`
     border-collapse: collapse;
+    width: 100%;
   `,
   Thead: styled.thead`
     position: sticky;

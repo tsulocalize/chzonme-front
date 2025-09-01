@@ -15,6 +15,6 @@ export const VideoRankingPage = () => {
 
 const S = {
   Wrapper: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
-     padding: ${({isMobile}) => isMobile ? `6px 16px 0 16px` : `20px 40px 0 40px`};
+     padding: ${({isMobile}) => isMobile ? `6px 14px 0 14px` : `20px 40px 0 40px`};
   `,
 }

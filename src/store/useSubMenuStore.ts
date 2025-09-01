@@ -20,8 +20,8 @@ export const useSubMenuStore = create<SubMenuState>((set) => ({
 const routeDataMap: Record<string, Menu[]> = {
   "/": [],
   "/video": [
-    {title: "지금 영도 중인 채널", shortTitle: "영도 채널", onClick: () => {}},
-    {title: "이번주 영도 랭킹", shortTitle: "랭킹", onClick: () => {window.open("/ranking")}},
+    // {title: "지금 영도 중인 채널", shortTitle: "영도 채널", onClick: () => {}},
+    {title: "이번주 영도 랭킹", shortTitle: "랭킹", onClick: () => {window.open("/ranking", "_blank")}},
     {title: "영도 고화질 설정", shortTitle: "고화질 설정", onClick: () => {window.open("/video-guide", "_blank")}},
   ],
   "/roulette": [

@@ -14,14 +14,16 @@ export const VideoGuide = () => {
           <S.Week>테스트 버전: OBS 30.1.2</S.Week><br/>
           <S.Strong isMobile={isMobile}>효능·효험</S.Strong><br/>
           1. 영상 도네이션 화질 개선<br/>
-          2. 치지직 클립 영상 부분만 잘라서 확대 처리<br/><br/><br/>
+          2. 치지직 클립: 영상 부분만 잘라서 확대 처리<br/><br/><br/>
 
           <S.Strong isMobile={isMobile}>적용 방법</S.Strong><br/>
 
           1. OBS 실행<br/>
           2. 영상 도네이션 용 <S.Bold isMobile={isMobile}>브라우저 캡처</S.Bold> - <S.Bold isMobile={isMobile}>속성</S.Bold><br/>
           3. 너비: <S.Bold isMobile={isMobile}>1600</S.Bold> / 높이: <S.Bold isMobile={isMobile}>1200</S.Bold><br/>
-          4. <S.Bold isMobile={isMobile}>사용자 지정 CSS</S.Bold> 아래 내용 붙여넣기
+          4. <S.Bold isMobile={isMobile}>사용자 지정 CSS</S.Bold> 안에 아래 내용 복사/붙여넣기
+          <br/><br/>
+
         </S.Text>
         <_CodeSnippet />
       </S.Page>

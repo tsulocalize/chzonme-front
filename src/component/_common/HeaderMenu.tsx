@@ -22,7 +22,7 @@ const S = {
     display: flex;
     flex: 1;
     justify-content: space-between;
-    max-width: ${({ratio}) => 800 * ratio + 'px'};
+    max-width: ${({ratio}) => 600 * ratio + 'px'};
   `,
 
   Menu: styled.div.withConfig({shouldForwardProp: (prop) => !["isCurrentMenu", "ratio"].includes(prop)})<{isCurrentMenu: boolean, ratio: number}>`
@@ -33,7 +33,7 @@ const S = {
     user-select: none;
     height: 50px;
     line-height: 50px;
-    padding: 5px;
+    padding: 4px 8px;
     white-space: nowrap;
     transition: color 0.3s ease;
 

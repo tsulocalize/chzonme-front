@@ -142,12 +142,13 @@ const S = {
     width: 100px;
     border-radius: 8px;
     ${({theme}) => fontStyle(theme.font.B(18))};
-    background: ${({theme}) => theme.color.point["500"]};
+    background: ${({theme}) => theme.color.point["300"]};
     cursor: pointer;
     user-select: none;
+    transition: background-color 0.2s ease;
       
     &:hover {
-      background: ${({theme}) => theme.color.point["700"]};
+      background: ${({theme}) => theme.color.point["500"]};
     }
   `,
   Overlay: styled.div`

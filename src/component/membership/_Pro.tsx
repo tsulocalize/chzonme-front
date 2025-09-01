@@ -2,32 +2,43 @@
 
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
-import {SUBSCRIBE_URL} from "@/common/constant.ts";
 import {Title} from "@/component/_common/Title.tsx";
 import {theme} from "@/common/styles.ts";
 import {LiContents} from "@/component/_common/LiContents.tsx";
 import {useIsMobile} from "@/hook/useIsMobile.ts";
+import {_makeToss} from "@/component/membership/_makeToss.ts";
+import {useUserStore} from "@/store/useUserStore.ts";
+import {LoginModal} from "@/component/modal/LoginModal.tsx";
 
 export const _Pro = () => {
   const isMobile = useIsMobile();
+  const { isLoggedIn } = useUserStore();
+
+  const handleOnclick = () => {
+    if (!isLoggedIn) {
+      LoginModal();
+      // make login first
+      return;
+    }
+    _makeToss(isMobile, 2);
+  }
 
   return (
     <S.Wrapper>
       <S.Content>
         <S.ContentHeader isMobile={isMobile}>
           <Title mainText={"Pro"} mainFont={theme.font.B(isMobile ? 32 : 38)}
-                 subText={"치지직 2티어 구독"} subFont={theme.font.M(isMobile ? 14 : 18)} />
+                 subText={"치즈온미 2티어 구독"} subFont={theme.font.M(isMobile ? 14 : 18)} />
           <S.Price isMobile={isMobile}>
-            14,900원 / 월
+            6,900원 / 월
           </S.Price>
         </S.ContentHeader>
         <LiContents checkIcon font={theme.font.M(isMobile ? 16 : 20)} gap={isMobile ? 2 : 8}
-                    texts={["과거 영상 도네이션 목록", "항상 연결하기 2채널", "채팅 기록하기 및 그래프 확인"]}
+                    texts={["과거 영상 도네이션 목록", "항상 연결하기 2채널", "분당 채팅수 기록"]}
         />
       </S.Content>
       <S.ButtonWrapper isMobile={isMobile}>
-        <S.SubscribeButton onClick={() => window.open(SUBSCRIBE_URL, "_blank")}>구독하러가기
-        </S.SubscribeButton>
+        <S.SubscribeButton onClick={handleOnclick}>구독하기</S.SubscribeButton>
       </S.ButtonWrapper>
     </S.Wrapper>
   );
@@ -38,6 +49,7 @@ const S = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 10px;
     flex:1;
   `,
   Content: styled.div``,

@@ -18,7 +18,9 @@ serverApi.interceptors.response.use(
   response => response,
   error => {
     if (error.response.status === 401) {
-      onError("권한이 없습니다.");
+      if (error.config.url !== '/token-login') {
+        onError(error.response.data.message ? error.response.data.message : "권한이 없습니다.");
+      }
       return Promise.reject(error);
     }
 

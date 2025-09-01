@@ -43,6 +43,7 @@ const S = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     padding: 6px 0;  
     background: ${({theme, floor}) => floor ? theme.color.white : theme.color.mono["100"]};
     ${({theme}) => fontStyle(theme.font.M(12))};

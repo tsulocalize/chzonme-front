@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
 import fallback from "@/assets/image/fallback-image.png";
 import {LoginModal} from "@/component/modal/LoginModal.tsx";
-import {goTo} from "@/router/Navigator.tsx";
+// import {goTo} from "@/router/Navigator.tsx";
 import {useIsMobile} from "@/hook/useIsMobile.ts";
 
 export const UserProfile = () => {
@@ -11,9 +11,9 @@ export const UserProfile = () => {
   const isMobile = useIsMobile();
 
   const handleOnClick = () => {
-    if (userChannelName) {
-      goTo("/my");
-    }
+    // if (userChannelName) {
+    //   goTo("/my");
+    // }
   }
 
   return (
@@ -37,7 +37,7 @@ const S = {
     align-items: center;
     height: 100%;
     gap: ${({isMobile}) => isMobile ? `5px` : `10px`};
-    cursor: pointer;
+    //cursor: pointer;
   `,
   Image: styled.img.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
     width: ${({isMobile}) => isMobile ? `30px` : `50px`};
@@ -61,11 +61,16 @@ const S = {
   Login: styled.div.withConfig({shouldForwardProp: (prop) => !["isMobile"].includes(prop)})<{ isMobile: boolean }>`
     padding: ${({isMobile}) => isMobile ? `10px 12px` : `10px 20px`};
     border-radius: 8px;
-    background: ${({theme}) => theme.color.point["500"]};
+    background: ${({theme}) => theme.color.point["300"]};
     color: ${({theme}) => theme.color.black};
     ${({theme, isMobile}) => fontStyle(theme.font.B(isMobile ? 18 : 24))};
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
+    transition: background-color 0.2s ease;
+      
+    &:hover {
+      background: ${({theme}) => theme.color.point["500"]};
+    }
   `,
 }

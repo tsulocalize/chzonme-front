@@ -4,9 +4,6 @@ import {getAllChannels} from "@/api/server/channel.ts";
 import styled from "styled-components";
 import {_ChannelBox} from "@/component/_common/_ChannelBox.tsx";
 
-interface Channel {
-  channelName: string;
-}
 
 interface Props {
   input: string;
@@ -14,14 +11,13 @@ interface Props {
 }
 
 export const ChannelFuseSearch = ({input, onClickEvent}: Props) => {
-  const fuseRef = useRef<Fuse<Channel> | null>(null);
-  const [fuseChannels, setFuseChannels] = useState<Channel[]>([]);
+  const fuseRef = useRef<Fuse<string> | null>(null);
+  const [fuseChannels, setFuseChannels] = useState<string[]>([]);
 
   useEffect(() => {
     const fuseLazyLoading = async () => {
-      const channels: Channel[] = await getAllChannels();
+      const channels: string[] = await getAllChannels();
       fuseRef.current = new Fuse(channels, {
-        keys: ["channelName"],
         threshold: 0.3,
         ignoreLocation: true,
       })

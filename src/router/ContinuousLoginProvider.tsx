@@ -12,6 +12,7 @@ export const ContinuousLoginProvider = ({children}: Props) => {
 
   useEffect(() => {
     if (isLoggedIn || tried.current) return;
+    if (window.location.pathname === "/login") return;
 
     const checkLoginCookie = async () => {
       await tokenLogin()

@@ -4,12 +4,8 @@ import {useEffect, useState} from "react";
 import {fontStyle} from "@/util/fontStyle.ts";
 import styled from "styled-components";
 
-interface Channel {
-  channelName: string;
-}
-
 interface Props {
-  fuseChannels: Channel[]
+  fuseChannels: string[]
   onClickEvent: (input: string) => void;
 }
 
@@ -32,7 +28,7 @@ export const _ChannelBox = ({fuseChannels, onClickEvent}: Props) => {
       }
       if (e.key === "Enter") {
         if (selectedIndex === -1) return;
-        onClickEvent(fuseChannels[selectedIndex].channelName ?? "");
+        onClickEvent(fuseChannels[selectedIndex] ?? "");
         setSelectedIndex(-1);
       }
     }
@@ -53,12 +49,12 @@ export const _ChannelBox = ({fuseChannels, onClickEvent}: Props) => {
           onMouseOut={() => setSelectedIndex(-1)}
           onClick={() => {
             if (selectedIndex === -1) return;
-            onClickEvent(fuseChannels[selectedIndex].channelName ?? "");
+            onClickEvent(fuseChannels[selectedIndex] ?? "");
             setSelectedIndex(-1);
           }}
           selected={selectedIndex === index}
         >
-          {fuseChannel.channelName}
+          {fuseChannel}
         </S.ChannelBox>
       )}
     </>

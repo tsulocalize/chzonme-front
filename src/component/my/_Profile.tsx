@@ -4,7 +4,7 @@ import {useUserStore} from "@/store/useUserStore.ts";
 import styled from "styled-components";
 import fallback from "@/assets/image/fallback-image.png";
 import {fontStyle} from "@/util/fontStyle.ts";
-import {SUBSCRIBE_URL} from "@/common/constant.ts";
+import {goTo} from "@/router/Navigator.tsx";
 
 export const _Profile = () => {
   const { userChannelName, img, tier } = useUserStore();
@@ -20,12 +20,11 @@ export const _Profile = () => {
         <S.Subscribe>
           {tier ? (
             <>
-              {`현재 치즈온미 채널을 ${tier}티어 구독 중입니다.`}
+              {`${tier}티어 구독 중입니다.`}
             </>
             ) : (
             <>
-              치즈온미 채널을 구독하고 있지 않습니다.
-              <S.SubscribeButton onClick={() => window.open(SUBSCRIBE_URL, "_blank")}>{"구독하러 가기"}</S.SubscribeButton>
+              <S.SubscribeButton onClick={() => goTo("/membership")}>{"구독하기"}</S.SubscribeButton>
             </>
           )}
         </S.Subscribe>
