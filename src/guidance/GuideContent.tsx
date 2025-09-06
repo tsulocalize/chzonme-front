@@ -15,7 +15,7 @@ export const GuideContent = ({content}: Props) => {
 
 const S = {
   Wrapper: styled.div`
-    ${({theme}) => fontStyle(theme.font.M(18))} 
+    ${({theme}) => fontStyle(theme.font.M(16))} 
     white-space: pre-line;
   `
 }

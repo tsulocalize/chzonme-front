@@ -1,9 +1,9 @@
 import {serverApi} from "@/api/server/_index.ts";
 import AxiosMockAdapter from 'axios-mock-adapter';
-import {registerRanking, registerVideoData, registerVideoSetting} from "@/api/mock/_videoMock.ts";
+import {registerRanking, registerVideoData, registerVideoDating, registerVideoSetting} from "@/api/mock/_videoMock.ts";
 import {registerChannelData, registerChannelInfo} from "@/api/mock/_channelMock.ts";
 import {registerLogin, registerTokenLogin} from "@/api/mock/_loginMock.ts";
-import {registerConnectVideo} from "@/api/mock/_connectMock.ts";
+import {registerConnect, registerConnectVideo} from "@/api/mock/_connectMock.ts";
 import {registerRoulette} from "@/api/mock/_rouletteMock.ts";
 import {registerChattingData} from "@/api/mock/_chattingMock.ts";
 
@@ -14,12 +14,14 @@ const registers: MockRegister[] = [
   registerVideoSetting,
   registerChannelData,
   registerChannelInfo,
+  registerConnect,
   registerConnectVideo,
   registerRanking,
   registerLogin,
   registerTokenLogin,
   registerRoulette,
-  registerChattingData
+  registerChattingData,
+  registerVideoDating
 ]
 
 export const setMockIfEnable = () => {

@@ -1,7 +1,7 @@
 import AxiosMockAdapter from "axios-mock-adapter";
 
 export const registerVideoData = (mock: AxiosMockAdapter) => {
-  mock.onGet(/\/video-donations.*/).reply(() => {
+  mock.onGet(/\/video-donations$/).reply(() => {
     return [200,
       {
         "general": [
@@ -277,5 +277,16 @@ export const registerRanking = (mock: AxiosMockAdapter) => {
         "now": "2025-06-13T05:00:00"
       }
     ]
+  })
+}
+
+export const registerVideoDating = (mock: AxiosMockAdapter) => {
+  mock.onGet(/\/video-donations\/video-donating/).reply(() => {
+    return [200,
+      [
+        "asdsada",
+        "asdasdasda",
+      ]
+    ];
   })
 }
