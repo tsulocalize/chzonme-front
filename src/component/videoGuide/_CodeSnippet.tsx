@@ -74,14 +74,14 @@ const code =
   clip-path: inset(650px 0px 650px 0px);
   z-index: 1;
   }
-  [class^="live_alarm_alarm"] {
+  [class^="overlay_donation_alarm"] {
   position: relative;top: -690px;
   }
-  [class^="live_alarm_animation"] {
+  [class^="overlay_donation_animation"] {
   position: relative;
   top: 625px;
   }
-  [class^="live_alarm_contents"] {
+  [class^="overlay_donation_contents"] {
   position: absolute;
   top: 1690px !important;
   width: 1600px !important;
@@ -89,5 +89,5 @@ const code =
   transform: scale(1.5);
   font-size: 32px !important;
   }
-  [class*="live_alarm_play_video"] {font-size: 24px !important;margin-botton:20px;}
-  [class^="live_alarm_video_title"] {margin-top: 20px !important;}`;
+  [class*="overlay_donation_play_video"] {font-size: 24px !important;margin-botton:20px;}
+  [class^="overlay_donation_video_title"] {margin-top: 20px !important;}`;
