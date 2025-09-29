@@ -46,7 +46,7 @@ const S = {
     color: ${({theme, active}) => (active ? theme.color.point["400"] : theme.color.black)};
     cursor: pointer;
 
-    @media (hover: hover) {
+    @media (hover: hover) and (pointer: fine) {
       &:hover {
         color: ${({theme}) => theme.color.point["600"]}
       }
