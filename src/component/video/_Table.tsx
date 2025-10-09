@@ -33,6 +33,7 @@ export const _Table = () => {
   const [ data, setData ] = useState<VideoData>({ general: [], highlighter: []});
   const [ unitPrice, setUnitPrice ] = useState(100);
   const etag = useRef(0); // etag by length
+  const networkFailCount = useRef(0)
 
   const summary = useMemo(() => {
     return {
@@ -77,6 +78,11 @@ export const _Table = () => {
     const fetchVideoTable = async () => {
       const available = await handleGetVideo(channelId);
       if (!available) {
+        networkFailCount.current++
+      } else {
+        networkFailCount.current = 0
+      }
+      if (networkFailCount.current >= 2) {
         clearInterval(intervalId);
       }
     };
