@@ -47,7 +47,7 @@ export const _Table = () => {
     try {
       const result = await getVideoTable(channelId, etag.current);
       if (result === null) {
-        pollingInterval.current = Math.min(pollingInterval.current + 1000, 10000);
+        pollingInterval.current = Math.min(pollingInterval.current + 2000, 15000);
         return true;
       }
       setData(result);
