@@ -33,7 +33,8 @@ export const _Table = () => {
   const [ data, setData ] = useState<VideoData>({ general: [], highlighter: []});
   const [ unitPrice, setUnitPrice ] = useState(100);
   const etag = useRef(0); // etag by length
-  const networkFailCount = useRef(0)
+  const networkFailCount = useRef(0);
+  const [pollingInterval, setPollingInterval] = useState(5000); // for reset useEffect
 
   const summary = useMemo(() => {
     return {
@@ -45,8 +46,12 @@ export const _Table = () => {
   const handleGetVideo = async (channelId: string) => {
     try {
       const result = await getVideoTable(channelId, etag.current);
-      if (result === null) return true;
+      if (result === null) {
+        setPollingInterval(Math.min(pollingInterval + 1000, 10000));
+        return true;
+      }
       setData(result);
+      setPollingInterval(5000);
       etag.current = result.general.length + result.highlighter.length;
       return true;
     } catch (err) {
@@ -89,10 +94,10 @@ export const _Table = () => {
 
     fetchVideoSetting();
     fetchVideoTable();
-    const intervalId = setInterval(fetchVideoTable, 5000);
+    const intervalId = setInterval(fetchVideoTable, pollingInterval);
 
     return () => clearInterval(intervalId);
-  }, [channelId, connected, date]);
+  }, [channelId, connected, date, pollingInterval]);
 
   useEffect(() => {
     if (!date || !channelId) return;
