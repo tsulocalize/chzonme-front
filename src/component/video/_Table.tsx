@@ -75,23 +75,27 @@ export const _Table = () => {
   useEffect(() => {
     if (!connected || !channelId || date) return;
 
-    const fetchVideoTable = async () => {
+    let cancelled = false;
+
+    const fetchVideoTableLoop = async () => {
+      if (cancelled) return;
+
       const available = await handleGetVideo(channelId);
-      if (!available) {
-        networkFailCount.current++
-      } else {
-        networkFailCount.current = 0
-      }
-      if (networkFailCount.current >= 2) {
-        clearInterval(intervalId);
+      if (!available) networkFailCount.current++;
+      else networkFailCount.current = 0;
+
+      if (networkFailCount.current < 2) {
+        setTimeout(fetchVideoTableLoop, pollingInterval);
       }
     };
 
-    fetchVideoTable();
-    const intervalId = setInterval(fetchVideoTable, pollingInterval);
+    fetchVideoTableLoop();
 
-    return () => clearInterval(intervalId);
+    return () => {
+      cancelled = true;
+    };
   }, [channelId, connected, date, pollingInterval]);
+
 
   useEffect(() => {
     if (!connected || !channelId) return;
