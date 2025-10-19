@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import {useChannelStore} from "@/store/useChannelStore.ts";
-import {getPreviousVideoTable, getVideoSetting, getVideoTable} from "@/api/server/video.ts";
+import {getPreviousVideoTable, getVideoSetting} from "@/api/server/video.ts";
 import {useEffect, useMemo, useRef, useState} from "react";
 import {_InnerTable} from "@/component/video/_InnerTable.tsx";
 import {useVideoStore} from "@/store/useVideoStore.ts";
@@ -11,6 +11,7 @@ import {useSizeStore} from "@/store/useSizeStore.ts";
 import {activateVideo, connect} from "@/api/server/connect.ts";
 import {useIsMobile} from "@/hook/useIsMobile.ts";
 import {fontStyle} from "@/util/fontStyle.ts";
+import {getCacheVideoTable} from "@/api/cache/video.ts";
 
 export interface VideoInfo {
   videoName: string;
@@ -45,7 +46,8 @@ export const _Table = () => {
 
   const handleGetVideo = async (channelId: string) => {
     try {
-      const result = await getVideoTable(channelId, etag.current);
+      // TODO: 로컬 환경에서 동작하게 변경 (cloudfront)
+      const result = await getCacheVideoTable(channelId, etag.current);
       if (result === null) {
         pollingInterval.current = Math.min(pollingInterval.current + 2000, 15000);
         return true;
@@ -75,8 +77,12 @@ export const _Table = () => {
   useEffect(() => {
     if (!connected || !channelId || date) return;
 
-    let cancelled = false;
+    const fetchVideoSetting = async () => {
+      const videoSetting = await getVideoSetting(channelId);
+      setUnitPrice(videoSetting.payAmountPerSecond);
+    }
 
+    let cancelled = false;
     const fetchVideoTableLoop = async () => {
       if (cancelled) return;
 
@@ -88,25 +94,13 @@ export const _Table = () => {
         setTimeout(fetchVideoTableLoop, pollingInterval.current);
       }
     };
-
+    fetchVideoSetting();
     fetchVideoTableLoop();
 
     return () => {
       cancelled = true;
     };
   }, [channelId, connected, date]);
-
-
-  useEffect(() => {
-    if (!connected || !channelId) return;
-
-    const fetchVideoSetting = async () => {
-      const videoSetting = await getVideoSetting(channelId);
-      setUnitPrice(videoSetting.payAmountPerSecond);
-    }
-    fetchVideoSetting();
-  }, [channelId, connected]);
-
 
   useEffect(() => {
     if (!date || !channelId) return;
