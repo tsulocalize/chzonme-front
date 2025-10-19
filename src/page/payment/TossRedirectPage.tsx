@@ -2,7 +2,7 @@ import {useSearchParams} from "react-router-dom";
 import {useEffect} from "react";
 import {startSubscription} from "@/api/server/billing.ts";
 
-let billingRequested = false;
+let billingRequested = false; // TODO 토스 제거
 
 export const TossRedirectPage = () => {
   const [searchParams] = useSearchParams();
