@@ -12,6 +12,7 @@ export const VideoGuide = () => {
         <S.Title isMobile={isMobile}>OBS 영상 도네이션 고화질 설정 가이드</S.Title>
         <S.Text isMobile={isMobile}>
           <S.Week>테스트 버전: OBS 30.1.2</S.Week><br/>
+          <S.Week>업데이트: 2025-11-28</S.Week><br/>
           <S.Strong isMobile={isMobile}>효능·효험</S.Strong><br/>
           1. 영상 도네이션 화질 개선<br/>
           2. 치지직 클립: 영상 부분만 잘라서 확대 처리<br/><br/><br/>
