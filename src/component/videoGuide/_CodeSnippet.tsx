@@ -61,7 +61,7 @@ const S = {
 }
 
 const code = `body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
-iframe[src*="www.youtube-nocookie.com"] {
+iframe[src*="www.youtube"] {
   position: relative;
   width: 1600px !important;
   height: 900px !important;
