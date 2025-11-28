@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import {useChannelStore} from "@/store/useChannelStore.ts";
-import {getPreviousVideoTable, getVideoSetting} from "@/api/server/video.ts";
+import {getPreviousVideoTable, getVideoSetting, getVideoTable} from "@/api/server/video.ts";
 import {useEffect, useMemo, useRef, useState} from "react";
 import {_InnerTable} from "@/component/video/_InnerTable.tsx";
 import {useVideoStore} from "@/store/useVideoStore.ts";
@@ -11,7 +11,6 @@ import {useSizeStore} from "@/store/useSizeStore.ts";
 import {activateVideo, connect} from "@/api/server/connect.ts";
 import {useIsMobile} from "@/hook/useIsMobile.ts";
 import {fontStyle} from "@/util/fontStyle.ts";
-import {getCacheVideoTable} from "@/api/cache/video.ts";
 
 export interface VideoInfo {
   videoName: string;
@@ -47,7 +46,7 @@ export const _Table = () => {
   const handleGetVideo = async (channelId: string) => {
     try {
       // TODO: 로컬 환경에서 동작하게 변경 (cloudfront)
-      const result = await getCacheVideoTable(channelId, etag.current);
+      const result = await getVideoTable(channelId, etag.current);
       if (result === null) {
         pollingInterval.current = Math.min(pollingInterval.current + 2000, 15000);
         return true;
