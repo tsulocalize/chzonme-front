@@ -1,11 +1,12 @@
 import {create} from "zustand/react";
 import {immer} from "zustand/middleware/immer";
 
-interface Menu {
+export interface Menu {
   title: string;
   shortTitle: string;
   path: string;
   isCurrentMenu: boolean;
+  isExternal: boolean;
 }
 
 export interface MenuState {
@@ -16,9 +17,10 @@ export interface MenuState {
 export const useMenuStore = create<MenuState>()(
   immer((set) => ({
       menus: [
-        {title: "치즈온미 소개", shortTitle:"홈", path: "/", isCurrentMenu: true},
-        {title: "영상 도네이션", shortTitle:"영도", path: "/video", isCurrentMenu: false},
-        {title: "도네이션 룰렛", shortTitle:"룰렛", path: "/roulette", isCurrentMenu: false},
+        {title: "치즈온미 소개", shortTitle:"홈", path: "/", isCurrentMenu: true, isExternal: false},
+        {title: "영상 도네이션", shortTitle:"영도", path: "/video", isCurrentMenu: false, isExternal: false},
+        // {title: "도네이션 룰렛", shortTitle:"룰렛", path: "/roulette", isCurrentMenu: false, isExternal: false},
+        {title: "c/place(beta)", shortTitle:"c/p", path: "https://cplace.chz-on.me", isCurrentMenu: false, isExternal: true},
         // {title: "채팅 그래프", shortTitle:"채팅", path: "/chatting", isCurrentMenu: false},
         // {title: "멤버십", shortTitle:"멤버십", path: "/membership", isCurrentMenu: false},
       ],

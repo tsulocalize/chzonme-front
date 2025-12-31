@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {fontStyle} from "@/util/fontStyle.ts";
-import {useMenuStore} from "@/store/useMenuStore.ts";
+import {type Menu, useMenuStore} from "@/store/useMenuStore.ts";
 import {goTo} from "@/router/Navigator.tsx";
 import {useSizeStore} from "@/store/useSizeStore.ts";
 
@@ -8,10 +8,18 @@ export const HeaderMenu = () => {
   const { menus } = useMenuStore();
   const { ratio } = useSizeStore();
 
+  const handleMenuClick = (menu: Menu) => {
+    if (menu.isExternal) {
+      window.open(menu.path, "_blank")
+    } else {
+      goTo(menu.path)
+    }
+  }
+
   return (
     <S.Wrapper ratio={ratio}>
       {menus.map((menu, index) => (
-        <S.Menu key={index} onClick={() => goTo(menu.path)} isCurrentMenu={menu.isCurrentMenu} ratio={ratio}>{menu.title}</S.Menu>
+        <S.Menu key={index} onClick={() => handleMenuClick(menu)} isCurrentMenu={menu.isCurrentMenu} ratio={ratio}>{menu.title}</S.Menu>
       ))}
     </S.Wrapper>
   )
