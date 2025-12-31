@@ -13,6 +13,8 @@ import {createRoulette, getRouletteTable} from "@/api/server/roulette.ts";
 import {ToggleIcon} from "@/component/_common/ToggleIcon.tsx";
 import {useVoteStore} from "@/store/useVoteStore.ts";
 import {useIsMobile} from "@/hook/useIsMobile.ts";
+import Tippy from "@tippyjs/react";
+import 'tippy.js/dist/tippy.css';
 
 interface _ControllerProps {
   handleRotate: () => void,
@@ -60,9 +62,21 @@ export const _Controller = ({handleRotate, handleStop}: _ControllerProps) => {
 
   return (
     <S.Wrapper>
-      <Icon svg={RefreshSVG} onClick={refresh} isMobile={isMobile} id={'step-3'}/>
-      <ToggleIcon svg={VoteSVG} onClick={toggleVote} isMobile={isMobile} id={'step-4'}/>
-      <Icon svg={isRotating ? StopSVG : PlaySVG} onClick={turnWheel} isMobile={isMobile} id={'step-5'}/>
+      <Tippy content="룰렛 새로고침" arrow={true}>
+        <S.IconWrapper>
+          <Icon svg={RefreshSVG} onClick={refresh} isMobile={isMobile}/>
+        </S.IconWrapper>
+      </Tippy>
+      <Tippy content="투표 시작/종료" arrow={true}>
+        <S.IconWrapper>
+          <ToggleIcon svg={VoteSVG} onClick={toggleVote} isMobile={isMobile} id={'step-4'}/>
+        </S.IconWrapper>
+      </Tippy>
+      <Tippy content="룰렛 돌리기" arrow={true}>
+        <S.IconWrapper>
+          <Icon svg={isRotating ? StopSVG : PlaySVG} onClick={turnWheel} isMobile={isMobile} id={'step-5'}/>
+        </S.IconWrapper>
+      </Tippy>
     </S.Wrapper>
   )
 }
@@ -73,5 +87,9 @@ const S = {
     align-items: center;
     justify-content: flex-end;
     gap: 6px;
-  `
+  `,
+  IconWrapper: styled.div`
+    display: flex;
+    align-items: center;
+  `,
 }
