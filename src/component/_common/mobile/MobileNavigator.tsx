@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {useMenuStore} from "@/store/useMenuStore.ts";
+import {type Menu, useMenuStore} from "@/store/useMenuStore.ts";
 import {goTo} from "@/router/Navigator.tsx";
 import HomeSVG from "@/assets/image/mobile/homeNav.svg?react"
 import VideoSVG from "@/assets/image/mobile/videoNav.svg?react"
@@ -18,10 +18,18 @@ const svgMap = [
 export const MobileNavigator = () => {
   const { menus } = useMenuStore();
 
+  const handleMenuClick = (menu: Menu) => {
+    if (menu.isExternal) {
+      window.open(menu.path, "_blank")
+    } else {
+      goTo(menu.path)
+    }
+  }
+
   return (
     <S.Wrapper>
       {menus.map((menu, index) => (
-        <S.Menu key={index} onClick={() => goTo(menu.path)}
+        <S.Menu key={index} onClick={() => handleMenuClick(menu)}
                 isCurrentMenu={menu.isCurrentMenu}>{menu.shortTitle}
           {svgMap[index]}
         </S.Menu>
