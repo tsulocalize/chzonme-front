@@ -30,7 +30,7 @@ const S = {
     display: flex;
     flex: 1;
     justify-content: space-between;
-    max-width: ${({ratio}) => 600 * ratio + 'px'};
+    max-width: ${({ratio}) => 700 * ratio + 'px'};
   `,
 
   Menu: styled.div.withConfig({shouldForwardProp: (prop) => !["isCurrentMenu", "ratio"].includes(prop)})<{isCurrentMenu: boolean, ratio: number}>`
