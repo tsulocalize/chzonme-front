@@ -64,7 +64,7 @@ export const _Controller = ({handleRotate, handleStop}: _ControllerProps) => {
     <S.Wrapper>
       <Tippy content="룰렛 새로고침" arrow={true}>
         <S.IconWrapper>
-          <Icon svg={RefreshSVG} onClick={refresh} isMobile={isMobile}/>
+          <Icon svg={RefreshSVG} onClick={refresh} isMobile={isMobile} id={'step-3'}/>
         </S.IconWrapper>
       </Tippy>
       <Tippy content="투표 시작/종료" arrow={true}>

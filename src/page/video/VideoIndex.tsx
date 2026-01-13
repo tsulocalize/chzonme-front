@@ -16,7 +16,7 @@ export const VideoIndex = () => {
       <HeaderMobile />
       <SubHeader />
       <VideoMobilePage />
-      <FooterMobile/>
+      <FooterMobile />
     </MobileWrapper>
   ) : (
     <>
