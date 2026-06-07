@@ -8,6 +8,7 @@ import {useIsMobile} from "@/hook/useIsMobile.ts";
 import {MobileNavigator} from "@/component/_common/mobile/MobileNavigator.tsx";
 import {ContinuousLoginProvider} from "@/router/ContinuousLoginProvider.tsx";
 import {GuidanceProvider} from "@/guidance/GuidanceProvider.tsx";
+import {Analytics} from "@vercel/analytics/react";
 
 function App() {
   const isMobile = useIsMobile();
@@ -19,6 +20,7 @@ function App() {
     <ContinuousLoginProvider>
       <RouterProvider router={router} />
       {isMobile ? <MobileNavigator /> : <></>}
+      <Analytics />
     </ContinuousLoginProvider>
     </GuidanceProvider>
     </ThemeProvider>
