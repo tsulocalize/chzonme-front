@@ -65,7 +65,7 @@ iframe[src*="www.youtube"] {
   position: relative;
   width: 1600px !important;
   height: 900px !important;
-  top: 700px;
+  top: 0px;
 }
 iframe[title*="CHZZK Player"] {
   position: relative;
