@@ -9,10 +9,14 @@ export const VideoItems = () => {
   const { ratio } = useSizeStore();
 
   return (
-    <S.Wrapper ratio={ratio} isMobile={isMobile}>
-      <_Video />
-      <_Table />
-    </S.Wrapper>
+    <div>
+      [시스템 점검 안내] (07.31 오후 ~ 08.01 오전) <br />
+      정확한 시간은 미정이며, 연결/조회가 언제든 중단될 수 있습니다
+      <S.Wrapper ratio={ratio} isMobile={isMobile}>
+        <_Video />
+        <_Table />
+      </S.Wrapper>
+    </div>
   )
 }
 
