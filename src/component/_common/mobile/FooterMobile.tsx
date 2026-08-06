@@ -13,7 +13,7 @@ export const FooterMobile = ({floor}: Props) => {
     },
     {
       content: "개인정보처리방침",
-      url: "https://drive.google.com/file/d/1NZjZb7ogkRFoZSlI7BWdy3B_tH2Q0o_b/view?usp=sharing"
+      url: "https://drive.google.com/file/d/1QpnnsmnjNEIiIi2Wu2Fu1Wj6FZXJLOnH/view?usp=sharing"
     },
     {
       content: "1:1 문의",
