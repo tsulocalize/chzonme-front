@@ -70,8 +70,7 @@ iframe[src*="www.youtube"] {
 iframe[title*="CHZZK Player"] {
   position: relative;
   width: 1600px !important;
-  height: 2300px !important;
-  clip-path: inset(650px 0px 650px 0px);
+  height: 900px !important;
   z-index: 1;
 }
 [class^="overlay_donation_alarm"] {
